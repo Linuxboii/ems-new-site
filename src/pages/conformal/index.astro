@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import { coatings, coatingIntro } from '@/data/coatings';
+
+const title = 'ELPEGUARD® Conformal Coatings - Acrylic, PU, Silicone | EMS';
+const description = 'Peters ELPEGUARD conformal coatings distributed in India by EMS Technologies: acrylic, polyurethane, silicone, thick-film curing and aqua coatings for PCB protection.';
+const jsonLd = [{
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://emstechnologies.in/' },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://emstechnologies.in/products/' },
+    { '@type': 'ListItem', position: 3, name: 'Conformal Coatings', item: 'https://emstechnologies.in/conformal/' },
+  ],
+}];
+---
+<Layout title={title} description={description} path="/conformal/" jsonLd={jsonLd}>
+  <PageHero eyebrow="Products · ELPEGUARD®" title="Conformal Coatings" lead={coatingIntro} />
+  <section class="section container-x">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} blurb={c.blurb} />)}
+    </div>
+  </section>
+</Layout>

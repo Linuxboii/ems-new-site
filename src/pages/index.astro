@@ -1,0 +1,174 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import AssetImage from '@/components/AssetImage.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import StatCounter from '@/components/StatCounter.astro';
+import ClientMarquee from '@/components/ClientMarquee.astro';
+import { company } from '@/data/company';
+import { products } from '@/data/products';
+
+const title = 'EMS Technologies - Peters Conformal Coatings & ESD Solutions, India';
+const description = 'Exclusive India distributor for Lackwerke Peters ELPEGUARD® conformal coatings, ESD packing solutions and selective coating machines. Hyderabad-based, since 2011.';
+
+// FAQ answers double as citable facts for AI / generative answer engines.
+const faq = [
+  {
+    q: 'What does EMS Technologies do?',
+    a: 'EMS Technologies is the exclusive India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work. It has operated from Hyderabad, Telangana since 2011.',
+  },
+  {
+    q: 'Where is EMS Technologies located?',
+    a: 'EMS Technologies is based in Hyderabad, Telangana, India, and runs its own ESD packing manufacturing plants in Hyderabad and Cochin.',
+  },
+  {
+    q: 'What conformal coatings does EMS Technologies supply?',
+    a: 'EMS supplies Peters ELPEGUARD acrylic, polyurethane, silicone, thick-film curing and aqua (water-based) conformal coatings for protecting and insulating assembled PCBs.',
+  },
+  {
+    q: 'Does EMS Technologies provide conformal coating job work?',
+    a: 'Yes. EMS provides end-to-end on-site conformal coating job work covering application, UV optical inspection, drying and curing, coating thickness testing, removal, rework and final inspection, handled by 30+ trained engineers.',
+  },
+  {
+    q: 'What ESD packing products does EMS Technologies offer?',
+    a: 'EMS offers anti-static bubble bags, static shielding bags, LDPE pink bags and conductive grid bags, plus PP corrugated trays and bins, EVA conductive foam trays and ESD thermoforming trays.',
+  },
+];
+const faqJsonLd = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question', name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Layout title={title} description={description} path="/" jsonLd={[faqJsonLd]}>
+  <!-- Hero -->
+  <section class="border-b border-line brand-wash">
+    <div class="container-x grid lg:grid-cols-12 gap-12 items-center py-16 sm:py-20 lg:py-24">
+      <div class="lg:col-span-6 fade-up">
+        <p class="eyebrow">Exclusive Peters distributor · India · since {company.since}</p>
+        <h1 class="heading mt-6 text-4xl sm:text-5xl lg:text-6xl" style="line-height:1.05">
+          Protection for the electronics that everything else depends on.
+        </h1>
+        <p class="lead mt-7 max-w-xl">
+          Conformal coatings, ESD packing and on-site coating job work: the Peters range, supported end to end from Hyderabad.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/products/" class="btn-primary">Explore products</a>
+          <a href="/contact-us/" class="btn-outline">Talk to our team</a>
+        </div>
+      </div>
+      <div class="lg:col-span-6 fade-up" style="animation-delay:.12s">
+        <div class="rounded-xl border border-brand-500/25 bg-surface p-8 sm:p-10 shadow-lg shadow-brand-900/5">
+          <p class="eyebrow">Why EMS Technologies</p>
+          <div class="mt-6 grid grid-cols-2 gap-x-8 gap-y-8">
+            <div>
+              <div class="heading text-3xl sm:text-4xl">Since {company.since}</div>
+              <p class="mt-1 text-sm text-muted">Exclusive India distributor for Lackwerke Peters</p>
+            </div>
+            <div>
+              <div class="heading text-3xl sm:text-4xl">{company.stats.projects}</div>
+              <p class="mt-1 text-sm text-muted">Coating projects completed</p>
+            </div>
+            <div>
+              <div class="heading text-3xl sm:text-4xl">{company.stats.clients}</div>
+              <p class="mt-1 text-sm text-muted">Clients served across India</p>
+            </div>
+            <div>
+              <div class="heading text-3xl sm:text-4xl">{company.stats.products}</div>
+              <p class="mt-1 text-sm text-muted">ESD &amp; coating products supplied</p>
+            </div>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-2 border-t border-line pt-6">
+            <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">Conformal coatings</span>
+            <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">ESD packing</span>
+            <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">Coating machines</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About intro -->
+  <section class="section border-b border-line">
+    <div class="container-x grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 order-2 lg:order-1">
+        <div class="overflow-hidden rounded-xl border border-line bg-paper">
+          <AssetImage name="home-about.jpg" alt="EMS Technologies conformal coating operations" width={640} height={480} class="w-full object-cover" />
+        </div>
+      </div>
+      <div class="lg:col-span-6 order-1 lg:order-2">
+        <p class="eyebrow">Who we are</p>
+        <h2 class="heading mt-5 text-3xl sm:text-4xl" style="line-height:1.12">Global-leader coatings, delivered and supported in India</h2>
+        <p class="mt-6 text-muted leading-relaxed">EMS Technologies, based in Hyderabad, Telangana, is the exclusive India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG. From coatings for PCB manufacture to protection of assembled electronics, Peters is a global leader in electronics-related high-tech coatings for automotive, aerospace, industrial, medical and LED applications.</p>
+        <a href="/about-us/" class="btn-outline mt-8">About EMS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section border-b border-line">
+    <div class="container-x">
+      <p class="eyebrow">By the numbers</p>
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line">
+        <div class="py-6 sm:py-0 sm:pr-8"><StatCounter value={company.stats.projects} label="Projects completed" /></div>
+        <div class="py-6 sm:py-0 sm:px-8"><StatCounter value={company.stats.products} label="Products supplied" /></div>
+        <div class="py-6 sm:py-0 sm:pl-8"><StatCounter value={company.stats.clients} label="Clients served" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section border-b border-line">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Products &amp; services</p>
+        <h2 class="heading mt-5 text-3xl sm:text-4xl">One roof for coating, packing and equipment</h2>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients -->
+  <section class="section border-b border-line">
+    <div class="container-x">
+      <p class="eyebrow">Trusted by</p>
+      <div class="mt-10"><ClientMarquee /></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section border-b border-line">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Frequently asked</p>
+        <h2 class="heading mt-5 text-3xl sm:text-4xl">Common questions about EMS Technologies</h2>
+      </div>
+      <div class="mt-10 grid gap-x-12 gap-y-8 lg:grid-cols-2">
+        {faq.map((f) => (
+          <div>
+            <h3 class="font-semibold text-ink">{f.q}</h3>
+            <p class="mt-2 text-muted leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container-x text-center max-w-2xl">
+      <h2 class="heading text-3xl sm:text-4xl">Need conformal coating or ESD packing?</h2>
+      <p class="mt-5 text-muted leading-relaxed">Tell us about your assembly and our engineers will recommend the right solution.</p>
+      <a href="/contact-us/" class="btn-primary mt-8">Get in touch</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .fade-up { opacity: 0; transform: translateY(12px); animation: fadeUp .6s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; animation: none; } }
+</style>

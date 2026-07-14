@@ -1,0 +1,31 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import GallerySection from '@/components/GallerySection.astro';
+import { gallery } from '@/data/gallery';
+import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+
+const title = 'EVA Conductive Foam Trays - Static-Safe Handling | EMS Technologies';
+const description = 'Conductive EVA foam trays and inserts from EMS Technologies, Hyderabad, cut to component geometry for secure, static-safe handling and transport of sensitive electronics.';
+const path = '/products/conductive-foam-trays/';
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products/' },
+    { name: 'EVA Conductive Foam Trays', path },
+  ]),
+  await galleryJsonLd('EVA Conductive Foam Trays', description, path, [gallery.evafoam, gallery.confoam]),
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero eyebrow="ESD Packing" title="EVA Conductive Foam Trays" lead="Conductive EVA foam inserts and trays cut precisely to component geometry, giving cushioning and continuous static dissipation for secure device handling." />
+  <GallerySection title="EVA Conductive Foam Inserts" enquire="EVA Conductive Foam Inserts" images={gallery.evafoam.images} blurb="Blue EVA conductive foam inserts routed to hold parts snugly and dissipate static." />
+  <GallerySection title="Conductive Foam Component Trays" enquire="Conductive Foam Component Trays" images={gallery.confoam.images} blurb="Black conductive foam trays cradling electronic components during storage and transit." />
+  <section class="section border-t border-line">
+    <div class="container-x text-center max-w-2xl">
+      <h2 class="heading text-2xl sm:text-3xl">Custom foam for your parts?</h2>
+      <a href="/contact-us/?product=EVA%20Conductive%20Foam%20Trays" class="btn-primary mt-7">Request a quote</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,14 @@
+---
+import { Image } from 'astro:assets';
+interface Props { name: string; alt: string; class?: string; width?: number; height?: number; }
+const { name, alt, class: cls = '', width = 800, height = 600 } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{png,jpg,jpeg,webp}', { eager: true });
+const match = images[`/src/assets/${name}`]?.default;
+---
+{match ? (
+  <Image src={match} alt={alt} width={width} height={height} class={cls} loading="lazy" />
+) : (
+  <div class={`grid place-items-center bg-surface text-muted ${cls}`} style={`aspect-ratio:${width}/${height}`} role="img" aria-label={alt}>
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 15 5-5 4 4 3-3 6 6"/></svg>
+  </div>
+)}

@@ -1,0 +1,193 @@
+---
+import AssetImage from '@/components/AssetImage.astro';
+import type { GalleryImage } from '@/data/gallery';
+interface Props { images: GalleryImage[]; enquire?: string; }
+const { images, enquire } = Astro.props;
+const enquireHref = enquire ? `/contact-us/?product=${encodeURIComponent(enquire)}` : null;
+
+// Resolve each thumbnail to its full-resolution source so the pop-up and the
+// magnifier show a sharp image rather than the small grid thumbnail.
+const assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{png,jpg,jpeg,webp}', { eager: true });
+const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? '';
+---
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 js-lightbox">
+  {images.map((img, i) => (
+    <div class="card group flex flex-col overflow-hidden">
+      <button
+        type="button"
+        class="relative aspect-[4/3] overflow-hidden bg-paper focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-inset"
+        data-lb-open
+        data-lb-index={i}
+        data-lb-alt={img.alt}
+        data-lb-full={fullSrc(img.src)}
+        aria-label={`View larger: ${img.alt}`}
+      >
+        <AssetImage name={img.src} alt={img.alt} width={1000} height={750} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+      </button>
+      {enquire && enquireHref && (
+        <div class="flex items-center justify-between gap-2 border-t border-line px-3 py-2.5">
+          <span class="text-xs text-muted leading-tight">{enquire}</span>
+          <a href={enquireHref} class="shrink-0 text-xs font-medium text-ink hover:text-accent2 transition" aria-label={`Enquire about ${enquire}`}>Enquire &rarr;</a>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+<style is:global>
+  /* Global (not component-scoped) because the overlay is injected into <body>
+     by JS and would not otherwise match scoped selectors. */
+  #lb-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(8, 12, 20, 0.82); backdrop-filter: blur(2px);
+    padding: clamp(1rem, 4vw, 3rem);
+    opacity: 0; transition: opacity .2s ease;
+  }
+  #lb-overlay.is-open { opacity: 1; }
+  #lb-overlay[hidden] { display: none; }
+
+  .lb-frame {
+    position: relative; display: inline-flex; line-height: 0;
+    max-width: min(1100px, 92vw); max-height: 82vh;
+    border-radius: 12px; overflow: hidden; background: #fff;
+    box-shadow: 0 24px 70px rgba(0,0,0,.45);
+  }
+  .lb-img { max-width: 100%; max-height: 82vh; object-fit: contain; display: block; }
+  .lb-frame.zoomable { cursor: zoom-in; }
+
+  .lb-lens {
+    position: absolute; pointer-events: none; display: none;
+    width: 200px; height: 200px; border-radius: 999px;
+    border: 3px solid rgba(255,255,255,.9);
+    box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.15);
+    background-repeat: no-repeat; z-index: 2;
+  }
+  .lb-frame.zoomable:hover .lb-lens { display: block; }
+
+  .lb-cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0.75rem 1rem; font-size: 0.8rem; color: #f1f5f9;
+    background: linear-gradient(transparent, rgba(0,0,0,.6));
+    text-align: center; z-index: 3;
+  }
+
+  .lb-btn {
+    position: absolute; z-index: 4; color: #fff; background: rgba(0,0,0,.35);
+    border: 0; cursor: pointer; display: grid; place-items: center;
+    border-radius: 999px; transition: background .15s ease;
+  }
+  .lb-btn:hover { background: rgba(0,0,0,.6); }
+  .lb-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .lb-close { top: max(1rem, env(safe-area-inset-top)); right: 1.25rem; width: 44px; height: 44px; font-size: 1.6rem; }
+  .lb-nav { top: 50%; transform: translateY(-50%); width: 48px; height: 48px; font-size: 2rem; }
+  .lb-prev { left: 1rem; } .lb-next { right: 1rem; }
+  .lb-hint { position: absolute; top: 1.25rem; left: 1.25rem; z-index: 4; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+
+  @media (max-width: 640px) {
+    .lb-nav { width: 40px; height: 40px; font-size: 1.5rem; }
+    .lb-lens { display: none !important; }
+    .lb-hint { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { #lb-overlay { transition: none; } }
+</style>
+
+<script>
+  function initLightbox() {
+    if (document.getElementById('lb-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'lb-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.hidden = true;
+    overlay.innerHTML = `
+      <span class="lb-hint">Hover to magnify</span>
+      <button type="button" class="lb-btn lb-close" aria-label="Close">&times;</button>
+      <button type="button" class="lb-btn lb-nav lb-prev" aria-label="Previous image">&#8249;</button>
+      <figure class="lb-frame" style="margin:0">
+        <img class="lb-img" alt="" />
+        <span class="lb-lens" aria-hidden="true"></span>
+        <figcaption class="lb-cap"></figcaption>
+      </figure>
+      <button type="button" class="lb-btn lb-nav lb-next" aria-label="Next image">&#8250;</button>`;
+    document.body.appendChild(overlay);
+
+    const frame = overlay.querySelector('.lb-frame') as HTMLElement;
+    const imgEl = overlay.querySelector('.lb-img') as HTMLImageElement;
+    const lens = overlay.querySelector('.lb-lens') as HTMLElement;
+    const capEl = overlay.querySelector('.lb-cap') as HTMLElement;
+    const ZOOM = 2.4;
+    let group: HTMLElement[] = [];
+    let idx = 0;
+    let lastFocus: HTMLElement | null = null;
+
+    function show(i: number) {
+      idx = (i + group.length) % group.length;
+      const btn = group[idx];
+      const full = btn.getAttribute('data-lb-full') || '';
+      const thumb = btn.querySelector('img');
+      const alt = btn.getAttribute('data-lb-alt') || '';
+      lens.style.display = 'none';
+      // Show the thumbnail instantly, then swap to full-res when it loads.
+      imgEl.src = (thumb && (thumb.currentSrc || thumb.src)) || full;
+      if (full) {
+        const hi = new Image();
+        hi.onload = () => { imgEl.src = full; lens.style.backgroundImage = `url("${full}")`; };
+        hi.src = full;
+      }
+      imgEl.alt = alt;
+      capEl.textContent = alt;
+    }
+    function open(btn: HTMLElement) {
+      group = Array.from(btn.closest('.js-lightbox')!.querySelectorAll<HTMLElement>('[data-lb-open]'));
+      lastFocus = btn;
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+      show(Number(btn.getAttribute('data-lb-index')) || 0);
+      (overlay.querySelector('.lb-close') as HTMLElement).focus();
+    }
+    function close() {
+      overlay.classList.remove('is-open');
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+      lastFocus?.focus();
+    }
+
+    // Magnifier lens.
+    frame.addEventListener('mousemove', (e) => {
+      if (window.matchMedia('(hover: none)').matches) return;
+      const r = imgEl.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      if (x < 0 || y < 0 || x > r.width || y > r.height) { lens.style.display = 'none'; return; }
+      frame.classList.add('zoomable');
+      const lw = lens.offsetWidth, lh = lens.offsetHeight;
+      const fx = e.clientX - frame.getBoundingClientRect().left;
+      const fy = e.clientY - frame.getBoundingClientRect().top;
+      lens.style.left = fx - lw / 2 + 'px';
+      lens.style.top = fy - lh / 2 + 'px';
+      lens.style.backgroundSize = `${r.width * ZOOM}px ${r.height * ZOOM}px`;
+      lens.style.backgroundPosition = `${-(x * ZOOM - lw / 2)}px ${-(y * ZOOM - lh / 2)}px`;
+      lens.style.display = 'block';
+    });
+    frame.addEventListener('mouseleave', () => { lens.style.display = 'none'; });
+
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const opener = t.closest('[data-lb-open]') as HTMLElement | null;
+      if (opener) { e.preventDefault(); open(opener); return; }
+      if (t.closest('.lb-close') || t.id === 'lb-overlay') return close();
+      if (t.closest('.lb-next')) return show(idx + 1);
+      if (t.closest('.lb-prev')) return show(idx - 1);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (overlay.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') show(idx + 1);
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+    });
+  }
+  initLightbox();
+  document.addEventListener('astro:page-load', initLightbox);
+</script>

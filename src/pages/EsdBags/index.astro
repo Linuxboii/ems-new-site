@@ -1,0 +1,33 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import GallerySection from '@/components/GallerySection.astro';
+import { esdBags } from '@/data/esdBags';
+import { gallery } from '@/data/gallery';
+import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+
+const title = 'ESD Bags - Bubble, Static Shielding, LDPE Pink & Conductive | EMS';
+const description = 'ESD packing bags from EMS Technologies, Hyderabad: anti-static bubble bags, static shielding bags, LDPE pink bags and conductive grid bags for safe electronics packing.';
+const path = '/EsdBags/';
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products/' },
+    { name: 'ESD Bags', path },
+  ]),
+  await galleryJsonLd('ESD Bags', description, path, [gallery.bubble, gallery.shield, gallery.pink]),
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero eyebrow="ESD Packing" title="ESD Bags" lead="Anti-static packing bags that protect electronics from static discharge, moisture and physical shock: bubble, static-shielding, LDPE pink and conductive grid types." />
+  <section class="section container-x">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {esdBags.map((b) => <ProductCard title={b.title} href={b.href} img={b.img} blurb={b.blurb} />)}
+    </div>
+  </section>
+  <GallerySection id="bubble-bags" title="Bubble Bags" enquire="Anti-Static Bubble Bags" images={gallery.shield.images} blurb="Cushioned anti-static bubble bags protecting components from shock and static during transit." />
+  <GallerySection id="static-shielding-bags" title="Static Shielding Bags" enquire="Static Shielding Bags" images={gallery.pink.images} blurb="Metallised shielding bags forming a Faraday cage around sensitive electronics." />
+  <GallerySection id="ldpe-pink-bags" title="LDPE Pink Bags" enquire="LDPE Pink Anti-Static Bags" images={gallery.bubble.images} blurb="Anti-static pink LDPE bags for general electronics packing and storage." />
+</Layout>

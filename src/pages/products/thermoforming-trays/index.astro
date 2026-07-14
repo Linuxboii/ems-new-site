@@ -1,0 +1,31 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import GallerySection from '@/components/GallerySection.astro';
+import { gallery } from '@/data/gallery';
+import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+
+const title = 'ESD Thermoforming Trays - Custom Blister Trays for PCBs | EMS Technologies';
+const description = 'Custom ESD thermoformed and blister trays from EMS Technologies, Hyderabad: anti-static, conductive and clear trays tailored to component geometry for storage and transport.';
+const path = '/products/thermoforming-trays/';
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products/' },
+    { name: 'ESD Thermoforming Trays', path },
+  ]),
+  await galleryJsonLd('ESD Thermoforming Trays', description, path, [gallery.trays]),
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero eyebrow="ESD Packing" title="ESD Thermoforming Trays" lead="Anti-static, conductive and clear thermoformed blister trays, custom-formed to the exact geometry of your components for safe storage, handling and automated line feeding." />
+  <GallerySection title="Thermoformed Blister Trays" enquire="ESD Thermoforming Trays" images={gallery.trays.images} blurb="A range of ESD thermoformed trays, clear, conductive and anti-static, formed to hold PCBs and components securely." />
+  <section class="section border-t border-line">
+    <div class="container-x text-center max-w-2xl">
+      <h2 class="heading text-2xl sm:text-3xl">Send us your component drawing</h2>
+      <p class="mt-4 text-muted">We form trays to your exact part geometry.</p>
+      <a href="/contact-us/?product=ESD%20Thermoforming%20Trays" class="btn-primary mt-7">Request a quote</a>
+    </div>
+  </section>
+</Layout>

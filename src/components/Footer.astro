@@ -1,0 +1,35 @@
+---
+import { company } from '@/data/company';
+import { nav } from '@/data/nav';
+---
+<footer class="border-t border-line bg-paper">
+  <div class="container-x py-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <div class="heading text-lg text-ink">{company.name}</div>
+      <p class="mt-3 text-sm text-muted max-w-xs">{company.tagline}.</p>
+    </div>
+    <div>
+      <h3 class="eyebrow">Explore</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-muted">
+        {nav.map((n) => (<li><a class="hover:text-ink transition" href={n.href}>{n.label}</a></li>))}
+      </ul>
+    </div>
+    <div>
+      <h3 class="eyebrow">Contact</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-muted">
+        <li>{company.location}</li>
+        {company.phones.map((p) => (<li><a class="hover:text-ink transition" href={`tel:${p.replaceAll('-', '')}`}>{p}</a></li>))}
+        <li><a class="hover:text-ink transition" href={`mailto:${company.email}`}>{company.email}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="eyebrow">Partner</h3>
+      <p class="mt-4 text-sm text-muted">Exclusive India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG, Germany, since {company.since}.</p>
+    </div>
+  </div>
+  <div class="border-t border-line">
+    <div class="container-x py-6 text-xs text-muted">
+      © {new Date().getFullYear()} {company.name}. All rights reserved.
+    </div>
+  </div>
+</footer>

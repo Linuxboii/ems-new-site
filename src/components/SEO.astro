@@ -1,0 +1,93 @@
+---
+import { company } from '@/data/company';
+interface Props { title: string; description: string; path: string; image?: string; jsonLd?: object[]; }
+const { title, description, path, image = '/social-card.jpg', jsonLd = [] } = Astro.props;
+const site = 'https://emstechnologies.in';
+const canonical = new URL(path, site).href;
+const ogImage = new URL(image, site).href;
+
+const orgId = `${site}/#organization`;
+const postalAddress = {
+  '@type': 'PostalAddress',
+  addressLocality: company.address.locality,
+  addressRegion: company.address.region,
+  addressCountry: company.address.country,
+};
+
+// Organization: primary entity for search + generative engines. Explicit facts
+// (founding, what we know about, who we distribute) help AI answer engines.
+const organization = {
+  '@context': 'https://schema.org', '@type': 'Organization',
+  '@id': orgId,
+  name: company.name, legalName: company.legalName, url: site, logo: `${site}/logo.png`,
+  image: ogImage, email: company.email, telephone: company.phones[0],
+  foundingDate: String(company.since),
+  slogan: company.tagline,
+  description: company.description,
+  address: postalAddress,
+  areaServed: { '@type': 'Country', name: 'India' },
+  knowsAbout: [
+    'Conformal coating',
+    'ELPEGUARD conformal coatings',
+    'ESD packaging',
+    'Anti-static packing',
+    'Selective conformal coating machines',
+    'Conformal coating job work',
+  ],
+  makesOffer: {
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Product',
+      name: 'ELPEGUARD conformal coatings',
+      brand: { '@type': 'Brand', name: 'ELPEGUARD' },
+      manufacturer: { '@type': 'Organization', name: 'Lackwerke Peters GmbH & Co. KG' },
+    },
+  },
+};
+
+const localBusiness = {
+  '@context': 'https://schema.org', '@type': 'LocalBusiness',
+  '@id': `${site}/#localbusiness`,
+  name: company.name, image: ogImage, url: site,
+  telephone: company.phones[0], email: company.email,
+  address: postalAddress,
+  geo: { '@type': 'GeoCoordinates', latitude: company.geo.lat, longitude: company.geo.lng },
+  areaServed: 'IN',
+  parentOrganization: { '@id': orgId },
+};
+
+const website = {
+  '@context': 'https://schema.org', '@type': 'WebSite',
+  '@id': `${site}/#website`,
+  url: site, name: company.name, inLanguage: 'en-IN',
+  publisher: { '@id': orgId },
+};
+
+const graph = [organization, localBusiness, website, ...jsonLd];
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#1e63c4" />
+
+<!-- Geographic / local SEO -->
+<meta name="geo.region" content={company.address.regionCode} />
+<meta name="geo.placename" content={company.address.locality} />
+<meta name="geo.position" content={`${company.geo.lat};${company.geo.lng}`} />
+<meta name="ICBM" content={`${company.geo.lat}, ${company.geo.lng}`} />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_IN" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content={company.name} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

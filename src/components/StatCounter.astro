@@ -1,0 +1,24 @@
+---
+interface Props { value: string; label: string; }
+const { value, label } = Astro.props;
+const num = parseInt(value.replace(/\D/g, ''), 10) || 0;
+const suffix = value.replace(/[0-9]/g, '');
+---
+<div>
+  <div class="heading text-5xl sm:text-6xl text-ink tabular-nums" data-count={num} data-suffix={suffix}>0{suffix}</div>
+  <div class="eyebrow mt-3">{label}</div>
+</div>
+<script>
+  const els = document.querySelectorAll<HTMLElement>('[data-count]');
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const el = e.target as HTMLElement;
+      const target = Number(el.dataset.count), suffix = el.dataset.suffix ?? '';
+      let cur = 0; const step = Math.max(1, Math.ceil(target / 40));
+      const tick = () => { cur = Math.min(target, cur + step); el.textContent = cur + suffix; if (cur < target) requestAnimationFrame(tick); };
+      tick(); io.unobserve(el);
+    }
+  }, { threshold: 0.4 });
+  els.forEach((el) => io.observe(el));
+</script>

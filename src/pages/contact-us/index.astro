@@ -1,0 +1,96 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { company } from '@/data/company';
+
+const title = 'Contact EMS Technologies - Hyderabad, Telangana';
+const description = 'Contact EMS Technologies for Peters conformal coatings, ESD packing and coating job work. Call +91-9394116660 or email info@emstechnologies.in. Based in Hyderabad, Telangana.';
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
+---
+<Layout title={title} description={description} path="/contact-us/">
+  <PageHero eyebrow="Contact" title="Contact Us" lead="Tell us about your conformal coating or ESD packing requirement and our engineers will get back to you promptly." />
+
+  <section class="section container-x grid lg:grid-cols-2 gap-12">
+    <div>
+      <h2 class="heading text-2xl">Send us a message</h2>
+      <p class="text-sm text-muted mt-1">We'll get back to you as soon as possible.</p>
+      <p id="productBadge" class="mt-4 hidden rounded-lg bg-surface border border-line px-4 py-3 text-sm text-ink">Enquiry about: <span id="productBadgeName" class="font-semibold text-accent2"></span></p>
+      <form id="contactForm" class="mt-6 space-y-4" method="POST" action={endpoint || undefined}>
+        <input type="hidden" name="product" id="productField" />
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input required name="name" placeholder="Full name" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
+          <input required type="email" name="email" placeholder="Email" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
+          <input name="mobile" placeholder="Mobile" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
+          <input name="company" placeholder="Company name" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
+        </div>
+        <textarea required name="message" rows="5" placeholder="Message" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3"></textarea>
+        <button type="submit" class="btn-primary">Send message</button>
+        <p id="formNote" class="text-sm text-accent2 hidden">Thanks, your message has been prepared in your mail app.</p>
+        <p id="formFallback" class="text-sm text-muted hidden">Mail app didn't open? Email us directly at <a id="fallbackLink" class="text-accent2 hover:underline" href={`mailto:${company.email}`}>{company.email}</a>.</p>
+      </form>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <h3 class="font-semibold text-ink">Address</h3>
+        <p class="text-muted">{company.location}</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-ink">Call us</h3>
+        {company.phones.map((p) => (<p><a class="text-accent2 hover:underline" href={`tel:${p.replaceAll('-', '')}`}>{p}</a></p>))}
+      </div>
+      <div>
+        <h3 class="font-semibold text-ink">Mail us</h3>
+        <a class="text-accent2 hover:underline" href={`mailto:${company.email}`}>{company.email}</a>
+      </div>
+      <iframe title="EMS Technologies location" class="w-full h-64 rounded-2xl border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Hyderabad,Telangana,India&output=embed"></iframe>
+    </div>
+  </section>
+</Layout>
+<script is:inline define:vars={{ endpoint, email: company.email }}>
+  const form = document.getElementById('contactForm');
+  const note = document.getElementById('formNote');
+
+  // Prefill from ?product= (e-commerce enquiry flow). Photos/products across the
+  // site link here as /contact-us/?product=<name>.
+  const product = new URLSearchParams(location.search).get('product');
+  if (product) {
+    document.getElementById('productField').value = product;
+    const badge = document.getElementById('productBadge');
+    document.getElementById('productBadgeName').textContent = product;
+    badge.classList.remove('hidden');
+    const msg = form?.querySelector('[name="message"]');
+    if (msg && !msg.value) msg.value = `I would like to enquire about: ${product}.\nPlease share product details, availability and pricing.`;
+  }
+  const subject = product ? `Enquiry: ${product}` : 'Website enquiry';
+
+  const fallback = document.getElementById('formFallback');
+  const fallbackLink = document.getElementById('fallbackLink');
+
+  form?.addEventListener('submit', (e) => {
+    if (endpoint) return; // real endpoint handles POST
+    e.preventDefault();
+    const f = new FormData(form);
+    // Cap the message so the mailto: URL stays under browser length limits
+    // (long mailto: URLs silently fail to open a mail client).
+    const message = String(f.get('message') || '').slice(0, 1200);
+    const bodyText = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nMobile: ${f.get('mobile')}\nCompany: ${f.get('company')}\nProduct: ${f.get('product') || '-'}\n\n${message}`;
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+
+    note.classList.remove('hidden');
+    if (fallbackLink) fallbackLink.href = mailtoUrl;
+
+    // If a mail client opens, the window loses focus. If it never blurs,
+    // no handler is registered — reveal the direct-email fallback.
+    let opened = false;
+    const onBlur = () => { opened = true; };
+    window.addEventListener('blur', onBlur, { once: true });
+    setTimeout(() => {
+      window.removeEventListener('blur', onBlur);
+      if (!opened) fallback?.classList.remove('hidden');
+    }, 1500);
+
+    window.location.href = mailtoUrl;
+  });
+</script>

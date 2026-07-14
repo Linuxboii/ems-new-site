@@ -1,0 +1,55 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import AssetImage from '@/components/AssetImage.astro';
+import StatCounter from '@/components/StatCounter.astro';
+import TeamCard from '@/components/TeamCard.astro';
+import GallerySection from '@/components/GallerySection.astro';
+import { company } from '@/data/company';
+import { team } from '@/data/team';
+import { gallery } from '@/data/gallery';
+
+const title = 'About EMS Technologies - Peters Distributor in India Since 2011';
+const description = 'EMS Technologies is the exclusive India distributor for Lackwerke Peters, with 10+ years in conformal coating, 30+ trained engineers, and manufacturing plants in Hyderabad and Cochin.';
+const plantImages = [...gallery.handling.images, ...gallery.swatch.images];
+---
+<Layout title={title} description={description} path="/about-us/">
+  <PageHero eyebrow="Who we are" title="India's Peters partner since 2011" lead="Exclusive India distributor for Lackwerke Peters: coatings, packing and job work, supported end to end from Hyderabad and Cochin." />
+
+  <section class="section border-b border-line container-x grid lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-6">
+      <div class="overflow-hidden rounded-xl border border-line bg-paper">
+        <AssetImage name="home-intro.jpg" alt="EMS Technologies team at work" width={640} height={480} class="w-full object-cover" />
+      </div>
+    </div>
+    <div class="lg:col-span-6 space-y-4 text-muted leading-relaxed">
+      <p class="text-lg font-medium text-ink">EMS Technologies, based in Hyderabad, Telangana, is the exclusive India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG.</p>
+      <p>EMS Technologies is a proprietary concern and the exclusive distributor for M/s Lackwerke Peters GmbH, Germany, in India since 2011. Lackwerke Peters is part of the Peters Group based in Kempen, Germany; EMS represents them in India and supports all leading clients locally. Peters is a global leader in electronics-related high-tech coatings for automotive, aerospace, industrial, medical and LED applications.</p>
+      <p>Headed by electronics professionals with in-depth knowledge of conformal coating products and processes, EMS brings 10+ years of expertise, supplying coatings and delivering conformal coating job work. Our qualified team of 30+ members handles job work at multiple client locations, all trained under the guidance of experts from Lackwerke Peters.</p>
+      <p>EMS also supplies selective conformal coating line equipment from AUTOLEADER (China) and glue dispensing, screwdriver and soldering machines from Topbest (China). We operate our own manufacturing plants in Hyderabad, Telangana and Cochin, Kerala for ESD PET/HIPS trays, anti-static bubble bags, metallic static bags and all electronics packing materials since 2015.</p>
+    </div>
+  </section>
+
+  <section class="section border-b border-line">
+    <div class="container-x">
+      <p class="eyebrow">By the numbers</p>
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line">
+        <div class="py-6 sm:py-0 sm:pr-8"><StatCounter value={company.stats.projects} label="Projects completed" /></div>
+        <div class="py-6 sm:py-0 sm:px-8"><StatCounter value={company.stats.products} label="Products supplied" /></div>
+        <div class="py-6 sm:py-0 sm:pl-8"><StatCounter value={company.stats.clients} label="Clients served" /></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="border-b border-line">
+    <GallerySection title="Inside our ESD packing plant" images={plantImages} blurb="Since 2015 we manufacture ESD trays, anti-static bubble bags and metallic static bags at our own plants in Hyderabad and Cochin, handled and inspected by trained staff, in a full range of conductive materials." />
+  </div>
+
+  <section class="section container-x">
+    <p class="eyebrow">The team</p>
+    <h2 class="heading mt-5 text-3xl sm:text-4xl">People behind the work</h2>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {team.map((m) => <TeamCard name={m.name} role={m.role} email={m.email} img={m.img} />)}
+    </div>
+  </section>
+</Layout>

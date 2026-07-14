@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import AssetImage from '@/components/AssetImage.astro';
+import { machines } from '@/data/machines';
+
+const title = 'Selective Coating Machines - ALTD-450B & ALTD-450J | EMS';
+const description = 'Automated selective conformal coating machines supplied by EMS Technologies: ALTD-450B and ALTD-450J with precision atomization, auto calibration and integrated UV inspection.';
+---
+<Layout title={title} description={description} path="/SCMachines/">
+  <PageHero eyebrow="Products · Equipment" title="Selective Coating Machines" lead="Professional coating equipment offering complete automation, reliability, quality and efficiency to enhance the quality of your end product." />
+  <section class="section container-x space-y-16">
+    {machines.map((m, i) => (
+      <div class={`grid lg:grid-cols-2 gap-10 items-center ${i % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+        <div class="rounded-xl border border-line bg-paper p-6">
+          <AssetImage name={m.img} alt={`${m.model} selective coating machine`} width={560} height={480} class="w-full object-contain" />
+        </div>
+        <div>
+          <p class="eyebrow">{`Model 0${i + 1}`}</p>
+          <h2 class="heading mt-4 text-2xl sm:text-3xl">{m.model}</h2>
+          <ul class="mt-6 space-y-3 text-sm text-muted">
+            {m.features.map((f) => (<li class="flex gap-3"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent2"></span><span>{f}</span></li>))}
+          </ul>
+          {m.datasheet && <a href={m.datasheet} class="btn-outline mt-8" target="_blank" rel="noopener">Data sheet (PDF)</a>}
+        </div>
+      </div>
+    ))}
+  </section>
+</Layout>

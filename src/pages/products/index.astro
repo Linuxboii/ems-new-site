@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import { products } from '@/data/products';
+
+const title = 'Products - Conformal Coatings, ESD Bags & Coating Machines | EMS';
+const description = 'EMS Technologies products: ELPEGUARD conformal coatings, ESD bags, PP corrugated trays & bins, EVA conductive foam trays, ESD thermoforming trays and selective coating machines.';
+---
+<Layout title={title} description={description} path="/products/">
+  <PageHero eyebrow="Catalogue" title="Products" lead="Conformal coatings, ESD packing and selective coating equipment: the full EMS Technologies range." />
+  <section class="section container-x">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} />)}
+    </div>
+  </section>
+  <section class="section border-t border-line">
+    <div class="container-x flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p class="eyebrow">Also available</p>
+        <h2 class="heading mt-4 text-2xl">ProtectA Pro: ESD Conductive &amp; Anti-Static Paints</h2>
+        <p class="mt-3 max-w-2xl text-muted">An advanced range of ESD conductive and anti-static paints for floors, walls, surfaces and polypropylene bins, built on a conductive polymer matrix for stable, durable electrostatic protection in industrial environments.</p>
+      </div>
+      <a href="/datasheets/protecta-pro-esd-conductive-paint.pdf" class="btn-outline shrink-0" target="_blank" rel="noopener">Datasheet (PDF)</a>
+    </div>
+  </section>
+</Layout>
