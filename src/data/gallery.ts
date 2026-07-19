@@ -4,7 +4,7 @@ export interface GalleryGroup { label: string; images: GalleryImage[]; }
 
 export const gallery: Record<string, GalleryGroup> = {
   "bubble": {
-    "label": "Anti-static bubble bag",
+    "label": "Pink bubble bag",
     "images": [
       {
         "src": "esd-bubble-bag-01.jpg",
@@ -32,11 +32,24 @@ export const gallery: Record<string, GalleryGroup> = {
       }
     ]
   },
+  "grid": {
+    "label": "Conductive grid bag",
+    "images": [
+      {
+        "src": "static-shielding-bag-01.jpg",
+        "alt": "Conductive grid bag with diamond pattern protecting a PCB, EMS Technologies"
+      },
+      {
+        "src": "conductbag.png",
+        "alt": "Conductive grid bag with diamond pattern protecting a PCB, EMS Technologies"
+      }
+    ]
+  },
   "shield": {
     "label": "Static shielding bag",
     "images": [
       {
-        "src": "static-shielding-bag-01.jpg",
+        "src": "Static-Shielding-bags.jpeg",
         "alt": "Metallised static shielding bag with PCB forming a Faraday cage, EMS Technologies"
       },
       {
@@ -69,6 +82,10 @@ export const gallery: Record<string, GalleryGroup> = {
     "label": "LDPE pink anti-static bag",
     "images": [
       {
+        "src": "pinkbag.png",
+        "alt": "Pink LDPE anti-static bag for electronics packing, EMS Technologies"
+      },
+      {
         "src": "ldpe-pink-antistatic-bag-01.jpg",
         "alt": "Pink LDPE anti-static bag for electronics packing, EMS Technologies"
       },
@@ -79,31 +96,31 @@ export const gallery: Record<string, GalleryGroup> = {
     ]
   },
   "bins": {
-    "label": "PP corrugated ESD bin",
+    "label": "EVA ESD bin",
     "images": [
       {
         "src": "esd-corrugated-bin-01.jpg",
-        "alt": "PP corrugated ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
+        "alt": "EVA ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
       },
       {
         "src": "esd-corrugated-bin-02.jpg",
-        "alt": "PP corrugated ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
+        "alt": "EVA ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
       },
       {
         "src": "esd-corrugated-bin-03.jpg",
-        "alt": "PP corrugated ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
+        "alt": "EVA ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
       },
       {
         "src": "esd-corrugated-bin-04.jpg",
-        "alt": "PP corrugated ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
+        "alt": "EVA ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
       },
       {
         "src": "esd-corrugated-bin-05.jpg",
-        "alt": "PP corrugated ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
+        "alt": "EVA ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
       },
       {
         "src": "esd-corrugated-bin-06.jpg",
-        "alt": "PP corrugated ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
+        "alt": "EVA ESD bin holding circuit boards, electrostatic-sensitive-device labelled, EMS Technologies"
       }
     ]
   },
@@ -145,188 +162,193 @@ export const gallery: Record<string, GalleryGroup> = {
       }
     ]
   },
-  "trays": {
-    "label": "ESD thermoformed tray",
+  "traysPet": {
+    "label": "PET (clear) thermoformed tray",
     "images": [
       {
-        "src": "esd-thermoformed-tray-01.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-02.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-03.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-04.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-05.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-06.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
         "src": "esd-thermoformed-tray-07.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-08.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-09.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-10.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-11.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-12.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-13.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-14.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-15.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-16.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-17.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-18.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-19.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-20.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-21.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-22.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-23.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-24.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-25.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-26.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-27.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-28.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-29.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-30.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-31.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-32.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-33.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-34.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-35.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
-      },
-      {
-        "src": "esd-thermoformed-tray-36.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-37.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-38.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-39.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-40.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-41.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-42.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      }
+    ]
+  },
+  "traysHips": {
+    "label": "HIPS (black conductive) thermoformed tray",
+    "images": [
+      {
+        "src": "esd-thermoformed-tray-01.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-02.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-03.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-04.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-05.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray with clear lid for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-06.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray with clear lid for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-11.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-12.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-13.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-14.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-15.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-19.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-20.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-21.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-22.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-23.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-32.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-33.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-34.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-35.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-36.jpg",
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-43.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-44.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       },
       {
         "src": "esd-thermoformed-tray-45.jpg",
-        "alt": "ESD thermoformed blister tray for secure component storage and transport, EMS Technologies"
+        "alt": "Black HIPS conductive thermoformed ESD tray for secure component storage and transport, EMS Technologies"
       }
     ]
   },

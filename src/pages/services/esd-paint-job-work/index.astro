@@ -1,0 +1,53 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import AssetImage from '@/components/AssetImage.astro';
+import { esdPaintServices, esdPaintIntro } from '@/data/services';
+import { breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+
+const title = 'ESD Paint Job Work - Conductive Floor & Surface Coating | EMS';
+const description = 'EMS Technologies applies ProtectA Pro ESD conductive and anti-static paints on site: surface preparation, conductive primer and earthing, topcoat application, resistance testing and handover.';
+const path = '/services/esd-paint-job-work/';
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: 'ESD Paint Job Work', path },
+  ]),
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero eyebrow="Services · Job work" title="ESD Paint Job Work" lead={esdPaintIntro} />
+  <section class="section container-x">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {esdPaintServices.map((s) => (
+        <article class="card overflow-hidden">
+          <div class="aspect-[4/3] overflow-hidden bg-surface">
+            <AssetImage name={s.img} alt={s.title} width={480} height={360} class="h-full w-full object-cover" />
+          </div>
+          <div class="p-6">
+            <h3 class="heading text-lg">{s.title}</h3>
+            <p class="mt-2 text-sm text-muted">{s.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="section border-t border-line">
+    <div class="container-x flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p class="eyebrow">The coating we apply</p>
+        <h2 class="heading mt-4 text-2xl">ProtectA Pro: ESD Conductive &amp; Anti-Static Paints</h2>
+        <p class="mt-3 max-w-2xl text-muted">An advanced range of ESD conductive and anti-static paints for floors, walls, surfaces and polypropylene bins, built on a conductive polymer matrix for stable, durable electrostatic protection in industrial environments.</p>
+      </div>
+      <a href="/datasheets/protecta-pro-esd-conductive-paint.pdf" class="btn-outline shrink-0" target="_blank" rel="noopener">Datasheet (PDF)</a>
+    </div>
+  </section>
+  <section class="section border-t border-line">
+    <div class="container-x text-center max-w-2xl">
+      <h2 class="heading text-2xl sm:text-3xl">Planning an ESD floor or workspace?</h2>
+      <a href="/contact-us/?product=ESD%20Paint%20Job%20Work" class="btn-primary mt-7">Request a site visit</a>
+    </div>
+  </section>
+</Layout>

@@ -12,7 +12,7 @@ const description = 'Automated selective conformal coating machines supplied by 
   <section class="section container-x space-y-16">
     {machines.map((m, i) => (
       <div class={`grid lg:grid-cols-2 gap-10 items-center ${i % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
-        <div class="rounded-xl border border-line bg-paper p-6">
+        <div class="rounded-xl border border-line bg-surface p-6">
           <AssetImage name={m.img} alt={`${m.model} selective coating machine`} width={560} height={480} class="w-full object-contain" />
         </div>
         <div>
