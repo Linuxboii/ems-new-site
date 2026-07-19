@@ -2,13 +2,15 @@
 
 :root {
   scroll-behavior: smooth;
+  /* Keep in-page anchors clear of the sticky 5rem header. */
+  scroll-padding-top: 6rem;
   color-scheme: light;
   /* Light theme (default) */
-  --c-paper: 251 252 253;
-  --c-surface: 255 255 255;
+  --c-paper: 221 227 235;  /* muted grey-white page background */
+  --c-surface: 250 251 253; /* pale white — cards lift off the page */
   --c-ink: 14 26 43;
   --c-muted: 91 107 127;
-  --c-line: 228 232 238;
+  --c-line: 203 212 223;
   --c-accent: 21 82 124;   /* brand navy — logo mark */
   --c-teal: 13 80 70;      /* brand teal — logo ISO rule */
 }

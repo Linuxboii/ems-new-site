@@ -4,7 +4,7 @@ interface Props { title: string; href: string; img: string; blurb?: string; }
 const { title, href, img, blurb } = Astro.props;
 ---
 <a href={href} class="card group flex flex-col overflow-hidden">
-  <div class="aspect-[4/3] overflow-hidden bg-paper">
+  <div class="aspect-[4/3] overflow-hidden bg-surface">
     <AssetImage name={img} alt={title} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
   </div>
   <div class="flex flex-1 flex-col p-6">

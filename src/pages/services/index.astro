@@ -1,27 +1,31 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
-import AssetImage from '@/components/AssetImage.astro';
-import { services, serviceIntro } from '@/data/services';
+import ProductCard from '@/components/ProductCard.astro';
 
-const title = 'Conformal Coating Job Work - On-Site Coating Services | EMS';
-const description = 'EMS Technologies provides end-to-end conformal coating job work: application, UV optical inspection, curing, thickness testing, removal and final inspection by 30+ trained engineers.';
+const title = 'Services - Conformal Coating & ESD Paint Job Work | EMS';
+const description = 'EMS Technologies job work services: end-to-end conformal coating of PCB assemblies and on-site application of ProtectA Pro ESD conductive and anti-static paints.';
+
+const jobWork = [
+  {
+    title: 'Conformal Coating Job Work',
+    href: '/services/conformal-coating-job-work/',
+    img: '2019-services-hires-coating.jpg',
+    blurb: 'Application, UV optical inspection, curing, thickness testing, removal and final inspection, delivered on site by 30+ trained engineers.',
+  },
+  {
+    title: 'ESD Paint Job Work',
+    href: '/services/esd-paint-job-work/',
+    img: 'bins.png',
+    blurb: 'ProtectA Pro ESD conductive and anti-static paints applied to floors, walls, work surfaces and bins, with earthing and resistance testing.',
+  },
+];
 ---
 <Layout title={title} description={description} path="/services/">
-  <PageHero eyebrow="Services · Job work" title="Conformal Coating Job Work" lead={serviceIntro} />
+  <PageHero eyebrow="Job work" title="Services" lead="Two on-site job work programmes: protective conformal coating of assembled PCBs, and ESD conductive paint systems for the environment those boards are built in." />
   <section class="section container-x">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((s) => (
-        <article class="card overflow-hidden">
-          <div class="aspect-[4/3] overflow-hidden bg-paper">
-            <AssetImage name={s.img} alt={s.title} width={480} height={360} class="h-full w-full object-cover" />
-          </div>
-          <div class="p-6">
-            <h3 class="heading text-lg">{s.title}</h3>
-            <p class="mt-2 text-sm text-muted">{s.body}</p>
-          </div>
-        </article>
-      ))}
+    <div class="grid gap-6 sm:grid-cols-2">
+      {jobWork.map((s) => <ProductCard title={s.title} href={s.href} img={s.img} blurb={s.blurb} />)}
     </div>
   </section>
 </Layout>

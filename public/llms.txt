@@ -15,10 +15,11 @@
 ## Products & Services
 
 - Conformal coatings (Peters ELPEGUARD): acrylic, polyurethane, silicone, thick-film curing, aqua (water-based): https://emstechnologies.in/conformal/
-- Conformal coating job work (on-site): application, UV optical inspection, curing, thickness testing, removal, rework, final inspection: https://emstechnologies.in/services/
+- Conformal coating job work (on-site): application, UV optical inspection, curing, thickness testing, removal, rework, final inspection: https://emstechnologies.in/services/conformal-coating-job-work/
+- ESD paint job work (on-site): ProtectA Pro ESD conductive and anti-static paints for floors, walls, surfaces and bins, with earthing and resistance testing: https://emstechnologies.in/services/esd-paint-job-work/
 - ESD bags: anti-static bubble, static shielding, LDPE pink, conductive grid: https://emstechnologies.in/EsdBags/
 - PP corrugated ESD trays & bins: https://emstechnologies.in/products/pp-bins/
-- EVA conductive foam trays: https://emstechnologies.in/products/conductive-foam-trays/
+- EPE foam trays: https://emstechnologies.in/products/conductive-foam-trays/
 - ESD thermoforming trays: https://emstechnologies.in/products/thermoforming-trays/
 - Selective coating machines (ALTD-450B, ALTD-450J): https://emstechnologies.in/SCMachines/
 
@@ -27,4 +28,6 @@
 - Home: https://emstechnologies.in/
 - About: https://emstechnologies.in/about-us/
 - Products: https://emstechnologies.in/products/
+- Services: https://emstechnologies.in/services/
+- Gallery: https://emstechnologies.in/gallery/
 - Contact: https://emstechnologies.in/contact-us/

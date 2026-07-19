@@ -1,0 +1,43 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import AssetImage from '@/components/AssetImage.astro';
+import { services, serviceIntro } from '@/data/services';
+import { breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+
+const title = 'Conformal Coating Job Work - On-Site Coating Services | EMS';
+const description = 'EMS Technologies provides end-to-end conformal coating job work: application, UV optical inspection, curing, thickness testing, removal and final inspection by 30+ trained engineers.';
+const path = '/services/conformal-coating-job-work/';
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: 'Conformal Coating Job Work', path },
+  ]),
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero eyebrow="Services · Job work" title="Conformal Coating Job Work" lead={serviceIntro} />
+  <section class="section container-x">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <article class="card overflow-hidden">
+          <div class="aspect-[4/3] overflow-hidden bg-surface">
+            <AssetImage name={s.img} alt={s.title} width={480} height={360} class="h-full w-full object-cover" />
+          </div>
+          <div class="p-6">
+            <h3 class="heading text-lg">{s.title}</h3>
+            <p class="mt-2 text-sm text-muted">{s.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="section border-t border-line">
+    <div class="container-x text-center max-w-2xl">
+      <h2 class="heading text-2xl sm:text-3xl">Need coating support at your line?</h2>
+      <a href="/contact-us/?product=Conformal%20Coating%20Job%20Work" class="btn-primary mt-7">Request a quote</a>
+    </div>
+  </section>
+</Layout>
