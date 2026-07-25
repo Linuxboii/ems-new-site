@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import ProductIntro from '@/components/ProductIntro.astro';
 import ProductCard from '@/components/ProductCard.astro';
 import { coatings, coatingIntro } from '@/data/coatings';
 
@@ -17,6 +18,7 @@ const jsonLd = [{
 ---
 <Layout title={title} description={description} path="/conformal/" jsonLd={jsonLd}>
   <PageHero eyebrow="Products · ELPEGUARD®" title="Conformal Coatings" lead={coatingIntro} />
+  <ProductIntro path="/conformal/" />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} blurb={c.blurb} />)}

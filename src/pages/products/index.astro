@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import ProductIntro from '@/components/ProductIntro.astro';
 import ProductCard from '@/components/ProductCard.astro';
 import { products } from '@/data/products';
 
@@ -9,6 +10,7 @@ const description = 'EMS Technologies products: ELPEGUARD conformal coatings, ES
 ---
 <Layout title={title} description={description} path="/products/">
   <PageHero eyebrow="Catalogue" title="Products" lead="Conformal coatings, ESD packing and selective coating equipment: the full EMS Technologies range." />
+  <ProductIntro path="/products/" />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} />)}

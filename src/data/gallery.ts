@@ -49,10 +49,6 @@ export const gallery: Record<string, GalleryGroup> = {
     "label": "Static shielding bag",
     "images": [
       {
-        "src": "Static-Shielding-bags.jpeg",
-        "alt": "Metallised static shielding bag with PCB forming a Faraday cage, EMS Technologies"
-      },
-      {
         "src": "static-shielding-bag-02.jpg",
         "alt": "Metallised static shielding bag with PCB forming a Faraday cage, EMS Technologies"
       },
@@ -67,14 +63,23 @@ export const gallery: Record<string, GalleryGroup> = {
       {
         "src": "static-shielding-bag-05.jpg",
         "alt": "Metallised static shielding bag with PCB forming a Faraday cage, EMS Technologies"
+      }
+    ]
+  },
+  "mbb": {
+    "label": "Aluminium bag (MBB moisture barrier bag)",
+    "images": [
+      {
+        "src": "Static-Shielding-bags.jpeg",
+        "alt": "Silver aluminium MBB moisture barrier bag with PCB, EMS Technologies"
       },
       {
         "src": "static-shielding-bag-06.jpg",
-        "alt": "Metallised static shielding bag with PCB forming a Faraday cage, EMS Technologies"
+        "alt": "Silver aluminium MBB moisture barrier bag with PCB, EMS Technologies"
       },
       {
         "src": "static-shielding-bag-07.jpg",
-        "alt": "Metallised static shielding bag with PCB forming a Faraday cage, EMS Technologies"
+        "alt": "Silver aluminium MBB moisture barrier bag with PCB, EMS Technologies"
       }
     ]
   },

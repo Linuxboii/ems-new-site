@@ -1,8 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
-import AssetImage from '@/components/AssetImage.astro';
-import { esdPaintServices, esdPaintIntro } from '@/data/services';
+import ApplicationCard from '@/components/ApplicationCard.astro';
+import { esdPaintApplications, esdPaintIntro } from '@/data/services';
 import { breadcrumbJsonLd } from '@/lib/galleryJsonLd';
 
 const title = 'ESD Paint Job Work - Conductive Floor & Surface Coating | EMS';
@@ -20,17 +20,12 @@ const jsonLd = [
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Services · Job work" title="ESD Paint Job Work" lead={esdPaintIntro} />
   <section class="section container-x">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {esdPaintServices.map((s) => (
-        <article class="card overflow-hidden">
-          <div class="aspect-[4/3] overflow-hidden bg-surface">
-            <AssetImage name={s.img} alt={s.title} width={480} height={360} class="h-full w-full object-cover" />
-          </div>
-          <div class="p-6">
-            <h3 class="heading text-lg">{s.title}</h3>
-            <p class="mt-2 text-sm text-muted">{s.body}</p>
-          </div>
-        </article>
+    <p class="eyebrow">Applications</p>
+    <h2 class="heading mt-4 text-2xl sm:text-3xl">Where we apply it</h2>
+    <p class="mt-3 text-sm text-accent2">Click any card to read more about that application.</p>
+    <div class="mt-8 grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {esdPaintApplications.map((s, i) => (
+        <ApplicationCard id={String(i)} title={s.title} img={s.img} body={s.body} detail={s.detail} points={s.points} />
       ))}
     </div>
   </section>

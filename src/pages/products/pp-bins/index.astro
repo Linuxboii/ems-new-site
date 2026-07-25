@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
@@ -20,6 +21,7 @@ const jsonLd = [
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="ESD Packing" title="EVA Bins" lead="Rugged, reusable EVA bins for storing and transporting circuit boards and components. ESD-safe and clearly labelled for electrostatic-sensitive devices." />
+  <ProductIntro path={path} />
   <GallerySection title="EVA ESD Bins" enquire="EVA Bins" images={gallery.bins.images} blurb="Anti-static EVA bins holding assembled PCBs, labelled for electrostatic-sensitive devices." />
   <section class="section border-t border-line">
     <div class="container-x text-center max-w-2xl">

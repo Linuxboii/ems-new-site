@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
@@ -20,6 +21,7 @@ const jsonLd = [
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="ESD Packing" title="ESD Thermoforming Trays" lead="Anti-static, conductive and clear thermoformed blister trays, custom-formed to the exact geometry of your components for safe storage, handling and automated line feeding." />
+  <ProductIntro path={path} />
   <GallerySection id="pet" title="PET Thermoformed Trays" enquire="ESD Thermoforming Trays (PET)" images={gallery.traysPet.images} blurb="Clear, transparent PET blister trays for full part visibility, formed to hold PCBs and components securely." />
   <GallerySection id="hips" title="HIPS Thermoformed Trays" enquire="ESD Thermoforming Trays (HIPS)" images={gallery.traysHips.images} blurb="Black, conductive and anti-static HIPS trays for robust, reusable protection of ESD-sensitive components." />
   <section class="section border-t border-line">
