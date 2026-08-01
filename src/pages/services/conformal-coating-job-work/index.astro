@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
-import AssetImage from '@/components/AssetImage.astro';
+import ApplicationCard from '@/components/ApplicationCard.astro';
 import { services, serviceIntro } from '@/data/services';
 import { breadcrumbJsonLd } from '@/lib/galleryJsonLd';
 
@@ -20,18 +20,23 @@ const jsonLd = [
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Services · Job work" title="Conformal Coating Job Work" lead={serviceIntro} />
   <section class="section container-x">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((s) => (
-        <article class="card overflow-hidden">
-          <div class="aspect-[4/3] overflow-hidden bg-surface">
-            <AssetImage name={s.img} alt={s.title} width={480} height={360} class="h-full w-full object-cover" />
-          </div>
-          <div class="p-6">
-            <h3 class="heading text-lg">{s.title}</h3>
-            <p class="mt-2 text-sm text-muted">{s.body}</p>
-          </div>
-        </article>
+    <p class="eyebrow">Process</p>
+    <h2 class="heading mt-4 text-2xl sm:text-3xl">What the job work covers</h2>
+    <p class="mt-3 text-sm text-accent2">Click any card to read more about that step.</p>
+    <div class="mt-8 grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s, i) => (
+        <ApplicationCard id={`cc-${i}`} title={s.title} img={s.img} body={s.body} detail={s.detail} points={s.points} eyebrow="Process step" enquirePrefix="Conformal Coating" />
       ))}
+    </div>
+  </section>
+  <section class="section border-t border-line">
+    <div class="container-x flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p class="eyebrow">The coatings we apply</p>
+        <h2 class="heading mt-4 text-2xl">ELPEGUARD® Conformal Coatings</h2>
+        <p class="mt-3 max-w-2xl text-muted">Peters ELPEGUARD acrylic, polyurethane, silicone, thick-film UV-curing and aqua-based conformal coatings that protect and insulate assembled PCBs for higher reliability and service life.</p>
+      </div>
+      <a href="/datasheets/protecta-pro-esd-conductive-paint.pdf" class="btn-outline shrink-0" target="_blank" rel="noopener">Datasheet (PDF)</a>
     </div>
   </section>
   <section class="section border-t border-line">

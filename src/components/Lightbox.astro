@@ -1,8 +1,13 @@
 ---
 import AssetImage from '@/components/AssetImage.astro';
 import type { GalleryImage } from '@/data/gallery';
-interface Props { images: GalleryImage[]; enquire?: string; }
-const { images, enquire } = Astro.props;
+import type { ProductDetail } from '@/data/productDetails';
+// Given a `detail`, opening a photo shows the product write-up beside the
+// enlarged image, so the information comes with the click rather than from a
+// separate button. Every photo in the grid is the same product, so they share
+// one write-up.
+interface Props { images: GalleryImage[]; enquire?: string; detail?: ProductDetail; detailLabel?: string; }
+const { images, enquire, detail, detailLabel } = Astro.props;
 const enquireHref = enquire ? `/contact-us/?product=${encodeURIComponent(enquire)}` : null;
 
 // Resolve each thumbnail to its full-resolution source so the pop-up and the
@@ -20,7 +25,7 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
         data-lb-index={i}
         data-lb-alt={img.alt}
         data-lb-full={fullSrc(img.src)}
-        aria-label={`View larger: ${img.alt}`}
+        aria-label={detail ? `View larger with details: ${img.alt}` : `View larger: ${img.alt}`}
       >
         <AssetImage name={img.src} alt={img.alt} width={1000} height={750} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
       </button>
@@ -32,6 +37,22 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
       )}
     </div>
   ))}
+
+  {/* Rendered once per grid and copied into the overlay when a photo opens,
+      so the copy is server-rendered rather than built in JS. */}
+  {detail && (
+    <div hidden data-lb-panel-src>
+      <p class="lb-p-eyebrow">Product</p>
+      <h3 class="lb-p-title">{detailLabel ?? enquire}</h3>
+      <p class="lb-p-text">{detail.detail}</p>
+      {detail.points.length > 0 && (
+        <ul class="lb-p-list">
+          {detail.points.map((p) => (<li>{p}</li>))}
+        </ul>
+      )}
+      {enquireHref && <a href={enquireHref} class="lb-p-cta">Enquire about this</a>}
+    </div>
+  )}
 </div>
 
 <style is:global>
@@ -47,6 +68,11 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
   #lb-overlay.is-open { opacity: 1; }
   #lb-overlay[hidden] { display: none; }
 
+  /* Image and write-up side by side; the image alone when there is no copy. */
+  .lb-stage {
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    max-width: min(1400px, 94vw); max-height: 86vh;
+  }
   .lb-frame {
     position: relative; display: inline-flex; line-height: 0;
     max-width: min(1100px, 92vw); max-height: 82vh;
@@ -55,6 +81,33 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
   }
   .lb-img { max-width: 100%; max-height: 82vh; object-fit: contain; display: block; }
   .lb-frame.zoomable { cursor: zoom-in; }
+
+  .lb-panel {
+    flex: 0 0 340px; align-self: stretch; max-height: 82vh; overflow-y: auto;
+    border-radius: 12px; padding: 1.6rem;
+    background: rgb(var(--c-surface)); color: rgb(var(--c-ink));
+    box-shadow: 0 24px 70px rgba(0,0,0,.45);
+    line-height: 1.5;
+  }
+  .lb-panel[hidden] { display: none; }
+  .lb-p-eyebrow {
+    font-size: .68rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: rgb(var(--c-accent));
+  }
+  .lb-p-title { font-size: 1.35rem; font-weight: 600; margin-top: .6rem; }
+  .lb-p-text { font-size: .85rem; color: rgb(var(--c-muted)); margin-top: .9rem; }
+  .lb-p-list { margin-top: 1.1rem; display: grid; gap: .6rem; font-size: .85rem; color: rgb(var(--c-muted)); }
+  .lb-p-list li { position: relative; padding-left: 1rem; }
+  .lb-p-list li::before {
+    content: ''; position: absolute; left: 0; top: .55em;
+    width: 4px; height: 4px; border-radius: 999px; background: rgb(var(--c-accent));
+  }
+  .lb-p-cta {
+    display: inline-block; margin-top: 1.5rem;
+    padding: .6rem 1.1rem; border-radius: 8px;
+    font-size: .82rem; font-weight: 500; color: #fff; text-decoration: none;
+    background-image: linear-gradient(135deg, rgb(var(--c-accent)), rgb(var(--c-teal)));
+  }
 
   .lb-lens {
     position: absolute; pointer-events: none; display: none;
@@ -84,10 +137,19 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
   .lb-prev { left: 1rem; } .lb-next { right: 1rem; }
   .lb-hint { position: absolute; top: 1.25rem; left: 1.25rem; z-index: 4; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); }
 
+  /* Stack the write-up under the photo once there is no room beside it. */
+  @media (max-width: 900px) {
+    #lb-overlay { align-items: flex-start; }
+    .lb-stage { flex-direction: column; max-height: 88vh; overflow-y: auto; }
+    .lb-panel { flex: none; width: 100%; max-height: none; overflow: visible; }
+    .lb-stage:has(.lb-panel:not([hidden])) .lb-frame,
+    .lb-stage:has(.lb-panel:not([hidden])) .lb-img { max-height: 46vh; }
+  }
   @media (max-width: 640px) {
     .lb-nav { width: 40px; height: 40px; font-size: 1.5rem; }
     .lb-lens { display: none !important; }
     .lb-hint { display: none; }
+    .lb-panel { padding: 1.2rem; }
   }
   @media (prefers-reduced-motion: reduce) { #lb-overlay { transition: none; } }
 </style>
@@ -105,11 +167,14 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
       <span class="lb-hint">Hover to magnify</span>
       <button type="button" class="lb-btn lb-close" aria-label="Close">&times;</button>
       <button type="button" class="lb-btn lb-nav lb-prev" aria-label="Previous image">&#8249;</button>
-      <figure class="lb-frame" style="margin:0">
-        <img class="lb-img" alt="" />
-        <span class="lb-lens" aria-hidden="true"></span>
-        <figcaption class="lb-cap"></figcaption>
-      </figure>
+      <div class="lb-stage">
+        <figure class="lb-frame" style="margin:0">
+          <img class="lb-img" alt="" />
+          <span class="lb-lens" aria-hidden="true"></span>
+          <figcaption class="lb-cap"></figcaption>
+        </figure>
+        <aside class="lb-panel" hidden></aside>
+      </div>
       <button type="button" class="lb-btn lb-nav lb-next" aria-label="Next image">&#8250;</button>`;
     document.body.appendChild(overlay);
 
@@ -117,6 +182,7 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
     const imgEl = overlay.querySelector('.lb-img') as HTMLImageElement;
     const lens = overlay.querySelector('.lb-lens') as HTMLElement;
     const capEl = overlay.querySelector('.lb-cap') as HTMLElement;
+    const panel = overlay.querySelector('.lb-panel') as HTMLElement;
     const ZOOM = 2.4;
     let group: HTMLElement[] = [];
     let idx = 0;
@@ -140,7 +206,13 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
       capEl.textContent = alt;
     }
     function open(btn: HTMLElement) {
-      group = Array.from(btn.closest('.js-lightbox')!.querySelectorAll<HTMLElement>('[data-lb-open]'));
+      const grid = btn.closest('.js-lightbox')!;
+      group = Array.from(grid.querySelectorAll<HTMLElement>('[data-lb-open]'));
+      // The write-up travels with the grid, so it is right for every photo in it.
+      const src = grid.querySelector('[data-lb-panel-src]');
+      panel.innerHTML = src ? src.innerHTML : '';
+      panel.hidden = !src;
+      panel.scrollTop = 0;
       lastFocus = btn;
       overlay.hidden = false;
       requestAnimationFrame(() => overlay.classList.add('is-open'));
@@ -177,7 +249,7 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
       const t = e.target as HTMLElement;
       const opener = t.closest('[data-lb-open]') as HTMLElement | null;
       if (opener) { e.preventDefault(); open(opener); return; }
-      if (t.closest('.lb-close') || t.id === 'lb-overlay') return close();
+      if (t.closest('.lb-close') || t.id === 'lb-overlay' || t.classList.contains('lb-stage')) return close();
       if (t.closest('.lb-next')) return show(idx + 1);
       if (t.closest('.lb-prev')) return show(idx - 1);
     });

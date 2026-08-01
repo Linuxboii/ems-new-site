@@ -1,18 +1,63 @@
 ---
 import AssetImage from '@/components/AssetImage.astro';
-interface Props { title: string; href: string; img: string; blurb?: string; }
-const { title, href, img, blurb } = Astro.props;
+import ProductDetailModal from '@/components/ProductDetailModal.astro';
+import { productDetails } from '@/data/productDetails';
+
+interface Props { title: string; href: string; img: string; blurb?: string; detailKey?: string; }
+const { title, href, img, blurb, detailKey } = Astro.props;
+
+// With a detailKey the photo opens an expanded panel; the "View" link below it
+// still navigates, so the card gains detail without losing its destination.
+const detail = detailKey ? productDetails[detailKey] : undefined;
+const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
-<a href={href} class="card group flex flex-col overflow-hidden">
-  <div class="aspect-[4/3] overflow-hidden bg-surface">
-    <AssetImage name={img} alt={title} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
-  </div>
+<article class="card group flex flex-col overflow-hidden">
+  {detail ? (
+    <button
+      type="button"
+      class="pc-open relative block w-full overflow-hidden bg-surface"
+      data-ac-open={dialogId}
+      aria-haspopup="dialog"
+      aria-label={`More about ${title}`}
+    >
+      <div class="aspect-[4/3] overflow-hidden">
+        <AssetImage name={img} alt={title} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+      </div>
+      <span class="pc-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+        Expand
+      </span>
+    </button>
+  ) : (
+    <a href={href} class="block aspect-[4/3] overflow-hidden bg-surface" tabindex="-1" aria-hidden="true">
+      <AssetImage name={img} alt={title} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+    </a>
+  )}
   <div class="flex flex-1 flex-col p-6">
     <h3 class="heading text-lg">{title}</h3>
     {blurb && <p class="mt-2 text-sm text-muted">{blurb}</p>}
-    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink">
+    <a href={href} class="mt-4 inline-flex items-center gap-1.5 self-start text-sm font-medium text-ink transition hover:text-accent2">
       View
       <span class="text-accent2 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-    </span>
+    </a>
   </div>
-</a>
+</article>
+
+{detail && <ProductDetailModal id={dialogId} title={title} img={img} detail={detail} href={href} />}
+
+<style>
+  .pc-open { cursor: pointer; }
+  .pc-open:focus-visible { outline: 2px solid rgb(var(--c-accent)); outline-offset: -2px; }
+
+  .pc-badge {
+    position: absolute; top: .6rem; right: .6rem;
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .3rem .5rem; border-radius: 999px;
+    font-size: .68rem; font-weight: 500; line-height: 1;
+    color: #fff; background: rgb(0 0 0 / 0.5);
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .pc-open:hover .pc-badge, .pc-open:focus-visible .pc-badge { opacity: 1; }
+  /* Touch devices get no hover, so keep the affordance permanently visible. */
+  @media (hover: none) { .pc-badge { opacity: 1; } }
+</style>

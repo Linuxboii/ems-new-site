@@ -1,6 +1,6 @@
 # EMS Technologies
 
-> EMS Technologies is the exclusive India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work. Based in Hyderabad, Telangana, India since 2011.
+> EMS Technologies is an India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work. Based in Hyderabad, Telangana, India since 2011.
 
 ## Facts
 
@@ -8,7 +8,7 @@
 - Founded: 2011
 - Location: Hyderabad, Telangana, India
 - Manufacturing plants: Hyderabad (Telangana) and Cochin (Kerala), since 2015
-- Role: Exclusive India distributor for Lackwerke Peters GmbH & Co. KG, Germany
+- Role: India distributor for Lackwerke Peters GmbH & Co. KG, Germany
 - Phone: +91-9394116660
 - Email: info@emstechnologies.in
 
@@ -17,7 +17,7 @@
 - Conformal coatings (Peters ELPEGUARD): acrylic, polyurethane, silicone, thick-film curing, aqua (water-based): https://emstechnologies.in/conformal/
 - Conformal coating job work (on-site): application, UV optical inspection, curing, thickness testing, removal, rework, final inspection: https://emstechnologies.in/services/conformal-coating-job-work/
 - ESD paint job work (on-site): ProtectA Pro ESD conductive and anti-static paints for floors, walls, surfaces and bins, with earthing and resistance testing: https://emstechnologies.in/services/esd-paint-job-work/
-- ESD bags: anti-static bubble, static shielding, LDPE pink, conductive grid: https://emstechnologies.in/EsdBags/
+- ESD bags: anti-static bubble, static shielding, aluminium MBB, LDPE pink, conductive grid, VCI (vapour corrosion inhibitor): https://emstechnologies.in/EsdBags/
 - PP corrugated ESD trays & bins: https://emstechnologies.in/products/pp-bins/
 - EPE foam trays: https://emstechnologies.in/products/conductive-foam-trays/
 - ESD thermoforming trays: https://emstechnologies.in/products/thermoforming-trays/

@@ -1,0 +1,108 @@
+---
+import AssetImage from '@/components/AssetImage.astro';
+
+// An image that shows a round magnifier lens under the cursor, the same
+// behaviour the gallery lightbox has, reusable inside any expanded card.
+interface Props { name: string; alt: string; width?: number; height?: number; fit?: 'cover' | 'contain'; class?: string; }
+const { name, alt, width = 900, height = 675, fit = 'cover', class: cls = '' } = Astro.props;
+
+// The lens paints the full-resolution original, not the resized thumbnail,
+// so magnifying reveals real detail rather than enlarged pixels.
+const assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{png,jpg,jpeg,webp}', { eager: true });
+const full = assets[`/src/assets/${name}`]?.default.src ?? '';
+// Spelled out rather than interpolated so Tailwind sees the literal class names.
+const fitCls = fit === 'contain' ? 'object-contain' : 'object-cover';
+---
+<figure class={`mag ${cls}`} data-mag data-mag-full={full} data-mag-fit={fit}>
+  <AssetImage name={name} alt={alt} width={width} height={height} class={`mag-img w-full ${fitCls}`} />
+  <span class="mag-lens" aria-hidden="true"></span>
+  <span class="mag-hint" aria-hidden="true">Hover to magnify</span>
+</figure>
+
+<style is:global>
+  .mag { position: relative; margin: 0; overflow: hidden; line-height: 0; }
+
+  .mag-lens {
+    position: absolute; pointer-events: none; display: none;
+    width: 180px; height: 180px; border-radius: 999px;
+    border: 3px solid rgba(255, 255, 255, .9);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(0, 0, 0, .15);
+    background-repeat: no-repeat; z-index: 2;
+  }
+
+  .mag-hint {
+    position: absolute; left: .75rem; bottom: .75rem; z-index: 3;
+    padding: .25rem .5rem; border-radius: 6px;
+    font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1;
+    color: rgba(255, 255, 255, .85); background: rgba(0, 0, 0, .45);
+    opacity: 0; transition: opacity .15s ease;
+  }
+  .mag:hover .mag-hint { opacity: 1; }
+  .mag.is-zooming { cursor: zoom-in; }
+  .mag.is-zooming .mag-hint { opacity: 0; }
+
+  /* No cursor to follow on touch, so the lens never applies. */
+  @media (hover: none) {
+    .mag-lens { display: none !important; }
+    .mag-hint { display: none; }
+  }
+</style>
+
+<script>
+  const ZOOM = 2.4;
+
+  function moveLens(fig: HTMLElement, e: MouseEvent) {
+    const img = fig.querySelector('img') as HTMLImageElement | null;
+    const lens = fig.querySelector('.mag-lens') as HTMLElement | null;
+    const full = fig.dataset.magFull;
+    if (!img || !lens || !full || !img.naturalWidth) return;
+
+    const r = img.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    if (x < 0 || y < 0 || x > r.width || y > r.height) { hideLens(fig); return; }
+
+    // object-fit crops or letterboxes the source inside the box, so the lens has
+    // to map the cursor through that same transform or it magnifies the wrong spot.
+    const sx = r.width / img.naturalWidth;
+    const sy = r.height / img.naturalHeight;
+    const scale = fig.dataset.magFit === 'contain' ? Math.min(sx, sy) : Math.max(sx, sy);
+    const drawnW = img.naturalWidth * scale;
+    const drawnH = img.naturalHeight * scale;
+    const offX = (r.width - drawnW) / 2;
+    const offY = (r.height - drawnH) / 2;
+
+    const lw = lens.offsetWidth, lh = lens.offsetHeight;
+    if (lens.style.backgroundImage === '') lens.style.backgroundImage = `url("${full}")`;
+    lens.style.backgroundSize = `${drawnW * ZOOM}px ${drawnH * ZOOM}px`;
+    lens.style.backgroundPosition = `${-((x - offX) * ZOOM - lw / 2)}px ${-((y - offY) * ZOOM - lh / 2)}px`;
+    lens.style.left = `${x + (r.left - fig.getBoundingClientRect().left) - lw / 2}px`;
+    lens.style.top = `${y + (r.top - fig.getBoundingClientRect().top) - lh / 2}px`;
+    lens.style.display = 'block';
+    fig.classList.add('is-zooming');
+  }
+
+  function hideLens(fig: HTMLElement) {
+    const lens = fig.querySelector('.mag-lens') as HTMLElement | null;
+    if (lens) lens.style.display = 'none';
+    fig.classList.remove('is-zooming');
+  }
+
+  function initMagnify() {
+    if (document.body.dataset.magWired) return;
+    document.body.dataset.magWired = '1';
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    // Delegated so figures revealed later (inside a dialog) are covered too.
+    document.addEventListener('mousemove', (e) => {
+      const fig = (e.target as HTMLElement).closest<HTMLElement>('[data-mag]');
+      if (fig) moveLens(fig, e);
+    });
+    document.addEventListener('mouseout', (e) => {
+      const fig = (e.target as HTMLElement).closest<HTMLElement>('[data-mag]');
+      if (fig && !fig.contains(e.relatedTarget as Node)) hideLens(fig);
+    });
+  }
+  initMagnify();
+  document.addEventListener('astro:page-load', initMagnify);
+</script>

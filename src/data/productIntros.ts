@@ -2,7 +2,7 @@
 // directly under the hero. Keyed by route so a page pulls its own intro.
 export const productIntros: Record<string, string[]> = {
   '/products/': [
-    'EMS Technologies supplies two connected halves of PCB protection: the coatings and equipment that protect a board in service, and the ESD packing that protects it on the way there. We have been the exclusive India distributor for Lackwerke Peters GmbH & Co. KG of Germany since 2011, working out of Hyderabad, Telangana.',
+    'EMS Technologies supplies two connected halves of PCB protection: the coatings and equipment that protect a board in service, and the ESD packing that protects it on the way there. We have been an India distributor for Lackwerke Peters GmbH & Co. KG of Germany since 2011, working out of Hyderabad, Telangana.',
     'The range below covers ELPEGUARD® conformal coatings, selective coating machines, and ESD packing in bag, bin, foam and thermoformed tray form. Most of the packing is made to your component geometry rather than pulled from a shelf, so a drawing or a sample is usually the fastest way to start.',
   ],
 
@@ -14,11 +14,17 @@ export const productIntros: Record<string, string[]> = {
   '/EsdBags/': [
     'A static discharge too small for a person to feel can still damage or quietly degrade a semiconductor. ESD packing bags are the first line of defence: they stop a charge building on the packaging surface and, in the shielding grades, stop an external discharge reaching the contents at all. We supply bags for bare boards, populated assemblies and loose components, both in transit and in store.',
     'Five types cover most requirements. Pink bubble bags add cushioning against shock alongside an anti-static surface. Static shielding bags carry a metallised layer that forms a Faraday cage around the contents. Aluminium bags — also known as MBB (moisture barrier bags) — are the silver, aluminium-laminated grade that adds a barrier against humidity on top of that shielding. Conductive grid bags use a printed diamond pattern to dissipate charge during storage and transit. LDPE pink bags handle general anti-static packing where shielding and cushioning are not needed.',
+    'Alongside them we supply VCI bags, which answer a different problem: corrosion rather than static. The film releases a vapour inside the sealed bag that settles on exposed metal and stops rust forming, so bare leads, connectors, contacts, fasteners and machined parts survive long storage and export runs without being oiled or wrapped.',
   ],
 
   '/products/pp-bins/': [
     'EVA bins are reusable containers for moving and storing populated boards and loose components between processes. The bin body is anti-static, so parts are not left sitting against a surface that can hold a charge, and each bin carries the electrostatic-sensitive-device marking that tells anyone on the floor what is inside before they open it.',
     'They are built for repeated handling rather than single use: stacking, line-side storage and transport between units. Sizes and internal layouts can be matched to the components they carry, including dividers and foam inserts where parts need to be held apart.',
+  ],
+
+  '/products/pp-corrugated/': [
+    'PP corrugated trays and bins are made from twin-wall polypropylene sheet, giving a rigid but lightweight container that stands up to repeated handling far better than card. The material is anti-static, so boards and components are not left resting against a surface that can hold a charge, and each unit carries the electrostatic-sensitive-device marking so the floor knows what is inside before it is opened.',
+    'They suit line-side storage, stacking and transport between processes, and can be supplied with dividers, partitions and foam inserts to hold parts apart. Footprint, wall height and internal layout are matched to the components they carry, so a drawing or a sample is the fastest way to start.',
   ],
 
   '/products/conductive-foam-trays/': [

@@ -21,7 +21,7 @@ const jsonLd = [{
   <ProductIntro path="/conformal/" />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} blurb={c.blurb} />)}
+      {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} blurb={c.blurb} detailKey={c.detailKey} />)}
     </div>
   </section>
 </Layout>

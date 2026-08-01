@@ -1,8 +1,10 @@
 ---
 import AssetImage from '@/components/AssetImage.astro';
+import MagnifyImage from '@/components/MagnifyImage.astro';
+import CardModal from '@/components/CardModal.astro';
 
-interface Props { title: string; img: string; body: string; detail: string; points?: string[]; id: string; }
-const { title, img, body, detail, points = [], id } = Astro.props;
+interface Props { title: string; img: string; body: string; detail: string; points?: string[]; id: string; eyebrow?: string; enquirePrefix?: string; }
+const { title, img, body, detail, points = [], id, eyebrow = 'Application', enquirePrefix = 'ESD Paint' } = Astro.props;
 const dialogId = `ac-${id}`;
 ---
 <article class="card ac overflow-hidden">
@@ -21,104 +23,23 @@ const dialogId = `ac-${id}`;
   </button>
 </article>
 
-{/* Closed <dialog> is display:none, so it takes no grid space; showModal() lifts it to the top layer. */}
-<dialog id={dialogId} class="ac-modal" aria-labelledby={`${dialogId}-title`}>
-  <button type="button" class="ac-close" data-ac-close aria-label="Close">&times;</button>
-  <div class="ac-grid">
-    <div class="ac-figure">
-      <AssetImage name={img} alt={title} width={900} height={675} class="h-full w-full object-cover" />
-    </div>
-    <div class="ac-copy">
-      <p class="eyebrow">Application</p>
-      <h3 id={`${dialogId}-title`} class="heading mt-4 text-2xl">{title}</h3>
-      <p class="mt-4 text-sm text-muted">{detail}</p>
-      {points.length > 0 && (
-        <ul class="mt-5 space-y-2.5 text-sm text-muted">
-          {points.map((p) => (
-            <li class="flex gap-3"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent2"></span><span>{p}</span></li>
-          ))}
-        </ul>
-      )}
-      <a href={`/contact-us/?product=${encodeURIComponent(`ESD Paint — ${title}`)}`} class="btn-primary mt-7">Enquire about this</a>
-    </div>
-  </div>
-</dialog>
+<CardModal id={dialogId}>
+  <MagnifyImage slot="figure" name={img} alt={title} width={900} height={675} />
+  <p class="eyebrow">{eyebrow}</p>
+  <h3 id={`${dialogId}-title`} class="heading mt-4 text-2xl">{title}</h3>
+  <p class="mt-4 text-sm text-muted">{detail}</p>
+  {points.length > 0 && (
+    <ul class="mt-5 space-y-2.5 text-sm text-muted">
+      {points.map((p) => (
+        <li class="flex gap-3"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent2"></span><span>{p}</span></li>
+      ))}
+    </ul>
+  )}
+  <a href={`/contact-us/?product=${encodeURIComponent(`${enquirePrefix} — ${title}`)}`} class="btn-primary mt-7">Enquire about this</a>
+</CardModal>
 
 <style>
   .ac-open { cursor: pointer; }
   .ac-open:focus-visible { outline: 2px solid rgb(var(--c-accent)); outline-offset: 2px; }
   .ac:hover img { transform: scale(1.03); }
-
-  .ac-modal {
-    width: min(1000px, 94vw);
-    max-height: 88vh;
-    padding: 0;
-    border: 1px solid rgb(var(--c-line));
-    border-radius: 14px;
-    background: rgb(var(--c-surface));
-    color: rgb(var(--c-ink));
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgb(0 0 0 / 0.35);
-  }
-  /* The blurred page behind the modal. */
-  .ac-modal::backdrop {
-    background: rgb(8 12 20 / 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .ac-modal[open] { animation: ac-in .2s ease-out; }
-  @keyframes ac-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-  /* Image beside the copy on desktop; stacked on small screens. */
-  .ac-grid { display: grid; grid-template-columns: 1fr; max-height: 88vh; }
-  @media (min-width: 768px) {
-    .ac-grid { grid-template-columns: 42% 58%; }
-    .ac-figure { height: 100%; }
-  }
-  .ac-figure { background: rgb(var(--c-paper)); min-height: 220px; max-height: 40vh; overflow: hidden; }
-  @media (min-width: 768px) { .ac-figure { max-height: none; } }
-  .ac-copy { padding: clamp(1.5rem, 3vw, 2.5rem); overflow-y: auto; }
-
-  .ac-close {
-    position: absolute; top: .6rem; right: .75rem; z-index: 2;
-    width: 40px; height: 40px; border: 0; border-radius: 999px;
-    display: grid; place-items: center; font-size: 1.6rem; line-height: 1;
-    cursor: pointer; color: #fff; background: rgb(0 0 0 / 0.45);
-    transition: background .15s ease;
-  }
-  .ac-close:hover { background: rgb(0 0 0 / 0.7); }
-  .ac-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 </style>
-
-<script>
-  function initAppCards() {
-    // Per-dialog listener, re-run on every page load so newly rendered dialogs are covered.
-    document.querySelectorAll<HTMLDialogElement>('dialog.ac-modal').forEach((d) => {
-      if (d.dataset.acWired) return;
-      d.dataset.acWired = '1';
-      // Restore scrolling however the dialog was dismissed (X, backdrop, Esc).
-      d.addEventListener('close', () => { document.body.style.overflow = ''; });
-    });
-
-    if (document.body.dataset.acWired) return;
-    document.body.dataset.acWired = '1';
-
-    document.addEventListener('click', (e) => {
-      const t = e.target as HTMLElement;
-
-      const opener = t.closest<HTMLElement>('[data-ac-open]');
-      if (opener) {
-        const dlg = document.getElementById(opener.dataset.acOpen!) as HTMLDialogElement | null;
-        if (dlg) { dlg.showModal(); document.body.style.overflow = 'hidden'; }
-        return;
-      }
-
-      const dlg = t.closest<HTMLDialogElement>('dialog.ac-modal');
-      if (!dlg) return;
-      // Close on the X, or on a click that lands on the dialog itself (the backdrop).
-      if (t.closest('[data-ac-close]') || t === dlg) dlg.close();
-    });
-  }
-  initAppCards();
-  document.addEventListener('astro:page-load', initAppCards);
-</script>

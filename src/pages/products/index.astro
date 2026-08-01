@@ -13,7 +13,7 @@ const description = 'EMS Technologies products: ELPEGUARD conformal coatings, ES
   <ProductIntro path="/products/" />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} />)}
+      {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} detailKey={p.detailKey} />)}
     </div>
   </section>
   <section class="section border-t border-line">

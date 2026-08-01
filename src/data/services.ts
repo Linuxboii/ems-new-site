@@ -1,13 +1,82 @@
 export const serviceIntro =
   'Complete solutions across the full conformal coating process: operating the coating machine, application, UV optical inspection, touch-up, drying/curing, thickness testing, removal, reworking and final inspection. EMS has partnered with Lackwerke Peters since 2011 and deploys 30+ trained B.Tech engineers on-site.';
 
+// The six steps of the job work process, in the order a board passes through them.
+// `detail` and `points` are revealed when a card is expanded.
 export const services = [
-  { title: 'Application of Conformal Coating', img: '2019-services-hires-coating.jpg', body: 'All major application methods: brush, pneumatic spray gun, dip coating (manual / semi-automated / automated) and automatic selective coating equipment.' },
-  { title: 'UV Optical Inspection', img: 'hero_circuit_board.jpeg', body: 'Inspection under UV light to verify coating uniformity, coverage and thickness across the assembly.' },
-  { title: 'Drying / Curing', img: 'selective-conformal-coating-640_sch-uk-2.jpeg', body: 'Controlled drying and curing to achieve full coating performance and adhesion.' },
-  { title: 'Coating Thickness Testing', img: 'automated-conformal-coating-2.jpg', body: 'Precise thickness measurement to confirm conformance to specification.' },
-  { title: 'Removal & Reworking', img: 'a84c75762407-Conformal-Coating-Tool-Removal.jpg', body: 'Selective removal and rework of coated areas for repair and component replacement.' },
-  { title: 'Final Inspection', img: 'home-intro.jpg', body: 'Complete final inspection ensuring every board meets quality and reliability requirements.' },
+  {
+    title: 'Application of Conformal Coating',
+    img: '2019-services-hires-coating.jpg',
+    body: 'All major application methods: brush, pneumatic spray gun, dip coating (manual / semi-automated / automated) and automatic selective coating equipment.',
+    detail: 'How the coating goes on is decided by the board and the volume, not by the method we happen to prefer. A prototype or a repair is often quickest by brush; a mixed-batch run suits spray; boards that need coating on every surface suit dipping; and a repeating production line is best served by selective equipment that needs no masking at all. Our engineers work at your line with the ELPEGUARD system chosen for the assembly.',
+    points: [
+      'Brush application for prototypes, touch-up and repair work',
+      'Pneumatic spray gun for batches and mixed board types',
+      'Dip coating, manual through to automated, for full coverage',
+      'Automatic selective coating for repeat production runs',
+      'Masking of connectors, test points and gold fingers where the method needs it',
+    ],
+  },
+  {
+    title: 'UV Optical Inspection',
+    img: 'hero_circuit_board.jpeg',
+    body: 'Inspection under UV light to verify coating uniformity, coverage and thickness across the assembly.',
+    detail: 'ELPEGUARD coatings carry a UV tracer, so a film that is invisible in normal light fluoresces under UV. That turns an unverifiable process into a visible one: thin patches, missed areas, runs and coating that has crept onto a keep-out area all show up before the board moves on. Anything found is touched up and re-checked rather than passed down the line.',
+    points: [
+      'Coverage confirmed across the whole assembly, not sampled',
+      'Thin spots, pinholes, bridging and runs identified under UV',
+      'Keep-out areas checked to confirm they stayed clear',
+      'Touch-up applied and re-inspected before the board proceeds',
+    ],
+  },
+  {
+    title: 'Drying / Curing',
+    img: 'selective-conformal-coating-640_sch-uk-2.jpeg',
+    body: 'Controlled drying and curing to achieve full coating performance and adhesion.',
+    detail: 'A coating only reaches its stated protection once it has cured properly; handled too early it stays soft, marks easily and never develops the adhesion or the insulation the datasheet promises. Each ELPEGUARD system has its own route to full cure, and we run the boards to the method that matches the chemistry rather than to the clock.',
+    points: [
+      'Air drying, heat curing or UV curing to suit the coating chosen',
+      'Cure schedule taken from the Peters technical datasheet for that product',
+      'Boards racked so the film sets without contact marks',
+      'Handling and packing only once the coating has fully cured',
+    ],
+  },
+  {
+    title: 'Coating Thickness Testing',
+    img: 'automated-conformal-coating-2.jpg',
+    body: 'Precise thickness measurement to confirm conformance to specification.',
+    detail: 'Thickness is where conformal coating quietly fails. Too thin and the board is not protected against moisture or contamination; too thick and the film can stress solder joints and crack as it moves through temperature cycles. Measuring it turns "the board is coated" into a figure that can be recorded and compared against the specification for the job.',
+    points: [
+      'Readings taken at defined points across the assembly',
+      'Compared against the thickness stated for that coating and application',
+      'Results recorded per batch for your quality records',
+      'Out-of-tolerance boards routed back for touch-up or rework',
+    ],
+  },
+  {
+    title: 'Removal & Reworking',
+    img: 'a84c75762407-Conformal-Coating-Tool-Removal.jpg',
+    body: 'Selective removal and rework of coated areas for repair and component replacement.',
+    detail: 'Coated boards still need repairs, and a failed component under a cured film is not a reason to scrap the assembly. The coating is removed only over the area being worked on, the repair is made, and that area is re-coated and re-inspected so the board leaves with the same protection as the rest of the batch.',
+    points: [
+      'Localised removal over the component or joint being repaired',
+      'Method matched to the coating: acrylics rework far more readily than silicones or thick-film systems',
+      'Surrounding coating left intact rather than stripping the whole board',
+      'Re-coating, curing and UV re-inspection of the reworked area',
+    ],
+  },
+  {
+    title: 'Final Inspection',
+    img: 'home-intro.jpg',
+    body: 'Complete final inspection ensuring every board meets quality and reliability requirements.',
+    detail: 'The last check before the boards go back to you: cured film, correct coverage, connectors and test points clean, thickness recorded and any reworked area indistinguishable from the rest. It is also where the job work is signed off as a batch, so what you receive comes with a clear account of what was done to it.',
+    points: [
+      'Full visual and UV check on every board, not a sample',
+      'Connectors, test points and mating surfaces confirmed clear of coating',
+      'Thickness and inspection results compiled for the batch',
+      'Boards packed in ESD packing from our own plants for return',
+    ],
+  },
 ];
 
 export const esdPaintIntro =
