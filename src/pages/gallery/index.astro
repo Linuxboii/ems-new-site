@@ -2,32 +2,23 @@
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import GallerySection from '@/components/GallerySection.astro';
-import { gallery } from '@/data/gallery';
+import { galleryShowcase } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
 
 const title = 'Gallery - ESD Packing & Coating Photos | EMS Technologies';
 const description = 'Photo gallery of EMS Technologies ESD packing: anti-static and static shielding bags, EVA bins, EPE foam inserts, PET and HIPS thermoformed trays and material swatches.';
 const path = '/gallery/';
 
-// One section per product line, in the same order as the products menu. `detail`
-// keys the write-up shown beside the enlarged photo when a section's images
-// are opened.
+// One section per group of the studio photography. `detail` keys the write-up
+// shown beside the enlarged photo when a section's images are opened.
 const sections = [
-  { key: 'bubble', id: 'bubble-bags', detail: 'bubble-bags', blurb: 'Anti-static bubble bags cushioning assembled boards in transit.' },
-  { key: 'shield', id: 'shielding-bags', detail: 'shielding-bags', blurb: 'Metallised static shielding bags forming a Faraday cage around the device.' },
-  { key: 'grid', id: 'grid-bags', detail: 'grid-bags', blurb: 'Conductive grid bags with the diamond pattern, for visible-content shielding.' },
-  { key: 'pink', id: 'pink-bags', detail: 'pink-bags', blurb: 'LDPE pink anti-static bags for general electronics packing.' },
-  { key: 'vci', id: 'vci-bags', detail: 'vci-bags', blurb: 'VCI bags whose vapour inhibitor keeps rust off bare metal parts in storage and transit.' },
-  { key: 'bins', id: 'eva-bins', detail: 'eva-bins', blurb: 'EVA ESD bins holding circuit boards, labelled for electrostatic-sensitive devices.' },
-  { key: 'ppCorrugated', id: 'pp-corrugated', detail: 'pp-corrugated', blurb: 'PP corrugated ESD trays with perforated and slotted conductive bases.' },
-  { key: 'evafoam', id: 'epe-foam', detail: 'epe-foam-trays', blurb: 'EPE foam inserts routed to component geometry for cushioned, static-safe handling.' },
-  { key: 'traysPet', id: 'pet-trays', detail: 'pet-trays', blurb: 'Clear PET thermoformed trays for component storage and transport.' },
-  { key: 'antiStaticPet', id: 'anti-static-pet', detail: 'anti-static-pet', blurb: 'Clear anti-static PET trays formed as a matrix of identical component pockets.' },
-  { key: 'blisterPet', id: 'pet-blister', detail: 'pet-blister', blurb: 'Clear PET blister packs, base and lid formed as a matched pair.' },
-  { key: 'traysHips', id: 'hips-trays', detail: 'hips-trays', blurb: 'Black HIPS conductive thermoformed trays, with and without clear lids.' },
-  { key: 'hipsPetLid', id: 'hips-pet-lid', detail: 'hips-pet-lid', blurb: 'Black HIPS base trays closed with a clear PET lid.' },
-  { key: 'swatch', id: 'materials', detail: 'material-swatches', blurb: 'Material and colour swatch samples used across the ESD packing range.' },
-].map((s) => ({ ...s, group: gallery[s.key] }));
+  { key: 'thermoformedBlack', id: 'black-trays', detail: 'hips-trays', blurb: 'Black conductive thermoformed trays, pockets tooled to the component and part numbers moulded into the rim.' },
+  { key: 'thermoformedWhite', id: 'white-trays', detail: 'white-trays', blurb: 'White thermoformed trays, where a light background makes the part and its orientation easier to check.' },
+  { key: 'ppCorrugated', id: 'pp-corrugated', detail: 'pp-corrugated', blurb: 'PP corrugated bins, boxes and trays with twin-wall dividers, riveted corners and carry slots.' },
+  { key: 'conductiveFoam', id: 'conductive-foam', detail: 'conductive-foam-packing', blurb: 'Conductive foam boxes and inserts routed to hold each part in its own pocket.' },
+  { key: 'epeFoam', id: 'epe-foam', detail: 'epe-foam-trays', blurb: 'EPE foam trays cut to component geometry for cushioned, static-safe handling.' },
+  { key: 'custom', id: 'custom', detail: 'custom-packing', blurb: 'Shaped presentation packs, PP honeycomb pallet tops and conductive reels, all made to a drawing.' },
+].map((s) => ({ ...s, group: galleryShowcase[s.key] }));
 
 const jsonLd = [
   breadcrumbJsonLd([

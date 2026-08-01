@@ -234,6 +234,36 @@ export const productDetails: Record<string, ProductDetail> = {
       'Black HIPS in conductive and anti-static grades for reusable protection',
     ],
   },
+  'conductive-foam-packing': {
+    detail:
+      'Conductive foam is cut and routed to the part rather than formed over a tool, which suits low and medium volumes and anything with an awkward outline. The foam takes up shock and vibration while conducting a charge away instead of holding it on the surface, so components with exposed pins or fragile connectors are cushioned and grounded at the same time. It is supplied as loose inserts to drop into a bin, or as a lined box that is the complete pack on its own.',
+    points: [
+      'Pockets routed to a drawing, so each part sits located and separated',
+      'Cushions against shock and vibration while dissipating charge',
+      'Supplied as inserts for a bin, or as a complete lined box',
+      'Practical at low and medium volumes with no tooling to pay for',
+    ],
+  },
+  'white-trays': {
+    detail:
+      'White thermoformed trays are the opaque counterpart to the clear PET range, used where a light background makes a part easier to see and inspect than a black tray does, and where the tray itself needs to carry a moulded part number. The pockets are tooled to the component outline so each part is located rather than loose, and the trays nest empty and stack loaded, which is what makes them practical for line feeding and for shipping in volume.',
+    points: [
+      'Pockets tooled to the component outline, so parts cannot shift',
+      'Light background makes parts and their orientation easy to check',
+      'Part numbers embossed into the tray rim for identification',
+      'Nests empty for return, stacks loaded for transport',
+    ],
+  },
+  'custom-packing': {
+    detail:
+      'Work that does not fit a standard tray or bin: packs cut to a shape the customer has asked for, pallet tops that replace timber, and conductive reels for tape-and-reel components. All of it starts the same way — from your drawing or a sample — and is made in the same conductive and anti-static materials as the rest of the range, so a presentation pack protects the contents as seriously as a production tray does.',
+    points: [
+      'Shaped and branded presentation packs cut from conductive foam',
+      'PP honeycomb pallet tops on moulded feet, in place of timber pallets',
+      'Conductive thermoformed reels for tape-and-reel component packing',
+      'Made from your drawing or a sample, in the material the job needs',
+    ],
+  },
   'material-swatches': {
     detail:
       'The materials the ESD packing range is made from, shown as swatches. Choosing the right one is usually a question of what the part has to survive: whether it needs cushioning or only a barrier, whether a charge has to be dissipated or an external discharge blocked, and whether the pack is opened once or handled daily for years. Send the part and how it travels, and we will match the material to it.',

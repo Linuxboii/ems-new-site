@@ -9,7 +9,7 @@ export const company = {
   principalEmail: 'vikramp@emstechnologies.in',
   address: { locality: 'Hyderabad', region: 'Telangana', regionCode: 'IN-TG', country: 'IN' },
   geo: { lat: 17.385, lng: 78.4867 },
-  stats: { projects: '500+', products: '100+', clients: '50+' },
+  stats: { clients: '500+', materials: '50+', products: '200+' },
   description:
     'EMS Technologies, based in Hyderabad, Telangana, is an India distributor for M/s Lackwerke Peters GmbH & Co. KG (Germany) since 2011, supplying ELPEGUARD conformal coatings, ESD packing solutions, and selective coating machines, and providing on-site conformal coating job work.',
 } as const;
