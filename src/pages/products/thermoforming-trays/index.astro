@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
+import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
@@ -9,19 +10,30 @@ const title = 'ESD Thermoforming Trays - Custom Blister Trays for PCBs | EMS Tec
 const description = 'Custom ESD thermoformed and blister trays from EMS Technologies, Hyderabad: anti-static, conductive and clear trays tailored to component geometry for storage and transport.';
 const path = '/products/thermoforming-trays/';
 
+// The gallery keeps the PET work split by tooling type so each set can be shown
+// on its own elsewhere; here they read as one PET section. Lidded HIPS trays
+// stay separate because the base and lid are sold as a pair.
+const petImages = [...gallery.traysPet.images, ...gallery.antiStaticPet.images, ...gallery.blisterPet.images];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Products', path: '/products/' },
     { name: 'ESD Thermoforming Trays', path },
   ]),
-  await galleryJsonLd('ESD Thermoforming Trays', description, path, [gallery.traysPet, gallery.traysHips]),
+  await galleryJsonLd('ESD Thermoforming Trays', description, path, [
+    { label: 'PET thermoformed tray', images: petImages },
+    gallery.traysHips,
+    gallery.hipsPetLid,
+  ]),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="ESD Packing" title="ESD Thermoforming Trays" lead="Anti-static, conductive and clear thermoformed blister trays, custom-formed to the exact geometry of your components for safe storage, handling and automated line feeding." />
-  <GallerySection id="pet" title="PET Thermoformed Trays" enquire="ESD Thermoforming Trays (PET)" images={gallery.traysPet.images} blurb="Clear, transparent PET blister trays for full part visibility, formed to hold PCBs and components securely." />
-  <GallerySection id="hips" title="HIPS Thermoformed Trays" enquire="ESD Thermoforming Trays (HIPS)" images={gallery.traysHips.images} blurb="Black, conductive and anti-static HIPS trays for robust, reusable protection of ESD-sensitive components." />
+  <ProductIntro path={path} />
+  <GallerySection id="pet" detailKey="pet-trays" title="PET Thermoformed Trays" enquire="ESD Thermoforming Trays (PET)" images={petImages} blurb="Clear, transparent PET trays and blister packs for full part visibility, including anti-static pocket matrices and matched base-and-lid sets formed to hold PCBs and components securely." />
+  <GallerySection id="hips" detailKey="hips-trays" title="HIPS Thermoformed Trays" enquire="ESD Thermoforming Trays (HIPS)" images={gallery.traysHips.images} blurb="Black, conductive and anti-static HIPS trays for robust, reusable protection of ESD-sensitive components." />
+  <GallerySection id="hips-pet-lid" detailKey="hips-pet-lid" title="Thermoforming HIPS Tray with PET Lid" enquire="Thermoforming HIPS Tray with PET Lid" images={gallery.hipsPetLid.images} blurb="Black HIPS slotted base trays holding boards on edge, closed with a clear PET lid so the contents stay visible and protected in stacked storage and transport." />
   <section class="section border-t border-line">
     <div class="container-x text-center max-w-2xl">
       <h2 class="heading text-2xl sm:text-3xl">Send us your component drawing</h2>

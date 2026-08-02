@@ -1,0 +1,93 @@
+---
+// The expanded panel behind a card: image on the left, copy on the right.
+// Shared by ApplicationCard and ProductCard so both open and close identically.
+// Open it from anywhere with `data-ac-open="<id>"` on a button.
+interface Props { id: string; }
+const { id } = Astro.props;
+---
+{/* A closed <dialog> is display:none, so it takes no grid space; showModal() lifts it to the top layer. */}
+<dialog id={id} class="ac-modal" aria-labelledby={`${id}-title`}>
+  <button type="button" class="ac-close" data-ac-close aria-label="Close">&times;</button>
+  <div class="ac-grid">
+    <div class="ac-figure"><slot name="figure" /></div>
+    <div class="ac-copy"><slot /></div>
+  </div>
+</dialog>
+
+<style is:global>
+  .ac-modal {
+    width: min(1000px, 94vw);
+    max-height: 88vh;
+    padding: 0;
+    border: 1px solid rgb(var(--c-line));
+    border-radius: 14px;
+    background: rgb(var(--c-surface));
+    color: rgb(var(--c-ink));
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.35);
+  }
+  /* The blurred page behind the modal. */
+  .ac-modal::backdrop {
+    background: rgb(8 12 20 / 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .ac-modal[open] { animation: ac-in .2s ease-out; }
+  @keyframes ac-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* Image beside the copy on desktop; stacked on small screens. */
+  .ac-grid { display: grid; grid-template-columns: 1fr; max-height: 88vh; }
+  @media (min-width: 768px) {
+    .ac-grid { grid-template-columns: 42% 58%; }
+    .ac-figure { height: 100%; }
+  }
+  .ac-figure { background: rgb(var(--c-paper)); min-height: 220px; max-height: 40vh; overflow: hidden; }
+  @media (min-width: 768px) { .ac-figure { max-height: none; } }
+  .ac-figure .mag { height: 100%; }
+  .ac-figure .mag img { height: 100%; }
+  .ac-copy { padding: clamp(1.5rem, 3vw, 2.5rem); overflow-y: auto; }
+
+  .ac-close {
+    position: absolute; top: .6rem; right: .75rem; z-index: 4;
+    width: 40px; height: 40px; border: 0; border-radius: 999px;
+    display: grid; place-items: center; font-size: 1.6rem; line-height: 1;
+    cursor: pointer; color: #fff; background: rgb(0 0 0 / 0.45);
+    transition: background .15s ease;
+  }
+  .ac-close:hover { background: rgb(0 0 0 / 0.7); }
+  .ac-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) { .ac-modal[open] { animation: none; } }
+</style>
+
+<script>
+  function initCardModals() {
+    document.querySelectorAll<HTMLDialogElement>('dialog.ac-modal').forEach((d) => {
+      if (d.dataset.acWired) return;
+      d.dataset.acWired = '1';
+      // Restore scrolling however the dialog was dismissed (X, backdrop, Esc).
+      d.addEventListener('close', () => { document.body.style.overflow = ''; });
+    });
+
+    if (document.body.dataset.acWired) return;
+    document.body.dataset.acWired = '1';
+
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+
+      const opener = t.closest<HTMLElement>('[data-ac-open]');
+      if (opener) {
+        const dlg = document.getElementById(opener.dataset.acOpen!) as HTMLDialogElement | null;
+        if (dlg) { dlg.showModal(); document.body.style.overflow = 'hidden'; }
+        return;
+      }
+
+      const dlg = t.closest<HTMLDialogElement>('dialog.ac-modal');
+      if (!dlg) return;
+      // Close on the X, or on a click that lands on the dialog itself (the backdrop).
+      if (t.closest('[data-ac-close]') || t === dlg) dlg.close();
+    });
+  }
+  initCardModals();
+  document.addEventListener('astro:page-load', initCardModals);
+</script>

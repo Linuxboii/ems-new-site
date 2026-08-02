@@ -1,0 +1,44 @@
+---
+// The contents of an expanded product panel: photo, copy, bullet points and the
+// enquiry buttons. Kept apart from the cards that open it so a product card and
+// a gallery section heading show the same matter in the same layout.
+import MagnifyImage from '@/components/MagnifyImage.astro';
+import CardModal from '@/components/CardModal.astro';
+import type { ProductDetail } from '@/data/productDetails';
+
+interface Props {
+  id: string;
+  title: string;
+  img: string;
+  detail: ProductDetail;
+  /** Where "View full details" goes. Omitted on a page that is already there. */
+  href?: string;
+  /** Product name to prefill on the contact form, when it differs from title. */
+  enquire?: string;
+}
+const { id, title, img, detail, href, enquire } = Astro.props;
+
+// A card whose link is already the contact form has nowhere else to send you,
+// and neither has a section sitting on the product's own page.
+const isEnquiryHref = href?.startsWith('/contact-us/') ?? false;
+const enquireHref = isEnquiryHref ? href! : `/contact-us/?product=${encodeURIComponent(enquire ?? title)}`;
+---
+<CardModal id={id}>
+  <MagnifyImage slot="figure" name={img} alt={title} width={900} height={675} />
+  <p class="eyebrow">Product</p>
+  <h3 id={`${id}-title`} class="heading mt-4 text-2xl">{title}</h3>
+  <p class="mt-4 text-sm text-muted">{detail.detail}</p>
+  {detail.points.length > 0 && (
+    <ul class="mt-5 space-y-2.5 text-sm text-muted">
+      {detail.points.map((p) => (
+        <li class="flex gap-3"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent2"></span><span>{p}</span></li>
+      ))}
+    </ul>
+  )}
+  <div class="mt-7 flex flex-wrap items-center gap-3">
+    <a href={enquireHref} class="btn-primary">Enquire about this</a>
+    {href && !isEnquiryHref && (
+      <a href={href} class="btn-outline" data-ac-close>View full details &rarr;</a>
+    )}
+  </div>
+</CardModal>

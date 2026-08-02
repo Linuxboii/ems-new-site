@@ -6,7 +6,8 @@ export const nav = [
     children: [
       { label: 'Conformal Coatings', href: '/conformal/' },
       { label: 'ESD Bags', href: '/EsdBags/' },
-      { label: 'EVA Bins', href: '/products/pp-bins/' },
+      { label: 'EVA Bins/Trays', href: '/products/pp-bins/' },
+      { label: 'PP Corrugated Trays and Bins', href: '/products/pp-corrugated/' },
       { label: 'EPE Foam Trays', href: '/products/conductive-foam-trays/' },
       { label: 'ESD Thermoforming Trays', href: '/products/thermoforming-trays/' },
       { label: 'Selective Coating Machines', href: '/SCMachines/' },

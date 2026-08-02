@@ -17,7 +17,7 @@ const groupActive = (item: (typeof nav)[number]) =>
 <header id="siteHeader" class="sticky top-0 z-50 bg-paper/85 backdrop-blur border-b border-line transition-shadow">
   <div class="container-x flex items-center justify-between h-28">
     <a href="/" class="flex items-center gap-2 shrink-0" aria-label="EMS Technologies home">
-      <Image src={logo} alt="EMS Technologies logo" height={104} class="site-logo h-20 sm:h-24 w-auto" />
+      <Image src={logo} alt="EMS Technologies logo" height={64} class="site-logo h-[53px] sm:h-[61px] w-auto" />
     </a>
 
     <!-- Desktop nav -->
@@ -108,7 +108,8 @@ const groupActive = (item: (typeof nav)[number]) =>
   </div>
 
   <style>
-    /* Navy logo is invisible on the dark header; brighten it to stay legible without a plate. */
+    /* Logo sits straight on the header — the PNG is transparent, no plate behind it.
+       Dark theme flips the navy mark to white so it stays legible. */
     :root[data-theme='dark'] .site-logo { filter: brightness(0) invert(1); }
     .menu-panel { opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .18s ease, transform .18s ease, visibility .18s; }
     .menu:hover .menu-panel,

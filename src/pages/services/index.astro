@@ -11,12 +11,15 @@ const jobWork = [
     title: 'Conformal Coating Job Work',
     href: '/services/conformal-coating-job-work/',
     img: '2019-services-hires-coating.jpg',
+    // Same service as the "Conformal Coating Services" product card, different photo.
+    detailKey: 'coating-job-work',
     blurb: 'Application, UV optical inspection, curing, thickness testing, removal and final inspection, delivered on site by 30+ trained engineers.',
   },
   {
     title: 'ESD Paint Job Work',
     href: '/services/esd-paint-job-work/',
     img: 'bins.png',
+    detailKey: 'esd-paint-job-work',
     blurb: 'ProtectA Pro ESD conductive and anti-static paints applied to floors, walls, work surfaces and bins, with earthing and resistance testing.',
   },
 ];
@@ -25,7 +28,7 @@ const jobWork = [
   <PageHero eyebrow="Job work" title="Services" lead="Two on-site job work programmes: protective conformal coating of assembled PCBs, and ESD conductive paint systems for the environment those boards are built in." />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2">
-      {jobWork.map((s) => <ProductCard title={s.title} href={s.href} img={s.img} blurb={s.blurb} />)}
+      {jobWork.map((s) => <ProductCard title={s.title} href={s.href} img={s.img} blurb={s.blurb} detailKey={s.detailKey} />)}
     </div>
   </section>
 </Layout>

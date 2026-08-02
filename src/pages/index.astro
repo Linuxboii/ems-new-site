@@ -8,13 +8,13 @@ import { company } from '@/data/company';
 import { products } from '@/data/products';
 
 const title = 'EMS Technologies - Peters Conformal Coatings & ESD Solutions, India';
-const description = 'Exclusive India distributor for Lackwerke Peters ELPEGUARD® conformal coatings, ESD packing solutions and selective coating machines. Hyderabad-based, since 2011.';
+const description = 'India distributor for Lackwerke Peters ELPEGUARD® conformal coatings, ESD packing solutions and selective coating machines. Hyderabad-based, since 2011.';
 
 // FAQ answers double as citable facts for AI / generative answer engines.
 const faq = [
   {
     q: 'What does EMS Technologies do?',
-    a: 'EMS Technologies is the exclusive India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work. It has operated from Hyderabad, Telangana since 2011.',
+    a: 'EMS Technologies is an India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work. It has operated from Hyderabad, Telangana since 2011.',
   },
   {
     q: 'Where is EMS Technologies located?',
@@ -46,7 +46,7 @@ const faqJsonLd = {
   <section class="border-b border-line brand-wash">
     <div class="container-x grid lg:grid-cols-12 gap-12 items-center py-16 sm:py-20 lg:py-24">
       <div class="lg:col-span-6 fade-up">
-        <p class="eyebrow">Exclusive Peters distributor · India · since {company.since}</p>
+        <p class="eyebrow">Peters distributor · India · since {company.since}</p>
         <h1 class="heading mt-6 text-4xl sm:text-5xl lg:text-6xl" style="line-height:1.05">
           Protection for the electronics that everything else depends on.
         </h1>
@@ -64,19 +64,19 @@ const faqJsonLd = {
           <div class="mt-6 grid grid-cols-2 gap-x-8 gap-y-8">
             <div>
               <div class="heading text-3xl sm:text-4xl">Since {company.since}</div>
-              <p class="mt-1 text-sm text-muted">Exclusive India distributor for Lackwerke Peters</p>
-            </div>
-            <div>
-              <div class="heading text-3xl sm:text-4xl">{company.stats.projects}</div>
-              <p class="mt-1 text-sm text-muted">Coating projects completed</p>
+              <p class="mt-1 text-sm text-muted">India distributor for Lackwerke Peters</p>
             </div>
             <div>
               <div class="heading text-3xl sm:text-4xl">{company.stats.clients}</div>
               <p class="mt-1 text-sm text-muted">Clients served across India</p>
             </div>
             <div>
+              <div class="heading text-3xl sm:text-4xl">{company.stats.materials}</div>
+              <p class="mt-1 text-sm text-muted">Different types of packing materials</p>
+            </div>
+            <div>
               <div class="heading text-3xl sm:text-4xl">{company.stats.products}</div>
-              <p class="mt-1 text-sm text-muted">ESD &amp; coating products supplied</p>
+              <p class="mt-1 text-sm text-muted">Customized products supplied</p>
             </div>
           </div>
           <div class="mt-8 flex flex-wrap gap-2 border-t border-line pt-6">
@@ -100,7 +100,7 @@ const faqJsonLd = {
       <div class="lg:col-span-6 order-1 lg:order-2">
         <p class="eyebrow">Who we are</p>
         <h2 class="heading mt-5 text-3xl sm:text-4xl" style="line-height:1.12">Global-leader coatings, delivered and supported in India</h2>
-        <p class="mt-6 text-muted leading-relaxed">EMS Technologies, based in Hyderabad, Telangana, is the exclusive India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG. From coatings for PCB manufacture to protection of assembled electronics, Peters is a global leader in electronics-related high-tech coatings for automotive, aerospace, industrial, medical and LED applications.</p>
+        <p class="mt-6 text-muted leading-relaxed">EMS Technologies, based in Hyderabad, Telangana, is an India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG. From coatings for PCB manufacture to protection of assembled electronics, Peters is a global leader in electronics-related high-tech coatings for automotive, aerospace, industrial, medical and LED applications.</p>
         <a href="/about-us/" class="btn-outline mt-8">About EMS</a>
       </div>
     </div>
@@ -111,9 +111,9 @@ const faqJsonLd = {
     <div class="container-x">
       <p class="eyebrow">By the numbers</p>
       <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line">
-        <div class="py-6 sm:py-0 sm:pr-8"><StatCounter value={company.stats.projects} label="Projects completed" /></div>
-        <div class="py-6 sm:py-0 sm:px-8"><StatCounter value={company.stats.products} label="Products supplied" /></div>
-        <div class="py-6 sm:py-0 sm:pl-8"><StatCounter value={company.stats.clients} label="Clients served" /></div>
+        <div class="py-6 sm:py-0 sm:pr-8"><StatCounter value={company.stats.clients} label="Clients served" /></div>
+        <div class="py-6 sm:py-0 sm:px-8"><StatCounter value={company.stats.materials} label="Types of packing materials" /></div>
+        <div class="py-6 sm:py-0 sm:pl-8"><StatCounter value={company.stats.products} label="Customized products supplied" /></div>
       </div>
     </div>
   </section>
@@ -123,10 +123,10 @@ const faqJsonLd = {
     <div class="container-x">
       <div class="max-w-2xl">
         <p class="eyebrow">Products &amp; services</p>
-        <h2 class="heading mt-5 text-3xl sm:text-4xl">One roof for coating, packing and equipment</h2>
+        <h2 class="heading mt-5 text-3xl sm:text-4xl">Protection in service, and on the way there</h2>
       </div>
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} />)}
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} detailKey={p.detailKey} />)}
       </div>
     </div>
   </section>

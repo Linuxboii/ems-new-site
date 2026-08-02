@@ -4,17 +4,14 @@ import PageHero from '@/components/PageHero.astro';
 import AssetImage from '@/components/AssetImage.astro';
 import StatCounter from '@/components/StatCounter.astro';
 import TeamCard from '@/components/TeamCard.astro';
-import GallerySection from '@/components/GallerySection.astro';
 import { company } from '@/data/company';
 import { team } from '@/data/team';
-import { gallery } from '@/data/gallery';
 
 const title = 'About EMS Technologies - Peters Distributor in India Since 2011';
-const description = 'EMS Technologies is the exclusive India distributor for Lackwerke Peters, with 10+ years in conformal coating, 30+ trained engineers, and manufacturing plants in Hyderabad and Cochin.';
-const plantImages = [...gallery.handling.images, ...gallery.swatch.images];
+const description = 'EMS Technologies is an India distributor for Lackwerke Peters, with 10+ years in conformal coating, 30+ trained engineers, and manufacturing plants in Hyderabad and Cochin.';
 ---
 <Layout title={title} description={description} path="/about-us/">
-  <PageHero eyebrow="Who we are" title="India's Peters partner since 2011" lead="Exclusive India distributor for Lackwerke Peters: coatings, packing and job work, supported end to end from Hyderabad and Cochin." />
+  <PageHero eyebrow="Who we are" title="EMS Technologies" lead="Electronics coatings, ESD packing and on-site job work, supported end to end from Hyderabad and Cochin since 2011." />
 
   <section class="section border-b border-line container-x grid lg:grid-cols-12 gap-12 items-start">
     <div class="lg:col-span-6">
@@ -23,27 +20,74 @@ const plantImages = [...gallery.handling.images, ...gallery.swatch.images];
       </div>
     </div>
     <div class="lg:col-span-6 space-y-4 text-muted leading-relaxed">
-      <p class="text-lg font-medium text-ink">EMS Technologies, based in Hyderabad, Telangana, is the exclusive India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG.</p>
-      <p>EMS Technologies is a proprietary concern and the exclusive distributor for M/s Lackwerke Peters GmbH, Germany, in India since 2011. Lackwerke Peters is part of the Peters Group based in Kempen, Germany; EMS represents them in India and supports all leading clients locally. Peters is a global leader in electronics-related high-tech coatings for automotive, aerospace, industrial, medical and LED applications.</p>
+      <p class="text-lg font-medium text-ink">EMS Technologies, based in Hyderabad, Telangana, is an India distributor for M/s Lackwerke Peters GmbH &amp; Co. KG.</p>
+      <p>EMS Technologies is a proprietary concern and a distributor for M/s Lackwerke Peters GmbH, Germany, in India since 2011. Lackwerke Peters is part of the Peters Group, an independent family-owned company based in Kempen, Germany, and the world's only full-range supplier of coating materials for electronics. EMS represents them in India and supports all leading clients locally. Peters is a global leader in electronics-related high-tech coatings for automotive, aerospace, industrial, medical and LED applications.</p>
       <p>Headed by electronics professionals with in-depth knowledge of conformal coating products and processes, EMS brings 10+ years of expertise, supplying coatings and delivering conformal coating job work. Our qualified team of 30+ members handles job work at multiple client locations, all trained under the guidance of experts from Lackwerke Peters.</p>
+      <p>We supply the complete ELPEGUARD range — acrylic, polyurethane, silicone, UV-curing thick-film and aqua-based conformal coatings — and provide selective coating machines and end-to-end job work, from application and UV optical inspection to curing, thickness testing, rework and final inspection.</p>
       <p>EMS also supplies selective conformal coating line equipment from AUTOLEADER (China) and glue dispensing, screwdriver and soldering machines from Topbest (China). We operate our own manufacturing plants in Hyderabad, Telangana and Cochin, Kerala for ESD PET/HIPS trays, anti-static bubble bags, metallic static bags and all electronics packing materials since 2015.</p>
     </div>
+  </section>
+
+  <section class="section border-b border-line container-x">
+    <p class="eyebrow">What we do</p>
+    <h2 class="heading mt-5 text-3xl sm:text-4xl">Three core capabilities</h2>
+    <div class="mt-12 grid gap-6 sm:grid-cols-3">
+      <div class="rounded-xl border border-line bg-surface p-6">
+        <h3 class="heading text-lg text-ink">Conformal coatings &amp; job work</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Supply of the full ELPEGUARD coating range and on-site conformal coating job work delivered by 30+ trained engineers.</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-6">
+        <h3 class="heading text-lg text-ink">ESD packing solutions</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">In-house manufacture of ESD PET/HIPS trays, anti-static bubble bags, metallic static shielding bags and all electronics packing materials since 2015.</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-6">
+        <h3 class="heading text-lg text-ink">Coating equipment</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Selective conformal coating lines plus glue dispensing, screwdriver and soldering machines, supplied and supported locally.</p>
+      </div>
+    </div>
+    <p class="mt-8 text-sm text-muted leading-relaxed max-w-3xl">Serving automotive electronics, aerospace engineering, industrial electronics, medical technology and LED applications across India.</p>
   </section>
 
   <section class="section border-b border-line">
     <div class="container-x">
       <p class="eyebrow">By the numbers</p>
       <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line">
-        <div class="py-6 sm:py-0 sm:pr-8"><StatCounter value={company.stats.projects} label="Projects completed" /></div>
-        <div class="py-6 sm:py-0 sm:px-8"><StatCounter value={company.stats.products} label="Products supplied" /></div>
-        <div class="py-6 sm:py-0 sm:pl-8"><StatCounter value={company.stats.clients} label="Clients served" /></div>
+        <div class="py-6 sm:py-0 sm:pr-8"><StatCounter value={company.stats.clients} label="Clients served" /></div>
+        <div class="py-6 sm:py-0 sm:px-8"><StatCounter value={company.stats.materials} label="Types of packing materials" /></div>
+        <div class="py-6 sm:py-0 sm:pl-8"><StatCounter value={company.stats.products} label="Customized products supplied" /></div>
       </div>
     </div>
   </section>
 
-  <div class="border-b border-line">
-    <GallerySection title="Inside our ESD packing plant" images={plantImages} blurb="Since 2015 we manufacture ESD trays, anti-static bubble bags and metallic static bags at our own plants in Hyderabad and Cochin, handled and inspected by trained staff, in a full range of conductive materials." />
-  </div>
+  <section class="section border-b border-line container-x">
+    <p class="eyebrow">Partners</p>
+    <h2 class="heading mt-5 text-3xl sm:text-4xl">Who we work with</h2>
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      <div class="rounded-xl border border-line bg-surface p-8 lg:col-span-3 lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center">
+        <div class="lg:col-span-1">
+          <p class="eyebrow">Principal partner</p>
+          <h3 class="heading mt-3 text-2xl text-ink">Lackwerke Peters</h3>
+          <p class="mt-1 text-sm text-muted">Kempen, Germany · since 1955</p>
+        </div>
+        <p class="mt-4 lg:mt-0 lg:col-span-2 text-sm text-muted leading-relaxed">Part of the Peters Group and the world's only full-range supplier of coating materials for electronics. EMS Technologies is a Peters India distributor since 2011, bringing the ELPEGUARD conformal coating and ELPECAST casting compound ranges — approved by the automotive industry — to Indian manufacturers.</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-8">
+        <p class="eyebrow">Equipment partner</p>
+        <h3 class="heading mt-3 text-xl text-ink">AUTOLEADER</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Selective conformal coating line equipment (China).</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-8">
+        <p class="eyebrow">Equipment partner</p>
+        <h3 class="heading mt-3 text-xl text-ink">Topbest</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Glue dispensing, screwdriver and soldering machines (China).</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-8">
+        <p class="eyebrow">In-house</p>
+        <h3 class="heading mt-3 text-xl text-ink">EMS ESD plants</h3>
+        <p class="mt-3 text-sm text-muted leading-relaxed">Own manufacturing in Hyderabad and Cochin for ESD packing materials.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="section container-x">
     <p class="eyebrow">The team</p>
