@@ -17,7 +17,9 @@ import { nav } from '@/data/nav';
     <div>
       <h3 class="eyebrow">Contact</h3>
       <ul class="mt-4 space-y-2.5 text-sm text-muted">
-        <li>{company.location}</li>
+        <li><address class="not-italic">{company.location}</address>
+          <a class="text-accent2 hover:underline" href={company.mapUrl} target="_blank" rel="noopener" aria-label="Open EMS Technologies office and factory location in Google Maps">View on map →</a>
+        </li>
         {company.phones.map((p) => (<li><a class="hover:text-ink transition" href={`tel:${p.replaceAll('-', '')}`}>{p}</a></li>))}
         <li><a class="hover:text-ink transition" href={`mailto:${company.email}`}>{company.email}</a></li>
       </ul>

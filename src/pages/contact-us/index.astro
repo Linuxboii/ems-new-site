@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import { company } from '@/data/company';
 
-const title = 'Contact EMS Technologies - Hyderabad, Telangana';
-const description = 'Contact EMS Technologies for Peters conformal coatings, ESD packing and coating job work. Call +91-9394116660 or email info@emstechnologies.in. Based in Hyderabad, Telangana.';
+const title = 'Contact & Location - EMS Technologies, Maheswaram, Hyderabad';
+const description = 'Visit EMS Technologies office & factory in Maheswaram, Ranga Reddy District, Hyderabad, Telangana 501510. Get directions, map & Plus Code. Call +91-9394116660 or email info@emstechnologies.in for Peters conformal coatings, ESD packing and coating job work.';
 const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
 ---
 <Layout title={title} description={description} path="/contact-us/">
@@ -32,8 +32,10 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
 
     <div class="space-y-6">
       <div>
-        <h3 class="font-semibold text-ink">Address</h3>
-        <p class="text-muted">{company.location}</p>
+        <h3 class="font-semibold text-ink">Office &amp; Factory</h3>
+        <address class="not-italic text-muted">{company.location}</address>
+        <p class="text-xs text-muted mt-1">Google Plus Code: <span class="font-mono">{company.plusCode}</span></p>
+        <a class="inline-flex items-center gap-1 mt-1 text-accent2 hover:underline" href={company.mapUrl} target="_blank" rel="noopener" aria-label="Open EMS Technologies location in Google Maps">Get directions →</a>
       </div>
       <div>
         <h3 class="font-semibold text-ink">Call us</h3>
@@ -52,8 +54,32 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
           <span>+91 93941 16660</span>
         </a>
       </div>
-      <iframe title="EMS Technologies location" class="w-full h-64 rounded-2xl border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Hyderabad,Telangana,India&output=embed"></iframe>
+      <div class="relative">
+        <iframe id="location-map" title="EMS Technologies location" class="w-full h-64 rounded-2xl border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src={`https://www.google.com/maps?q=${company.geo.lat},${company.geo.lng}&z=16&output=embed`}></iframe>
+        <div class="absolute top-3 right-3 flex items-center gap-2">
+          <button type="button" id="reset-map" title="Reset map to EMS Technologies" aria-label="Reset map to EMS Technologies location"
+            class="inline-flex items-center justify-center rounded-full bg-white/95 shadow-md w-9 h-9 text-ink hover:bg-white transition">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 text-accent2">
+              <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>
+            </svg>
+          </button>
+          <a href={company.mapUrl} target="_blank" rel="noopener" title="Open in Google Maps" aria-label="Open EMS Technologies in Google Maps"
+            class="inline-flex items-center gap-1.5 rounded-full bg-white/95 shadow-md px-3 py-1.5 text-sm font-medium text-ink hover:bg-white transition">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 text-accent2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Open in Maps</span>
+          </a>
+        </div>
+      </div>
+      <script>
+        const map = document.getElementById('location-map');
+        const original = map?.getAttribute('src') ?? '';
+        document.getElementById('reset-map')?.addEventListener('click', () => {
+          if (map) map.setAttribute('src', original);
+        });
+      </script>
     </div>
   </section>
 </Layout>

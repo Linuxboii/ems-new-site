@@ -7,11 +7,41 @@ const canonical = new URL(path, site).href;
 const ogImage = new URL(image, site).href;
 
 const orgId = `${site}/#organization`;
+const geoId = `${site}/#geo`;
+const placeId = `${site}/#place`;
+
 const postalAddress = {
   '@type': 'PostalAddress',
-  addressLocality: company.address.locality,
+  streetAddress: `${company.address.locality}, ${company.address.district}`,
+  addressLocality: company.address.metro,
   addressRegion: company.address.region,
+  postalCode: company.address.postalCode,
   addressCountry: company.address.country,
+};
+
+const geoCoordinates = {
+  '@type': 'GeoCoordinates',
+  '@id': geoId,
+  latitude: company.geo.lat,
+  longitude: company.geo.lng,
+};
+
+// Physical facility (office + factory) as a first-class Place so map/pin
+// searches ("EMS Technologies location", "conformal coating factory Hyderabad")
+// resolve to this exact spot.
+const place = {
+  '@type': 'Place',
+  '@id': placeId,
+  name: `${company.name} — Office & Factory`,
+  address: postalAddress,
+  geo: geoCoordinates,
+  hasMap: company.mapUrl,
+  additionalProperty: {
+    '@type': 'PropertyValue',
+    propertyID: 'plusCode',
+    name: 'Google Plus Code',
+    value: company.plusCode,
+  },
 };
 
 // Organization: primary entity for search + generative engines. Explicit facts
@@ -25,6 +55,8 @@ const organization = {
   slogan: company.tagline,
   description: company.description,
   address: postalAddress,
+  location: { '@id': placeId },
+  hasMap: company.mapUrl,
   areaServed: { '@type': 'Country', name: 'India' },
   knowsAbout: [
     'Conformal coating',
@@ -48,10 +80,12 @@ const organization = {
 const localBusiness = {
   '@context': 'https://schema.org', '@type': 'LocalBusiness',
   '@id': `${site}/#localbusiness`,
-  name: company.name, image: ogImage, url: site,
+  name: company.name, image: ogImage, url: site, logo: `${site}/logo.png`,
   telephone: company.phones[0], email: company.email,
   address: postalAddress,
-  geo: { '@type': 'GeoCoordinates', latitude: company.geo.lat, longitude: company.geo.lng },
+  geo: geoCoordinates,
+  hasMap: company.mapUrl,
+  location: { '@id': placeId },
   areaServed: 'IN',
   parentOrganization: { '@id': orgId },
 };
@@ -63,7 +97,7 @@ const website = {
   publisher: { '@id': orgId },
 };
 
-const graph = [organization, localBusiness, website, ...jsonLd];
+const graph = [organization, place, localBusiness, website, ...jsonLd];
 ---
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -71,11 +105,12 @@ const graph = [organization, localBusiness, website, ...jsonLd];
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="theme-color" content="#1e63c4" />
 
-<!-- Geographic / local SEO -->
+<!-- Geographic / local SEO: office & factory in Maheswaram, Hyderabad -->
 <meta name="geo.region" content={company.address.regionCode} />
-<meta name="geo.placename" content={company.address.locality} />
+<meta name="geo.placename" content={`${company.address.locality}, ${company.address.metro}, ${company.address.region}`} />
 <meta name="geo.position" content={`${company.geo.lat};${company.geo.lng}`} />
 <meta name="ICBM" content={`${company.geo.lat}, ${company.geo.lng}`} />
+<link rel="alternate" hreflang="en-in" href={canonical} />
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website" />

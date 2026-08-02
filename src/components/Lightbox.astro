@@ -22,7 +22,7 @@ const fullSrc = (name: string) => assets[`/src/assets/${name}`]?.default.src ?? 
         data-lb-full={fullSrc(img.src)}
         aria-label={`View larger: ${img.alt}`}
       >
-        <AssetImage name={img.src} alt={img.alt} width={1000} height={750} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+        <AssetImage name={img.src} alt={img.alt} width={520} height={390} sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
       </button>
       {enquire && enquireHref && (
         <div class="flex items-center justify-between gap-2 border-t border-line px-3 py-2.5">

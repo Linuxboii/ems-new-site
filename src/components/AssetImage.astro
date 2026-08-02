@@ -1,12 +1,55 @@
 ---
 import { Image } from 'astro:assets';
-interface Props { name: string; alt: string; class?: string; width?: number; height?: number; }
-const { name, alt, class: cls = '', width = 800, height = 600 } = Astro.props;
+interface Props {
+  name: string;
+  alt: string;
+  class?: string;
+  width?: number;
+  height?: number;
+  /** Above-the-fold images should pass loading="eager" + priority for a fast LCP. */
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  /** Responsive hint; defaults to full-width on mobile, capped at intrinsic width on desktop. */
+  sizes?: string;
+  quality?: number;
+}
+const {
+  name,
+  alt,
+  class: cls = '',
+  width = 800,
+  height = 600,
+  loading = 'lazy',
+  priority = false,
+  sizes,
+  quality = 72,
+} = Astro.props;
+
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{png,jpg,jpeg,webp}', { eager: true });
 const match = images[`/src/assets/${name}`]?.default;
+
+// Generate a small srcset so phones/tablets/retina each pull an appropriately sized file
+// instead of everyone downloading the desktop-width image.
+const widths = Array.from(new Set([Math.round(width / 2), width, Math.round(width * 1.5)]))
+  .filter((w) => w > 0 && (!match || w <= match.width))
+  .sort((a, b) => a - b);
+const resolvedSizes = sizes ?? `(max-width: 768px) 100vw, ${width}px`;
 ---
 {match ? (
-  <Image src={match} alt={alt} width={width} height={height} class={cls} loading="lazy" />
+  <Image
+    src={match}
+    alt={alt}
+    width={width}
+    height={height}
+    widths={widths}
+    sizes={resolvedSizes}
+    format="webp"
+    quality={quality}
+    class={cls}
+    loading={priority ? 'eager' : loading}
+    decoding={priority ? 'auto' : 'async'}
+    fetchpriority={priority ? 'high' : 'auto'}
+  />
 ) : (
   <div class={`grid place-items-center bg-surface text-muted ${cls}`} style={`aspect-ratio:${width}/${height}`} role="img" aria-label={alt}>
     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 15 5-5 4 4 3-3 6 6"/></svg>
