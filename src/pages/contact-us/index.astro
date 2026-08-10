@@ -5,7 +5,13 @@ import { company } from '@/data/company';
 
 const title = 'Contact EMS Technologies - Hyderabad, Telangana';
 const description = 'Contact EMS Technologies for Peters conformal coatings, ESD packing and coating job work. Call +91-9394116660 or email info@emstechnologies.in. Based in Hyderabad, Telangana.';
-const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
+// Enquiries are delivered to company.email. The site is static, so the form
+// posts to a form-relay service rather than a backend of our own; set
+// PUBLIC_CONTACT_ENDPOINT to move to a different provider without code changes.
+// The plain URL is the no-JS target (it redirects); JS posts to /ajax/ instead
+// so the visitor stays on the page.
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || `https://formsubmit.co/${company.email}`;
+const ajaxEndpoint = endpoint.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
 ---
 <Layout title={title} description={description} path="/contact-us/">
   <PageHero eyebrow="Contact" title="Contact Us" lead="Tell us about your conformal coating or ESD packing requirement and our engineers will get back to you promptly." />
@@ -15,8 +21,13 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
       <h2 class="heading text-2xl">Send us a message</h2>
       <p class="text-sm text-muted mt-1">We'll get back to you as soon as possible.</p>
       <p id="productBadge" class="mt-4 hidden rounded-lg bg-surface border border-line px-4 py-3 text-sm text-ink">Enquiry about: <span id="productBadgeName" class="font-semibold text-accent2"></span></p>
-      <form id="contactForm" class="mt-6 space-y-4" method="POST" action={endpoint || undefined}>
+      <form id="contactForm" class="mt-6 space-y-4" method="POST" action={endpoint}>
         <input type="hidden" name="product" id="productField" />
+        <input type="hidden" name="_subject" id="subjectField" value="Website enquiry" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        {/* Bots fill hidden fields; a submission with this set is dropped. */}
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
         <div class="grid sm:grid-cols-2 gap-4">
           <input required name="name" placeholder="Full name" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
           <input required type="email" name="email" placeholder="Email" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
@@ -24,9 +35,9 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
           <input name="company" placeholder="Company name" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3 min-h-[44px]" />
         </div>
         <textarea required name="message" rows="5" placeholder="Message" class="w-full rounded-lg border border-line bg-surface text-ink placeholder:text-muted px-4 py-3"></textarea>
-        <button type="submit" class="btn-primary">Send message</button>
-        <p id="formNote" class="text-sm text-accent2 hidden">Thanks, your message has been prepared in your mail app.</p>
-        <p id="formFallback" class="text-sm text-muted hidden">Mail app didn't open? Email us directly at <a id="fallbackLink" class="text-accent2 hover:underline" href={`mailto:${company.email}`}>{company.email}</a>.</p>
+        <button id="submitBtn" type="submit" class="btn-primary">Send message</button>
+        <p id="formNote" class="text-sm text-accent2 hidden">Thanks — your enquiry has been sent to our team. We'll get back to you shortly.</p>
+        <p id="formFallback" class="text-sm text-muted hidden">Couldn't send that. Please email us directly at <a id="fallbackLink" class="text-accent2 hover:underline" href={`mailto:${company.email}`}>{company.email}</a>.</p>
       </form>
     </div>
 
@@ -57,7 +68,7 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
     </div>
   </section>
 </Layout>
-<script is:inline define:vars={{ endpoint, email: company.email }}>
+<script is:inline define:vars={{ ajaxEndpoint, email: company.email }}>
   const form = document.getElementById('contactForm');
   const note = document.getElementById('formNote');
 
@@ -73,33 +84,45 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
     if (msg && !msg.value) msg.value = `I would like to enquire about: ${product}.\nPlease share product details, availability and pricing.`;
   }
   const subject = product ? `Enquiry: ${product}` : 'Website enquiry';
+  const subjectField = document.getElementById('subjectField');
+  if (subjectField) subjectField.value = subject;
 
   const fallback = document.getElementById('formFallback');
   const fallbackLink = document.getElementById('fallbackLink');
+  const submitBtn = document.getElementById('submitBtn');
 
-  form?.addEventListener('submit', (e) => {
-    if (endpoint) return; // real endpoint handles POST
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = new FormData(form);
-    // Cap the message so the mailto: URL stays under browser length limits
+
+    // Prepare the mailto up front: it is what we offer if the send fails.
+    // Cap the message so the URL stays under browser length limits
     // (long mailto: URLs silently fail to open a mail client).
     const message = String(f.get('message') || '').slice(0, 1200);
     const bodyText = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nMobile: ${f.get('mobile')}\nCompany: ${f.get('company')}\nProduct: ${f.get('product') || '-'}\n\n${message}`;
-    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+    if (fallbackLink) fallbackLink.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
 
-    note.classList.remove('hidden');
-    if (fallbackLink) fallbackLink.href = mailtoUrl;
+    note?.classList.add('hidden');
+    fallback?.classList.add('hidden');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
 
-    // If a mail client opens, the window loses focus. If it never blurs,
-    // no handler is registered — reveal the direct-email fallback.
-    let opened = false;
-    const onBlur = () => { opened = true; };
-    window.addEventListener('blur', onBlur, { once: true });
-    setTimeout(() => {
-      window.removeEventListener('blur', onBlur);
-      if (!opened) fallback?.classList.remove('hidden');
-    }, 1500);
-
-    window.location.href = mailtoUrl;
+    try {
+      const res = await fetch(ajaxEndpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: f,
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      note?.classList.remove('hidden');
+      form.reset();
+      if (subjectField) subjectField.value = subject;
+      const productField = document.getElementById('productField');
+      if (productField && product) productField.value = product;
+    } catch {
+      // Network down, blocked, or the relay is unreachable — offer direct email.
+      fallback?.classList.remove('hidden');
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send message'; }
+    }
   });
 </script>

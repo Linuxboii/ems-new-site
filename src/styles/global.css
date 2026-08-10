@@ -2,8 +2,8 @@
 
 :root {
   scroll-behavior: smooth;
-  /* Keep in-page anchors clear of the sticky 5rem header. */
-  scroll-padding-top: 6rem;
+  /* Keep in-page anchors clear of the sticky 7rem header. */
+  scroll-padding-top: 8rem;
   color-scheme: light;
   /* Light theme (default) */
   --c-paper: 221 227 235;  /* muted grey-white page background */

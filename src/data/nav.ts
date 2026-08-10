@@ -10,6 +10,7 @@ export const nav = [
       { label: 'PP Corrugated Trays and Bins', href: '/products/pp-corrugated/' },
       { label: 'EPE Foam Trays', href: '/products/conductive-foam-trays/' },
       { label: 'ESD Thermoforming Trays', href: '/products/thermoforming-trays/' },
+      { label: 'ESD Paints', href: '/products/esd-paints/' },
       { label: 'Selective Coating Machines', href: '/SCMachines/' },
     ],
   },

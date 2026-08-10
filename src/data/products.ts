@@ -9,4 +9,5 @@ export const products = [
   { title: 'EVA Bins', href: '/products/pp-bins/', img: 'esd-corrugated-bin-01.jpg', detailKey: 'eva-bins', blurb: 'Durable EVA bins for ESD-safe component storage and transport.' },
   { title: 'EPE Foam Trays', href: '/products/conductive-foam-trays/', img: 'eva-conductive-foam-insert-01.jpg', detailKey: 'epe-foam-trays', blurb: 'EPE foam trays for secure, static-safe device handling.' },
   { title: 'ESD Thermoforming Trays', href: '/products/thermoforming-trays/', img: 'esd-thermoformed-tray-01.jpg', detailKey: 'thermoforming-trays', blurb: 'Custom thermoformed anti-static trays tailored to component geometry.' },
+  { title: 'ESD Paints', href: '/products/esd-paints/', img: 'esd-floors-walls-surfaces.jpg', detailKey: 'esd-paints', blurb: 'ProtectA Pro conductive and anti-static paints for floors, walls, surfaces, conveyors and bins.' },
 ];

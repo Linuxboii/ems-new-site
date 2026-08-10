@@ -439,7 +439,7 @@ export const galleryShowcase: Record<string, GalleryGroup> = {
     ]
   },
   "thermoformedBlack": {
-    "label": "Black thermoformed trays",
+    "label": "Black thermoformed ESD HIPS trays",
     "images": [
       {
         "src": "thermoformed-black-tray-01.png",
@@ -468,7 +468,7 @@ export const galleryShowcase: Record<string, GalleryGroup> = {
     ]
   },
   "thermoformedWhite": {
-    "label": "White thermoformed trays",
+    "label": "White thermoformed HIPS trays",
     "images": [
       {
         "src": "thermoformed-white-tray-01.png",
@@ -513,17 +513,34 @@ export const galleryShowcase: Record<string, GalleryGroup> = {
       }
     ]
   },
-  "epeFoam": {
-    "label": "EPE foam trays",
+  "thermoformedPet": {
+    "label": "Thermoformed PET trays",
     "images": [
       {
-        "src": "epe-foam-tray-boards-01.png",
-        "alt": "White EPE foam tray with three populated circuit boards seated in routed channels, EMS Technologies"
+        "src": "esd-thermoformed-tray-26.jpg",
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-27.jpg",
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      },
+      {
+        "src": "esd-thermoformed-tray-28.jpg",
+        "alt": "Clear PET thermoformed ESD tray for secure component storage and transport, EMS Technologies"
+      }
+    ]
+  },
+  "pallets": {
+    "label": "ESD pallets",
+    "images": [
+      {
+        "src": "esd-pallet-top-01.png",
+        "alt": "Grey PP honeycomb ESD pallet on moulded feet, for moving loads without a timber pallet, EMS Technologies"
       }
     ]
   },
   "custom": {
-    "label": "Custom-formed ESD packing",
+    "label": "EVA foams",
     "images": [
       {
         "src": "custom-foam-scooter-01.png",
@@ -536,10 +553,6 @@ export const galleryShowcase: Record<string, GalleryGroup> = {
       {
         "src": "custom-foam-scooter-03.png",
         "alt": "Scooter-shaped conductive foam insert cut with located component pockets, EMS Technologies"
-      },
-      {
-        "src": "esd-pallet-top-01.png",
-        "alt": "Grey PP honeycomb ESD pallet top on moulded feet, for moving loads without a timber pallet, EMS Technologies"
       },
       {
         "src": "esd-conductive-reel-01.png",

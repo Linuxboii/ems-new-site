@@ -90,6 +90,17 @@ export const productDetails: Record<string, ProductDetail> = {
       'Applied under your site’s own permit-to-work and safety procedures',
     ],
   },
+  'esd-paints': {
+    detail:
+      'ProtectA Pro is an advanced range of ESD conductive and anti-static paints for floors, walls, work surfaces, conveyor systems, polypropylene bins and EVA foam packaging. Built on a conductive polymer matrix, it holds a stable, durable surface resistance rather than relying on a humidity-dependent anti-static agent, so static control across a plant stays consistent through the year. Supplied on its own, or applied on site by our own teams.',
+    points: [
+      'Conductive polymer matrix for stable, durable surface resistance',
+      'Floors, walls, benches, conveyors, bins, racking and EVA foam packaging',
+      'Roller or spray applied, matched to the substrate',
+      'Extends ESD control from the packing to the environment around it',
+      'Available as a supply-only product or as an on-site job work service',
+    ],
+  },
   'selective-machines': {
     detail:
       'Selective coating puts conformal coating only where it is wanted, leaving connectors, test points and gold fingers clear. There is no masking and no de-masking, and no operator judgement about where the coating should stop, which removes the slowest and least repeatable part of the process once volumes go beyond a handful of boards. EMS supplies and supports the ALTD-450GS and ALTD-450U locally.',
@@ -254,14 +265,25 @@ export const productDetails: Record<string, ProductDetail> = {
       'Nests empty for return, stacks loaded for transport',
     ],
   },
+  'esd-pallets': {
+    detail:
+      'ESD pallets are built from PP honeycomb sheet on moulded feet, so the deck is rigid and light and the whole unit is anti-static rather than a piece of bare timber under sensitive stock. They do not splinter, absorb moisture or shed dust the way a wooden pallet does, they do not need fumigation or heat treatment for export, and they wash down and go back into service instead of being scrapped after a trip.',
+    points: [
+      'PP honeycomb deck on moulded feet: rigid, light and reusable',
+      'Anti-static throughout, unlike timber or plain plastic pallets',
+      'No splinters, no moisture absorption and no dust into a clean area',
+      'Exempt from the fumigation and heat treatment timber needs for export',
+      'Deck size, foot layout and load rating made to suit your handling',
+    ],
+  },
   'custom-packing': {
     detail:
-      'Work that does not fit a standard tray or bin: packs cut to a shape the customer has asked for, pallet tops that replace timber, and conductive reels for tape-and-reel components. All of it starts the same way — from your drawing or a sample — and is made in the same conductive and anti-static materials as the rest of the range, so a presentation pack protects the contents as seriously as a production tray does.',
+      'Work that does not fit a standard tray or bin: packs cut to a shape the customer has asked for, and conductive reels for tape-and-reel components. All of it starts the same way — from your drawing or a sample — and is made in the same conductive and anti-static materials as the rest of the range, so a presentation pack protects the contents as seriously as a production tray does.',
     points: [
       'Shaped and branded presentation packs cut from conductive foam',
-      'PP honeycomb pallet tops on moulded feet, in place of timber pallets',
       'Conductive thermoformed reels for tape-and-reel component packing',
       'Made from your drawing or a sample, in the material the job needs',
+      'Printed and finished to your branding where the pack is seen by a customer',
     ],
   },
   'material-swatches': {

@@ -10,6 +10,13 @@ const { title, href, img, blurb, detailKey } = Astro.props;
 // still navigates, so the card gains detail without losing its destination.
 const detail = detailKey ? productDetails[detailKey] : undefined;
 const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
+// A card with no page of its own points at the contact form. There "View"
+// should open the write-up rather than jump the visitor to an enquiry, so it
+// becomes the panel trigger and the enquiry moves to its own corner link.
+const isEnquiryHref = href.startsWith('/contact-us/');
+const viewOpensDetail = Boolean(detail) && isEnquiryHref;
+const enquireHref = isEnquiryHref ? href : `/contact-us/?product=${encodeURIComponent(title)}`;
 ---
 <article class="card group flex flex-col overflow-hidden">
   {detail ? (
@@ -36,10 +43,20 @@ const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '
   <div class="flex flex-1 flex-col p-6">
     <h3 class="heading text-lg">{title}</h3>
     {blurb && <p class="mt-2 text-sm text-muted">{blurb}</p>}
-    <a href={href} class="mt-4 inline-flex items-center gap-1.5 self-start text-sm font-medium text-ink transition hover:text-accent2">
-      View
-      <span class="text-accent2 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-    </a>
+    <div class="mt-auto flex items-center justify-between gap-3 pt-4">
+      {viewOpensDetail ? (
+        <button type="button" class="pc-view" data-ac-open={dialogId} aria-haspopup="dialog">
+          View
+          <span class="text-accent2 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+        </button>
+      ) : (
+        <a href={href} class="pc-view">
+          View
+          <span class="text-accent2 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+        </a>
+      )}
+      <a href={enquireHref} class="pc-enquire">Enquire</a>
+    </div>
   </div>
 </article>
 
@@ -48,6 +65,25 @@ const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '
 <style>
   .pc-open { cursor: pointer; }
   .pc-open:focus-visible { outline: 2px solid rgb(var(--c-accent)); outline-offset: -2px; }
+
+  /* "View" reads the same whether it navigates or opens the panel. */
+  .pc-view {
+    display: inline-flex; align-items: center; gap: .375rem;
+    font-size: .875rem; font-weight: 500; line-height: 1.25rem;
+    color: rgb(var(--c-ink)); background: none; border: 0; padding: 0;
+    cursor: pointer; transition: color .2s ease;
+  }
+  .pc-view:hover { color: rgb(var(--c-accent)); }
+
+  /* Sits in the opposite corner so an enquiry is always one click away. */
+  .pc-enquire {
+    display: inline-flex; align-items: center;
+    padding: .3rem .7rem; border-radius: 999px;
+    border: 1px solid rgb(var(--c-accent) / 0.35);
+    font-size: .78rem; font-weight: 500; line-height: 1.25rem;
+    color: rgb(var(--c-muted)); transition: color .2s ease, border-color .2s ease;
+  }
+  .pc-enquire:hover { color: rgb(var(--c-accent)); border-color: rgb(var(--c-accent)); }
 
   .pc-badge {
     position: absolute; top: .6rem; right: .6rem;

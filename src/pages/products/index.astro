@@ -4,9 +4,10 @@ import PageHero from '@/components/PageHero.astro';
 import ProductIntro from '@/components/ProductIntro.astro';
 import ProductCard from '@/components/ProductCard.astro';
 import { products } from '@/data/products';
+import { esdPaintIntro } from '@/data/services';
 
 const title = 'Products - Conformal Coatings, ESD Bags & Coating Machines | EMS';
-const description = 'EMS Technologies products: ELPEGUARD conformal coatings, ESD bags, EVA bins, EPE foam trays, ESD thermoforming trays and selective coating machines.';
+const description = 'EMS Technologies products: ELPEGUARD conformal coatings, ESD bags, EVA bins, EPE foam trays, ESD thermoforming trays, ProtectA Pro ESD paints and selective coating machines.';
 ---
 <Layout title={title} description={description} path="/products/">
   <PageHero eyebrow="Catalogue" title="Products" lead="Conformal coatings, ESD packing and selective coating equipment: the full EMS Technologies range." />
@@ -16,14 +17,38 @@ const description = 'EMS Technologies products: ELPEGUARD conformal coatings, ES
       {products.map((p) => <ProductCard title={p.title} href={p.href} img={p.img} blurb={p.blurb} detailKey={p.detailKey} />)}
     </div>
   </section>
-  <section class="section border-t border-line">
-    <div class="container-x flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-      <div>
-        <p class="eyebrow">Also available</p>
-        <h2 class="heading mt-4 text-2xl">ProtectA Pro: ESD Conductive &amp; Anti-Static Paints</h2>
-        <p class="mt-3 max-w-2xl text-muted">An advanced range of ESD conductive and anti-static paints for floors, walls, surfaces and polypropylene bins, built on a conductive polymer matrix for stable, durable electrostatic protection in industrial environments.</p>
+  <section id="esd-paints" class="section border-t border-line">
+    <div class="container-x">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <p class="eyebrow">Also available</p>
+          <h2 class="heading mt-4 text-2xl sm:text-3xl">ESD Paints</h2>
+          <p class="mt-3 max-w-2xl text-muted">{esdPaintIntro}</p>
+        </div>
+        <a href="/datasheets/protecta-pro-esd-conductive-paint.pdf" class="btn-outline shrink-0" target="_blank" rel="noopener">Datasheet (PDF)</a>
       </div>
-      <a href="/datasheets/protecta-pro-esd-conductive-paint.pdf" class="btn-outline shrink-0" target="_blank" rel="noopener">Datasheet (PDF)</a>
+      <p class="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+        <a href="/products/esd-paints/" class="paint-service-link">
+          See the ESD Paints range
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/services/esd-paint-job-work/" class="paint-service-link">
+          ESD paint job service available
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </p>
     </div>
   </section>
 </Layout>
+
+<style>
+  /* Read as sentences rather than buttons, so the datasheet stays the one
+     call to action in this band while the two pages are still one click away. */
+  .paint-service-link {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-size: .95rem; font-weight: 500;
+    color: rgb(var(--c-accent)); text-underline-offset: 4px;
+    transition: gap .2s ease;
+  }
+  .paint-service-link:hover { gap: .65rem; text-decoration: underline; }
+</style>

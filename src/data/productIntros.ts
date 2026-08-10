@@ -37,6 +37,11 @@ export const productIntros: Record<string, string[]> = {
     'We form trays in both PET and HIPS. Clear PET keeps the contents visible for inspection and counting without breaking down the stack. Black HIPS is supplied in conductive and anti-static grades for ESD-sensitive parts that need robust, reusable protection. Both are formed to your component drawing.',
   ],
 
+  '/products/esd-paints/': [
+    'ESD paints extend static control from the packing a board travels in to the environment it is built in. The floor, the benches, the conveyors and the bins are all charge generators in an ordinary plant: a coating built on a conductive polymer matrix gives that charge a controlled path to ground instead of letting it build until it discharges into a component.',
+    'ProtectA Pro covers floors, walls, work surfaces, conveyor systems, polypropylene bins and EVA foam packaging, applied by roller or spray depending on the substrate. The coating can be supplied on its own, or applied on site by our own teams with earthing laid, resistance tested and handed over.',
+  ],
+
   '/SCMachines/': [
     'Selective coating puts conformal coating only where it is wanted, leaving connectors, test points and gold fingers clear. There is no masking and no de-masking, and no operator judgement about where the coating should stop, which removes the slowest and least repeatable part of the coating process once volumes go beyond a handful of boards.',
     'We supply the ALTD-450GS and the ALTD-450U. Both are built on a welded sheet-metal frame under industrial-computer control, with on-line and off-line programming, automatic accuracy calibration, precision pressure regulation for clean edge definition, automatic exhaust collection and integrated UV inspection so coverage can be verified before a board leaves the machine. The 450GS coats jointed, panelised boards in a single pass for throughput; the 450U adds a nozzle that tilts through 0–45°, reaching the whole board with no dead corners.',

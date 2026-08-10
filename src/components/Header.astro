@@ -15,9 +15,10 @@ const groupActive = (item: (typeof nav)[number]) =>
   isActive(item.href) || (item.children?.some((c) => isActive(c.href)) ?? false);
 ---
 <header id="siteHeader" class="sticky top-0 z-50 bg-paper/85 backdrop-blur border-b border-line transition-shadow">
-  <div class="container-x flex items-center justify-between h-20">
+  <div class="container-x flex items-center justify-between h-28">
     <a href="/" class="flex items-center gap-2 shrink-0" aria-label="EMS Technologies home">
-      <Image src={logo} alt="EMS Technologies logo" height={64} class="site-logo h-[53px] sm:h-[61px] w-auto" />
+      <!-- Rendered at 2x the displayed height so the mark stays sharp on retina screens. -->
+      <Image src={logo} alt="EMS Technologies logo" height={176} class="site-logo h-[72px] sm:h-[88px] w-auto" />
     </a>
 
     <!-- Desktop nav -->
