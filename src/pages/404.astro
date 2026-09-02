@@ -1,11 +1,35 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+
+// A 404 should never be indexed, and it should not be a dead end either — visitors
+// arriving from a stale search result need somewhere obvious to go next.
+const routes = [
+  { label: 'Conformal coatings', href: '/conformal/', note: 'ELPEGUARD acrylic, polyurethane, silicone, thick-film and aqua' },
+  { label: 'Selective coating machines', href: '/SCMachines/', note: 'ALTD-450GS and ALTD-450U — previously /our-equipment/' },
+  { label: 'ESD packing', href: '/EsdBags/', note: 'Bags, bins, foam and thermoformed trays made in-house' },
+  { label: 'Job work services', href: '/services/', note: 'Conformal coating and ESD paint, on site' },
+  { label: 'Technical resources', href: '/resources/', note: 'Selection guide, standards explainer, comparisons, glossary' },
+  { label: 'Datasheets & downloads', href: '/downloads/', note: 'Technical and safety data sheets' },
+];
 ---
-<Layout title="Page not found - EMS Technologies" description="The page you are looking for could not be found." path="/404">
-  <section class="section container-x text-center">
-    <p class="eyebrow">Error 404</p>
-    <h1 class="heading text-4xl sm:text-5xl mt-5">Page not found</h1>
-    <p class="mt-4 text-muted">The page you're looking for doesn't exist or has moved.</p>
-    <a href="/" class="btn-primary mt-8">Back to home</a>
+<Layout title="Page not found - EMS Technologies" description="The page you are looking for could not be found." path="/404" noindex>
+  <section class="section container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="heading mt-5 text-4xl sm:text-5xl">Page not found</h1>
+      <p class="mt-6 text-muted leading-relaxed">This page doesn't exist or has moved. If you arrived from a search result or an old link, one of these is probably what you were looking for.</p>
+    </div>
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {routes.map((r) => (
+        <li class="card p-6">
+          <h2 class="heading text-base"><a href={r.href} class="transition hover:text-accent2">{r.label}</a></h2>
+          <p class="mt-2 text-sm text-muted leading-relaxed">{r.note}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="mt-12 flex flex-wrap gap-3">
+      <a href="/" class="btn-primary">Back to home</a>
+      <a href="/contact-us/" class="btn-outline">Talk to our team</a>
+    </div>
   </section>
 </Layout>

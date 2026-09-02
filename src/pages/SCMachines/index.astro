@@ -3,29 +3,134 @@ import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import ProductIntro from '@/components/ProductIntro.astro';
 import MagnifyImage from '@/components/MagnifyImage.astro';
-import { machines } from '@/data/machines';
+import { machines, comparison } from '@/data/machines';
+import { breadcrumb, product, faq } from '@/lib/schema';
 
 const title = 'Selective Coating Machines - ALTD-450GS & ALTD-450U | EMS';
-const description = 'Automated selective conformal coating machines supplied by EMS Technologies: ALTD-450GS and ALTD-450U with precision atomization, auto calibration and integrated UV inspection.';
+const description = 'Automated selective conformal coating machines supplied by EMS Technologies: ALTD-450GS and ALTD-450U with precision atomization, auto calibration, integrated UV inspection and a 0–45° tilting nozzle option for coating with no dead corners.';
+const path = '/SCMachines/';
+
+const machineFaq = [
+  {
+    q: 'What is the difference between the ALTD-450GS and the ALTD-450U?',
+    a: 'Both share the same welded frame, industrial-computer control, auto accuracy calibration, precision atomisation control and integrated UV inspection. The ALTD-450GS is built for throughput: it coats jointed (panelised) boards in a single pass as well as single boards. The ALTD-450U adds a nozzle that tilts through 0–45°, so it reaches shadowed areas beside tall components and coats a board with no dead corners. Choose the GS for panelised volume, the U for board geometry that a vertical nozzle cannot reach.',
+  },
+  {
+    q: 'Does selective coating remove the need for masking?',
+    a: 'Largely, yes — and that is usually the economic argument for the machine. The nozzle follows a programmed path that covers what needs coating and avoids keep-out areas entirely, so the masking and de-masking labour that dominates spray and dip on a connector-heavy board mostly disappears. The trade is programming effort per board type, which has to be amortised over a repeating run.',
+  },
+  {
+    q: 'Can these machines run UV-curing coatings?',
+    a: 'Yes. Both models integrate UV inspection, and thick-film UV-curing ELPEGUARD systems are a common pairing because seconds-fast cure keeps the coating step off the critical path. Where tall components shadow the board, the coating system should include a secondary cure mechanism rather than relying on line of sight alone.',
+  },
+  {
+    q: 'Does EMS support the machines after installation?',
+    a: 'Yes. EMS supplies selective conformal coating line equipment from AUTOLEADER and supports it locally, alongside the ELPEGUARD coating systems that run on it. That means one supplier for the machine, the coating and the process — and 30+ trained engineers who can also run the process as job work while a line is being commissioned.',
+  },
+];
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products/' },
+    { name: 'Selective Coating Machines', path },
+  ]),
+  ...machines.map((m) =>
+    product({
+      name: `${m.model} selective conformal coating machine`,
+      description: m.summary,
+      path,
+      category: 'Selective conformal coating equipment',
+      brand: 'AUTOLEADER',
+      additionalProperty: [
+        { name: 'Model', value: m.model },
+        { name: 'Control', value: 'Industrial computer, on-line and off-line programming' },
+        { name: 'Nozzle', value: m.nozzle },
+        { name: 'Board handling', value: m.boards },
+        { name: 'UV inspection', value: 'Integrated' },
+        { name: 'Supplied and supported in India by', value: 'EMS Technologies' },
+      ],
+    })
+  ),
+  faq(machineFaq),
+];
 ---
-<Layout title={title} description={description} path="/SCMachines/">
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Products · Equipment" title="Selective Coating Machines" lead="Professional coating equipment offering complete automation, reliability, quality and efficiency to enhance the quality of your end product." />
-  <ProductIntro path="/SCMachines/" />
+  <ProductIntro path={path} />
+
   <section class="section container-x space-y-16">
     {machines.map((m, i) => (
       <div class={`grid lg:grid-cols-2 gap-10 items-center ${i % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
         <div class="rounded-xl border border-line bg-surface p-6">
-          <MagnifyImage name={m.img} alt={`${m.model} selective coating machine`} width={560} height={480} fit="contain" />
+          <MagnifyImage name={m.img} alt={`${m.model} automated selective conformal coating machine supplied by EMS Technologies`} width={560} height={480} fit="contain" />
         </div>
         <div>
           <p class="eyebrow">{`Model 0${i + 1}`}</p>
           <h2 class="heading mt-4 text-2xl sm:text-3xl">{m.model}</h2>
+          <p class="mt-4 text-muted leading-relaxed">{m.summary}</p>
           <ul class="mt-6 space-y-3 text-sm text-muted">
             {m.features.map((f) => (<li class="flex gap-3"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent2"></span><span>{f}</span></li>))}
           </ul>
-          {m.datasheet && <a href={m.datasheet} class="btn-outline mt-8" target="_blank" rel="noopener">Data sheet (PDF)</a>}
+          <div class="mt-8 flex flex-wrap gap-3">
+            {m.datasheet && <a href={m.datasheet} class="btn-outline" target="_blank" rel="noopener">Data sheet (PDF)</a>}
+            <a href={`/contact-us/?product=${encodeURIComponent(m.model)}`} class="btn-outline">Request specification</a>
+          </div>
         </div>
       </div>
     ))}
+  </section>
+
+  <!-- Model comparison: the granularity gap the two models are usually chosen on. -->
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Comparison</p>
+      <h2 class="heading mt-5 text-2xl sm:text-3xl">ALTD-450GS vs ALTD-450U</h2>
+      <p class="mt-6 text-muted leading-relaxed">The two machines share a platform and differ in how they reach the board. Panelised throughput points to the GS; board geometry a vertical nozzle cannot reach points to the U.</p>
+    </div>
+    <div class="mt-10 overflow-x-auto">
+      <table class="w-full min-w-[40rem] border-collapse text-left">
+        <thead>
+          <tr class="border-b border-line">
+            <th scope="col" class="eyebrow py-3 pr-6">Capability</th>
+            <th scope="col" class="eyebrow py-3 pr-6">ALTD-450GS</th>
+            <th scope="col" class="eyebrow py-3">ALTD-450U</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparison.map((row) => (
+            <tr class="border-b border-line">
+              <td class="py-4 pr-6 text-sm text-ink">{row.capability}</td>
+              <td class="py-4 pr-6 text-sm text-muted">{row.gs}</td>
+              <td class="py-4 text-sm text-muted">{row.u}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-8 max-w-3xl text-sm text-muted leading-relaxed">Full machine specifications — working envelope, utilities and footprint — are issued on request from the <a class="text-accent2 hover:underline" href="/downloads/">downloads page</a>.</p>
+  </section>
+
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Frequently asked</p>
+      <h2 class="heading mt-5 text-2xl sm:text-3xl">Equipment questions</h2>
+    </div>
+    <div class="mt-10 grid gap-x-12 gap-y-8 lg:grid-cols-2">
+      {machineFaq.map((f) => (
+        <div>
+          <h3 class="font-semibold text-ink">{f.q}</h3>
+          <p class="mt-2 text-muted leading-relaxed">{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section border-t border-line">
+    <div class="container-x max-w-2xl text-center">
+      <h2 class="heading text-2xl sm:text-3xl">Evaluating a selective coating line?</h2>
+      <p class="mt-5 text-muted leading-relaxed">We supply the machine, the ELPEGUARD coating that runs on it, and the engineers who can run the process as <a class="text-accent2 hover:underline" href="/services/conformal-coating-job-work/">job work</a> while the line is commissioned.</p>
+      <a href="/contact-us/?product=Selective%20Coating%20Machines" class="btn-primary mt-8">Talk to our team</a>
+    </div>
   </section>
 </Layout>

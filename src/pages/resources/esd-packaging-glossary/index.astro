@@ -1,0 +1,62 @@
+---
+import ResourceLayout from '@/layouts/ResourceLayout.astro';
+import { glossary } from '@/data/glossary';
+import { definedTermSet } from '@/lib/schema';
+
+const title = 'ESD & Conformal Coating Glossary - Terms Explained | EMS';
+const description = 'Plain definitions of the terms on an ESD packing or conformal coating quotation: ESD, EPA, static dissipative, Faraday cage, MBB, MSL, VCI, EPE foam, thermoforming, DFT, UV tracer, keep-out area, IPC-A-610 and IPC-CC-830B.';
+const path = '/resources/esd-packaging-glossary/';
+
+const groups = ['ESD & packaging', 'Conformal coating'] as const;
+const byGroup = groups.map((g) => ({ group: g, terms: glossary.filter((t) => t.group === g) }));
+
+const faqs = [
+  {
+    q: 'What is the difference between anti-static, dissipative and conductive packaging?',
+    a: 'They describe different surface resistance ranges and do different jobs. Anti-static means the material will not build a charge on its own surface, but it does not shield the contents. Static dissipative — roughly 1 × 10⁴ to 1 × 10¹¹ ohms per square — lets charge bleed away gradually, which is why most work surfaces, bins and trays are dissipative. Conductive — below 1 × 10⁴ ohms per square — moves charge quickly and equalises potential across a surface, as in conductive grid bags and carbon-loaded foam.',
+  },
+  {
+    q: 'What is the difference between a static shielding bag and an anti-static bag?',
+    a: 'A static shielding bag has a metallised layer that forms a Faraday cage, carrying an external discharge around the outside of the bag so it never reaches the board inside. A plain anti-static bag — pink LDPE, for instance — only stops charge generating on the bag surface. For transporting an unprotected ESD-sensitive assembly outside an EPA, only the shielding bag is the correct choice.',
+  },
+  {
+    q: 'What is an MBB and when do I need one?',
+    a: 'A moisture barrier bag is an aluminium-laminated bag that adds a humidity barrier on top of static shielding. You need one for moisture sensitive devices, for long-term storage, and for export shipments where the pack may sit in humid conditions. It is used with desiccant sized to the bag area and storage period, plus a humidity indicator card, and it is heat-sealed rather than folded closed.',
+  },
+];
+---
+<ResourceLayout
+  title={title}
+  description={description}
+  path={path}
+  heading="ESD and conformal coating glossary"
+  lead="The vocabulary on an ESD packing or coating quotation is precise, and the differences it encodes are the ones that decide whether a part arrives working. These are the terms, defined plainly."
+  eyebrow="Resources · Glossary"
+  datePublished="2026-08-31"
+  keywords={['ESD glossary', 'what is MBB packaging', 'static dissipative vs conductive', 'VCI bag meaning', 'conformal coating terms']}
+  faqs={faqs}
+  jsonLd={[definedTermSet('EMS Technologies ESD and conformal coating glossary', path, glossary.map((t) => ({ term: t.term, definition: t.definition })))]}
+>
+  <p>Procurement teams buying ESD packing or conformal coating for the first time meet a dense set of terms in which small distinctions carry real consequences — an anti-static bag and a static shielding bag are not interchangeable, and a part shipped in the wrong one can fail long after it passed test. Each entry below is written to stand on its own.</p>
+
+  {byGroup.map((g) => (
+    <>
+      <h2 id={g.group.toLowerCase().replace(/[^a-z]+/g, '-')}>{g.group}</h2>
+      <dl class="mt-8 space-y-8">
+        {g.terms.map((t) => (
+          <div class="border-t border-line pt-6">
+            <dt class="heading text-base text-ink" id={t.term.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>{t.term}</dt>
+            <dd class="mt-3 leading-relaxed">{t.definition}</dd>
+          </div>
+        ))}
+      </dl>
+    </>
+  ))}
+
+  <h2 id="next">Where to go next</h2>
+  <ul>
+    <li><a href="/EsdBags/">ESD bags</a> — bubble, static shielding, aluminium MBB, LDPE pink, conductive grid and VCI, manufactured in-house.</li>
+    <li><a href="/resources/conformal-coating-selection-guide/">Coating selection guide</a> — matching an operating environment to a coating chemistry.</li>
+    <li><a href="/resources/conformal-coating-standards/">Standards explainer</a> — IPC-A-610 classes, IPC-CC-830B and what happened to MIL-I-46058C.</li>
+  </ul>
+</ResourceLayout>

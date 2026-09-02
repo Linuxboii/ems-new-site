@@ -6,11 +6,44 @@ import StatCounter from '@/components/StatCounter.astro';
 import TeamCard from '@/components/TeamCard.astro';
 import { company } from '@/data/company';
 import { team } from '@/data/team';
+import { breadcrumb, ORG_ID, SITE } from '@/lib/schema';
 
 const title = 'About EMS Technologies - Peters Distributor in India Since 2011';
 const description = 'EMS Technologies is an India distributor for Lackwerke Peters, with 10+ years in conformal coating, 30+ trained engineers, and manufacturing plants in Hyderabad and Cochin.';
+const path = '/about-us/';
+
+// Named leadership published as Person nodes: the demonstrated-expertise signal
+// that an anonymous About page cannot give a search or answer engine.
+const people = team.map((m) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE}${path}#${m.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+  name: m.name.replace(/^Mr\.\s+/, ''),
+  jobTitle: m.role,
+  worksFor: { '@id': ORG_ID },
+  ...(m.email ? { email: m.email } : {}),
+  ...(m.bio ? { description: m.bio } : {}),
+  ...(m.linkedin ? { sameAs: [m.linkedin] } : {}),
+}));
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'About', path },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About EMS Technologies',
+    description,
+    url: `${SITE}${path}`,
+    mainEntity: { '@id': ORG_ID },
+    isPartOf: { '@id': `${SITE}/#website` },
+  },
+  ...people,
+];
 ---
-<Layout title={title} description={description} path="/about-us/">
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Who we are" title="EMS Technologies" lead="Electronics coatings, ESD packing and on-site job work, supported end to end from Hyderabad and Cochin since 2011." />
 
   <section class="section border-b border-line container-x grid lg:grid-cols-12 gap-12 items-start">
@@ -93,7 +126,7 @@ const description = 'EMS Technologies is an India distributor for Lackwerke Pete
     <p class="eyebrow">The team</p>
     <h2 class="heading mt-5 text-3xl sm:text-4xl">People behind the work</h2>
     <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {team.map((m) => <TeamCard name={m.name} role={m.role} email={m.email} img={m.img} />)}
+      {team.map((m) => <TeamCard name={m.name} role={m.role} email={m.email} img={m.img} bio={m.bio} linkedin={m.linkedin} />)}
     </div>
   </section>
 </Layout>

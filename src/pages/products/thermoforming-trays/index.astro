@@ -5,6 +5,7 @@ import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+import { product } from '@/lib/schema';
 
 const title = 'ESD Thermoforming Trays - Custom Blister Trays for PCBs | EMS Technologies';
 const description = 'Custom ESD thermoformed and blister trays from EMS Technologies, Hyderabad: anti-static, conductive and clear trays tailored to component geometry for storage and transport.';
@@ -26,6 +27,17 @@ const jsonLd = [
     gallery.traysHips,
     gallery.hipsPetLid,
   ]),
+  product({
+    name: 'ESD Thermoforming Trays',
+    description: 'Custom anti-static, conductive and clear thermoformed blister trays formed to the exact geometry of your components for storage, handling and automated line feeding.',
+    path,
+    category: 'ESD packaging',
+    material: 'PET / HIPS',
+    additionalProperty: [
+      { name: 'Manufactured by', value: 'EMS Technologies — Hyderabad and Cochin plants' },
+      { name: 'Customisation', value: 'Formed or cut to customer component geometry' },
+    ],
+  }),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>

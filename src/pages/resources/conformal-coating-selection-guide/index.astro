@@ -1,0 +1,145 @@
+---
+import ResourceLayout from '@/layouts/ResourceLayout.astro';
+
+const title = 'How to Choose a Conformal Coating for a PCB | EMS Technologies';
+const description = 'A practical selection guide for conformal coating on PCB assemblies: match the operating environment to acrylic, polyurethane, silicone, UV thick-film or water-based chemistry, then to an application method, thickness target and inspection regime.';
+const path = '/resources/conformal-coating-selection-guide/';
+
+const faqs = [
+  {
+    q: 'How do I choose a conformal coating for a PCB?',
+    a: 'Work in this order: define the operating environment (temperature range, humidity, condensation, chemicals, salt, vibration), then the electrical requirement, then whether the board has to be repairable in the field. Those three answers usually leave one or two viable chemistries. Only then choose an application method and a thickness band — picking the method first is the most common way a coating decision goes wrong.',
+  },
+  {
+    q: 'What thickness should a conformal coating be?',
+    a: 'For solvent- or water-based acrylic, polyurethane and silicone coatings, 25–75 µm (about 1–3 mils) of dry film is the usual working band, with 50 µm a common target. UV-curing thick-film systems are deliberately applied much heavier. The number that matters is the one you agree and measure against, not the one on the datasheet, because coverage on a populated board varies with component height and application method.',
+  },
+  {
+    q: 'Does a conformal coating need to cover the whole board?',
+    a: 'No, and it usually must not. Connectors, test points, gold fingers, sockets, adjustable components, heatsink interfaces and any part that has to make electrical or thermal contact are masked or kept clear. A coated contact is a field failure that inspection at the customer rarely catches in time.',
+  },
+  {
+    q: 'Can conformal coating be removed for repair?',
+    a: 'Yes, though how easily depends entirely on the chemistry. Acrylic is the most forgiving and can be dissolved or soldered through in many cases. Polyurethane and silicone need deliberate removal — thermal, mechanical or chemical — and silicone in particular must be fully removed from any area that will be re-coated, because almost nothing bonds over cured silicone.',
+  },
+  {
+    q: 'Is conformal coating an alternative to potting?',
+    a: 'They solve overlapping but different problems. A conformal coating is a thin film that follows the board contours and protects against moisture, dust and contamination while adding almost no weight. Potting encapsulates the assembly in a solid mass for mechanical shock, tamper resistance and severe chemical or immersion exposure, at the cost of weight, thermal behaviour and any hope of repair.',
+  },
+];
+---
+<ResourceLayout
+  title={title}
+  description={description}
+  path={path}
+  heading="How to choose a conformal coating for your PCB"
+  lead="Coating selection is a chain of dependent decisions: the environment sets the chemistry, the chemistry and the board set the application method, and both together set the thickness band and the inspection regime. Start anywhere else and you spend the savings on rework."
+  eyebrow="Resources · Buyer’s guide"
+  datePublished="2026-08-31"
+  keywords={['conformal coating selection', 'how to choose conformal coating for PCB', 'conformal coating thickness', 'acrylic polyurethane silicone coating', 'IPC-CC-830B']}
+  faqs={faqs}
+>
+  <p>A conformal coating is a thin polymeric film applied over an assembled printed circuit board so that it follows — conforms to — the contours of the components and the bare laminate underneath. Its job is to keep moisture, condensation, dust, airborne contamination, corrosive gases and stray conductive debris away from conductors that are only a fraction of a millimetre apart, and to raise the voltage that board can stand off between them.</p>
+
+  <p>What follows is the sequence our engineers use when a customer sends us a board and asks what to coat it with. It is deliberately ordered, because each answer narrows the next.</p>
+
+  <h2 id="step-1">Step 1 — Define the environment, precisely</h2>
+  <p>Almost every poor coating decision starts with an environment described as "industrial" or "outdoor". The specification that actually drives selection is narrower than that:</p>
+  <ul>
+    <li><strong>Temperature range and dwell.</strong> Not just the maximum, but how long the board sits there. A part that sees 125 °C continuously is a different problem from one that touches it for ten minutes during reflow-adjacent operation.</li>
+    <li><strong>Humidity and condensation.</strong> Steady high humidity is survivable for most chemistries. Repeated condensation cycling — a cold board in warm humid air, over and over — is the condition that finds every pinhole and every thin edge.</li>
+    <li><strong>Chemical and salt exposure.</strong> Fuel, oil, solvents, cleaning agents, coastal salt fog. This is where acrylic runs out of road fastest.</li>
+    <li><strong>Mechanical and vibration load.</strong> Continuous vibration argues for a coating that stays flexible rather than one that goes hard and cracks at a solder fillet.</li>
+    <li><strong>Electrical stress.</strong> Conductor spacing and working voltage set how much dielectric withstand you actually need from the film.</li>
+    <li><strong>Service life and repairability.</strong> A ten-year field product that will be repaired is a fundamentally different brief from a sealed consumer assembly that is replaced on failure.</li>
+  </ul>
+
+  <h2 id="step-2">Step 2 — Match the environment to a chemistry</h2>
+  <p>Five ELPEGUARD® families cover the overwhelming majority of Indian electronics manufacturing. In broad terms:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Chemistry</th>
+          <th scope="col">Strongest at</th>
+          <th scope="col">Weakest at</th>
+          <th scope="col">Typical fit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Acrylic (AR)</td>
+          <td>Fast drying, easy rework, good moisture protection, forgiving process</td>
+          <td>Solvent and chemical resistance; abrasion</td>
+          <td>General industrial, consumer, high-mix lines, anything likely to be repaired</td>
+        </tr>
+        <tr>
+          <td>Polyurethane (UR)</td>
+          <td>Chemical, solvent and abrasion resistance; strong moisture barrier</td>
+          <td>Rework is deliberate work; longer cure</td>
+          <td>Automotive under-bonnet, fuel and fluid exposure, harsh industrial</td>
+        </tr>
+        <tr>
+          <td>Silicone (SR)</td>
+          <td>Wide temperature range, stays flexible, excellent under thermal cycling</td>
+          <td>Abrasion; nothing bonds over cured silicone, so partial rework is awkward</td>
+          <td>High-temperature assemblies, LED, power electronics, vibration-heavy service</td>
+        </tr>
+        <tr>
+          <td>UV-curing thick film (DSL)</td>
+          <td>Seconds-fast cure, heavy build in one pass, high throughput</td>
+          <td>Shadowed areas under tall components need a secondary cure mechanism</td>
+          <td>High-volume repeat production on selective coating equipment</td>
+        </tr>
+        <tr>
+          <td>Aqua / water-based</td>
+          <td>Low VOC, reduced solvent handling and ventilation burden</td>
+          <td>Longer dry-off; more sensitive to board cleanliness</td>
+          <td>Plants tightening emissions and operator exposure without changing protection class</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The full side-by-side, including cure behaviour and rework routes, is in <a href="/resources/acrylic-vs-polyurethane-vs-silicone/">acrylic vs polyurethane vs silicone</a>. If the environment is severe enough that a thin film may not be the right answer at all, read <a href="/resources/conformal-coating-vs-encapsulation/">conformal coating vs potting and encapsulation</a> before going further.</p>
+
+  <h2 id="step-3">Step 3 — Choose the application method for the board, not the preference</h2>
+  <p>Chemistry decided, the board and the volume decide how it goes on:</p>
+  <ul>
+    <li><strong>Brush.</strong> Prototypes, touch-up, repair and very low volumes. No tooling, no programme, complete operator dependence.</li>
+    <li><strong>Pneumatic spray.</strong> Mixed board types and moderate batches. Needs masking, and needs a booth.</li>
+    <li><strong>Dip.</strong> Full coverage including underside and shadowed areas, at the cost of extensive masking. Efficient where the same board repeats.</li>
+    <li><strong>Selective coating equipment.</strong> A programmed nozzle path that avoids keep-out areas entirely, so masking largely disappears. Right for repeating production; the programming effort has to be amortised. See our <a href="/SCMachines/">selective coating machines</a>.</li>
+  </ul>
+  <p>The masking burden is the hidden cost here. A board with fourteen connectors coated by spray can consume more labour in masking and de-masking than in coating, and that is usually the argument that carries a line onto selective equipment.</p>
+
+  <h2 id="step-4">Step 4 — Set a thickness band, and agree how it is measured</h2>
+  <p>For conventional solvent- and water-based systems, dry film thickness of roughly 25–75 µm (1–3 mils) is the working range, with 50 µm a frequent target. UV thick-film systems are applied deliberately heavier. Two practical points matter more than the number itself:</p>
+  <ul>
+    <li>Thickness is a <em>measured</em> property. IPC-CC-830B and IPC-A-610 both treat it that way, and a lot released on visual impression alone has not really been inspected.</li>
+    <li>Coverage on a populated board is not uniform. Component shadows, tall parts and board edges are where a nominally correct average hides a thin patch — which is exactly where condensation cycling attacks first.</li>
+  </ul>
+
+  <h2 id="step-5">Step 5 — Decide what stays uncoated</h2>
+  <p>Before the first board is coated, mark up the keep-out areas: connectors and mating surfaces, test points and programming headers, gold fingers, sockets, adjustable components, sensor apertures, heatsink and thermal-pad interfaces, and any grounding or bonding point. Mask them for spray and dip, or programme around them on selective equipment — then verify they are clear after cure, not just after masking.</p>
+
+  <h2 id="step-6">Step 6 — Fix cleanliness and cure before you fix anything else</h2>
+  <p>Coating adhesion is decided before the coating arrives. Flux residue, handling oils, mould release, fingerprints and moisture trapped in the laminate all cause dewetting, blistering and delamination that look like coating defects and are not. No-clean flux is not automatically compatible with every coating system; where it is not, the board is cleaned. Equally, "tack-free" is not "cured" — moving or packing a board before its cure schedule completes is a common and entirely avoidable source of surface defects.</p>
+
+  <h2 id="step-7">Step 7 — Write down the inspection regime</h2>
+  <p>ELPEGUARD coatings carry a UV tracer, so a film invisible in normal light fluoresces under UV. That turns an unverifiable process into a visible one, and it is why every board we coat is inspected under UV rather than sampled. Alongside that, agree the acceptance class up front — IPC-A-610 Class 2 covers most industrial and automotive electronics, Class 3 applies where the assembly is life- or safety-critical. Our <a href="/resources/conformal-coating-standards/">standards explainer</a> covers what each class actually requires.</p>
+
+  <h2 id="short-version">The short version</h2>
+  <ol>
+    <li>Write the environment down properly — temperature, condensation, chemicals, vibration, voltage, service life.</li>
+    <li>Let it choose the chemistry: acrylic for general use and repairability, polyurethane for chemical and abrasion exposure, silicone for temperature and flex, UV thick-film for volume, aqua for lower VOC.</li>
+    <li>Let the board and the volume choose the application method — and count the masking labour honestly.</li>
+    <li>Agree a measured thickness band, not an impression.</li>
+    <li>Mark the keep-out areas before the first board is coated.</li>
+    <li>Fix cleanliness and cure discipline first; they cause more "coating failures" than coatings do.</li>
+    <li>Inspect under UV against a stated IPC-A-610 class, every lot.</li>
+  </ol>
+
+  <p>EMS Technologies supplies the full ELPEGUARD range in India as distributor for Lackwerke Peters, and runs the same process as <a href="/services/conformal-coating-job-work/">on-site job work</a> with 30+ trained engineers. If you would rather have the answer than the framework, <a href="/contact-us/">send us the board details</a>.</p>
+</ResourceLayout>

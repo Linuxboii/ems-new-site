@@ -20,6 +20,26 @@ export const nav = [
       { label: 'ESD Paint Job Work', href: '/services/esd-paint-job-work/' },
     ],
   },
+  {
+    label: 'Industries', href: '/industries/',
+    children: [
+      { label: 'Automotive Electronics', href: '/industries/automotive/' },
+      { label: 'Aerospace & Defence', href: '/industries/aerospace-defence/' },
+      { label: 'Medical Devices', href: '/industries/medical-devices/' },
+      { label: 'LED & Lighting', href: '/industries/led-lighting/' },
+    ],
+  },
+  {
+    label: 'Resources', href: '/resources/',
+    children: [
+      { label: 'Coating Selection Guide', href: '/resources/conformal-coating-selection-guide/' },
+      { label: 'Acrylic vs PU vs Silicone', href: '/resources/acrylic-vs-polyurethane-vs-silicone/' },
+      { label: 'Coating Standards Explained', href: '/resources/conformal-coating-standards/' },
+      { label: 'Coating vs Encapsulation', href: '/resources/conformal-coating-vs-encapsulation/' },
+      { label: 'ESD Glossary', href: '/resources/esd-packaging-glossary/' },
+      { label: 'Datasheets & Downloads', href: '/downloads/' },
+    ],
+  },
   { label: 'Gallery', href: '/gallery/' },
   { label: 'Contact', href: '/contact-us/' },
 ];

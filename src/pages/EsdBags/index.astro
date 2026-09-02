@@ -7,6 +7,7 @@ import GallerySection from '@/components/GallerySection.astro';
 import { esdBags } from '@/data/esdBags';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+import { productList } from '@/lib/schema';
 
 const title = 'ESD Bags - Bubble, Static Shielding, LDPE Pink & Conductive | EMS';
 const description = 'ESD packing bags from EMS Technologies, Hyderabad: anti-static bubble bags, static shielding bags, LDPE pink bags and conductive grid bags for safe electronics packing.';
@@ -19,6 +20,13 @@ const jsonLd = [
     { name: 'ESD Bags', path },
   ]),
   await galleryJsonLd('ESD Bags', description, path, [gallery.bubble, gallery.grid, gallery.shield, gallery.mbb, gallery.pink, gallery.vci]),
+  productList('ESD packing bags', path, esdBags.map((b) => ({
+    name: b.title,
+    description: b.blurb,
+    path,
+    category: 'ESD packaging',
+    additionalProperty: [{ name: 'Manufactured by', value: 'EMS Technologies — Hyderabad and Cochin plants' }],
+  }))),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
@@ -26,7 +34,7 @@ const jsonLd = [
   <ProductIntro path={path} />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {esdBags.map((b) => <ProductCard title={b.title} href={b.href} img={b.img} blurb={b.blurb} detailKey={b.detailKey} />)}
+      {esdBags.map((b) => <ProductCard title={b.title} href={b.href} img={b.img} alt={b.alt} blurb={b.blurb} detailKey={b.detailKey} />)}
     </div>
   </section>
   <GallerySection id="pink-bubble-bags" detailKey="bubble-bags" title="Pink Bubble Bags" enquire="Pink Bubble Bags" images={gallery.bubble.images} blurb="Cushioned pink anti-static bubble bags that guard components against both shock and static. The bubble layer absorbs impact and vibration in transit while the anti-static film stops a charge building on the surface, so boards and parts that need physical protection as well as ESD safety are covered by a single bag." />

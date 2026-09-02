@@ -4,24 +4,39 @@ import PageHero from '@/components/PageHero.astro';
 import ProductIntro from '@/components/ProductIntro.astro';
 import ProductCard from '@/components/ProductCard.astro';
 import { coatings, coatingIntro } from '@/data/coatings';
+import { breadcrumb, productList } from '@/lib/schema';
 
 const title = 'ELPEGUARD® Conformal Coatings - Acrylic, PU, Silicone | EMS';
 const description = 'Peters ELPEGUARD conformal coatings distributed in India by EMS Technologies: acrylic, polyurethane, silicone, thick-film curing and aqua coatings for PCB protection.';
-const jsonLd = [{
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://emstechnologies.in/' },
-    { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://emstechnologies.in/products/' },
-    { '@type': 'ListItem', position: 3, name: 'Conformal Coatings', item: 'https://emstechnologies.in/conformal/' },
-  ],
-}];
+const path = '/conformal/';
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products/' },
+    { name: 'Conformal Coatings', path },
+  ]),
+  productList('ELPEGUARD conformal coatings', path, coatings.map((c) => ({
+    name: `ELPEGUARD ${c.title} conformal coating`,
+    description: c.blurb,
+    path,
+    brand: 'ELPEGUARD',
+    peters: true,
+    category: 'Conformal coating',
+    material: c.title,
+    additionalProperty: [
+      { name: 'Coating family', value: c.title },
+      { name: 'Application', value: 'Protection and insulation of assembled PCBs' },
+      { name: 'Principal', value: 'Lackwerke Peters GmbH & Co. KG, Germany' },
+    ],
+  }))),
+];
 ---
-<Layout title={title} description={description} path="/conformal/" jsonLd={jsonLd}>
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Products · ELPEGUARD®" title="Conformal Coatings" lead={coatingIntro} />
   <ProductIntro path="/conformal/" />
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} blurb={c.blurb} detailKey={c.detailKey} />)}
+      {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} alt={c.alt} blurb={c.blurb} detailKey={c.detailKey} />)}
     </div>
   </section>
 </Layout>

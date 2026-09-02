@@ -1,0 +1,72 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { resources } from '@/data/resources';
+import { breadcrumb, collectionPage } from '@/lib/schema';
+
+const title = 'Technical Resources - Conformal Coating & ESD Guides | EMS';
+const description = 'Buyer guides, standards explainers and comparisons from the EMS Technologies engineering team: choosing a conformal coating, acrylic vs polyurethane vs silicone, IPC-A-610 and IPC-CC-830B, coating vs encapsulation, and an ESD packaging glossary.';
+const path = '/resources/';
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path },
+  ]),
+  collectionPage({ name: 'Technical resources', description, path }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'EMS Technologies technical resources',
+    numberOfItems: resources.length,
+    itemListElement: resources.map((r, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: r.title,
+      url: new URL(r.href, 'https://emstechnologies.in').href,
+    })),
+  },
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero
+    eyebrow="Resources"
+    title="Technical resources"
+    lead="The research a technical buyer does before contacting anyone. Written by the engineers who apply these coatings every day — no gate, no form, no login."
+  />
+
+  <section class="section container-x">
+    <ul class="grid gap-6 lg:grid-cols-2">
+      {resources.map((r) => (
+        <li class="card flex flex-col p-8">
+          <p class="eyebrow">{r.kind}</p>
+          <h2 class="heading mt-5 text-xl leading-snug">
+            <a href={r.href} class="transition hover:text-accent2">{r.title}</a>
+          </h2>
+          <p class="mt-4 flex-1 text-sm text-muted leading-relaxed">{r.blurb}</p>
+          <a href={r.href} class="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-medium text-ink transition hover:text-accent2">
+            Read
+            <span class="text-accent2">&rarr;</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section border-t border-line container-x">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Also useful</p>
+        <h2 class="heading mt-5 text-2xl">Downloads</h2>
+        <p class="mt-4 text-muted leading-relaxed">Product datasheets and technical documents, available directly — plus how to request a specific ELPEGUARD technical data sheet or safety data sheet for the grade you are evaluating.</p>
+        <a href="/downloads/" class="btn-outline mt-7">Datasheets &amp; downloads</a>
+      </div>
+      <div>
+        <p class="eyebrow">By sector</p>
+        <h2 class="heading mt-5 text-2xl">Industries we coat for</h2>
+        <p class="mt-4 text-muted leading-relaxed">Automotive, aerospace, medical and LED assemblies each stress a coating differently and each arrive with a different specification. What changes, sector by sector.</p>
+        <a href="/industries/" class="btn-outline mt-7">Industry applications</a>
+      </div>
+    </div>
+  </section>
+</Layout>

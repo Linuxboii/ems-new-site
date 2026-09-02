@@ -5,6 +5,7 @@ import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+import { product } from '@/lib/schema';
 
 const title = 'EPE Foam Trays - Static-Safe Handling | EMS Technologies';
 const description = 'EPE foam trays and inserts from EMS Technologies, Hyderabad, cut to component geometry for secure, static-safe handling and transport of sensitive electronics.';
@@ -17,6 +18,17 @@ const jsonLd = [
     { name: 'EPE Foam Trays', path },
   ]),
   await galleryJsonLd('EPE Foam Trays', description, path, [gallery.evafoam]),
+  product({
+    name: 'EPE Foam Trays',
+    description: 'EPE foam inserts and trays cut to component geometry, giving cushioning and continuous static dissipation for secure device handling.',
+    path,
+    category: 'ESD packaging',
+    material: 'Expanded polyethylene (EPE) foam',
+    additionalProperty: [
+      { name: 'Manufactured by', value: 'EMS Technologies — Hyderabad and Cochin plants' },
+      { name: 'Customisation', value: 'Formed or cut to customer component geometry' },
+    ],
+  }),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>

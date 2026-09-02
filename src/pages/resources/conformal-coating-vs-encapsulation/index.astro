@@ -1,0 +1,104 @@
+---
+import ResourceLayout from '@/layouts/ResourceLayout.astro';
+
+const title = 'Conformal Coating vs Potting & Encapsulation | EMS Technologies';
+const description = 'Conformal coating versus potting and encapsulation for PCB protection: coverage thickness, environmental protection, thermal behaviour, weight, repairability, tamper resistance and cost — and how to decide which one an assembly actually needs.';
+const path = '/resources/conformal-coating-vs-encapsulation/';
+
+const faqs = [
+  {
+    q: 'What is the difference between conformal coating and potting?',
+    a: 'A conformal coating is a thin film, typically 25–75 µm, that follows the contours of the board and its components. Potting fills an enclosure or mould around the assembly with a resin, encasing it in a solid mass measured in millimetres. Coating protects against moisture, dust and contamination while adding almost no weight; potting adds mechanical shock resistance, tamper resistance and immersion capability, at a large cost in weight, thermal behaviour and repairability.',
+  },
+  {
+    q: 'Is potting better than conformal coating?',
+    a: 'No — it is a different trade. Potting is more protective against mechanical shock, vibration, immersion and tampering, but it multiplies assembly weight, traps heat unless the compound is thermally selected, imposes cure stresses on components, and makes the assembly effectively unrepairable. For the majority of industrial and automotive electronics, a correctly specified conformal coating delivers the protection actually required at a fraction of the penalty.',
+  },
+  {
+    q: 'When should I use encapsulation instead of conformal coating?',
+    a: 'When the assembly faces sustained immersion or high-pressure washdown, severe mechanical shock or vibration that a film cannot damp, aggressive chemical attack a thin film will not survive, a genuine tamper or reverse-engineering risk, or a requirement for high-voltage isolation that needs bulk dielectric rather than a surface film. Absent one of those, coating is usually the proportionate answer.',
+  },
+  {
+    q: 'Can a potted assembly be repaired?',
+    a: 'In practice, rarely. Removing cured potting compound without destroying components is difficult and often uneconomic, which is why potted assemblies are generally treated as replaceable units. A conformal coated board, by contrast, can be reworked — most easily with acrylic chemistry, with more deliberate effort for polyurethane and silicone. If field repair is part of the service model, that alone frequently settles the decision.',
+  },
+  {
+    q: 'Does potting cause thermal problems?',
+    a: 'It can. Encapsulation removes convective cooling from the components inside, so heat must leave by conduction through the compound. With a thermally conductive compound selected deliberately this can improve heat spreading; with a standard compound chosen only for protection, it raises junction temperatures. Cure exotherm and the differential expansion between compound and components are additional stresses that need to be designed for, not discovered.',
+  },
+];
+---
+<ResourceLayout
+  title={title}
+  description={description}
+  path={path}
+  heading="Conformal coating vs potting and encapsulation"
+  lead="Both protect a PCB from its environment. One is a film measured in microns, the other a solid mass measured in millimetres — and the penalties they carry are as different as the protection they give."
+  eyebrow="Resources · Comparison"
+  datePublished="2026-08-31"
+  keywords={['conformal coating vs encapsulation', 'conformal coating vs potting', 'PCB potting compound', 'encapsulation electronics', 'ELPECAST']}
+  faqs={faqs}
+>
+  <p>The two are frequently discussed as if they were competing grades of the same idea. They are not. A conformal coating is a surface treatment; potting is a construction decision. Choosing between them is really a question about what the assembly has to survive and what you are willing to give up to survive it.</p>
+
+  <h2 id="what-they-are">What each one actually is</h2>
+  <p><strong>Conformal coating</strong> is a thin polymeric film — typically 25–75 µm for conventional systems — applied over the assembled board so it follows the contours of components, joints and bare laminate. It excludes moisture, dust, airborne contamination and conductive debris, and raises the voltage the board can stand off between adjacent conductors. It adds essentially no weight and does not change the mechanical design.</p>
+  <p><strong>Potting and encapsulation</strong> fill an enclosure or mould around the assembly with a resin — epoxy, polyurethane or silicone — encasing it in a solid body millimetres thick. Strictly, potting means filling a housing that stays part of the finished product, while encapsulation means moulding a resin body that becomes the housing; the trade-offs are the same either way.</p>
+
+  <h2 id="side-by-side">Side by side</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Dimension</th>
+          <th scope="col">Conformal coating</th>
+          <th scope="col">Potting / encapsulation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Typical thickness</td><td>25–75 µm</td><td>Millimetres to full enclosure fill</td></tr>
+        <tr><td>Added weight</td><td>Negligible</td><td>Substantial — often the dominant objection</td></tr>
+        <tr><td>Moisture, dust, contamination</td><td>Very effective</td><td>Very effective</td></tr>
+        <tr><td>Sustained immersion / washdown</td><td>Limited</td><td>Strong</td></tr>
+        <tr><td>Mechanical shock and vibration</td><td>Modest benefit</td><td>Strong — components are mechanically supported</td></tr>
+        <tr><td>Thermal behaviour</td><td>Effectively neutral</td><td>Removes convection; needs a thermally selected compound</td></tr>
+        <tr><td>Tamper / reverse-engineering resistance</td><td>None meaningful</td><td>Strong</td></tr>
+        <tr><td>Repairability</td><td>Reworkable, chemistry dependent</td><td>Effectively none</td></tr>
+        <tr><td>Process complexity</td><td>Masking, application, cure, UV inspection</td><td>Mould or housing, mix and dispense, degassing, exotherm control</td></tr>
+        <tr><td>Inspection after the fact</td><td>Visible under UV</td><td>Largely invisible; process control is the guarantee</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="choose-coating">Choose conformal coating when</h2>
+  <ul>
+    <li>The dominant threats are humidity, condensation, dust, airborne contamination or salt-laden air.</li>
+    <li>Weight or thermal performance is constrained — coating changes neither.</li>
+    <li>The assembly may be repaired, reworked or upgraded in the field.</li>
+    <li>Components must stay accessible: connectors, adjustments, sensors, test points, programming headers.</li>
+    <li>Heat dissipation depends on convection or on direct thermal contact with a heatsink.</li>
+    <li>You need to verify protection after the fact — a UV-traced coating can be inspected; a potted body cannot.</li>
+  </ul>
+
+  <h2 id="choose-potting">Choose potting or encapsulation when</h2>
+  <ul>
+    <li>The assembly faces sustained immersion, high-pressure washdown or condensing conditions a film will not hold out.</li>
+    <li>Mechanical shock or vibration is severe enough that components need bulk support, not surface protection.</li>
+    <li>Chemical attack is aggressive enough that any thin film will eventually be breached.</li>
+    <li>Tamper resistance or protection against reverse engineering is a genuine product requirement.</li>
+    <li>High-voltage isolation needs bulk dielectric between conductors rather than a surface coating.</li>
+    <li>The assembly is a sealed, replaceable module by design and repair was never in the plan.</li>
+  </ul>
+
+  <h2 id="hidden-costs">The costs people underestimate</h2>
+  <h3>On the potting side</h3>
+  <p>Weight is the obvious one. Less obvious: cure exotherm can stress components during manufacture; differential thermal expansion between compound and parts imposes cyclic stress in service; trapped air must be removed by degassing or vacuum or it becomes a void exactly where you least want one; and once the compound is cured, nothing can be inspected, so process control is the only guarantee you will ever have.</p>
+  <h3>On the coating side</h3>
+  <p>Masking labour is the recurring cost, and on a connector-heavy board it can exceed the coating operation itself. Coverage on tall or shadowed component areas needs deliberate attention. And a coating only protects what it actually reached — which is precisely why every board we coat is inspected under UV rather than sampled.</p>
+
+  <h2 id="both">It is not always either/or</h2>
+  <p>Products routinely use both: the board conformal coated for environmental protection, and a specific subassembly — a high-voltage section, a transformer, a sensor head — potted for isolation or mechanical support. Lackwerke Peters supplies both families, the ELPEGUARD conformal coatings and the ELPECAST casting compounds, so a single specification can cover the whole assembly without mixing supplier chemistries at an interface.</p>
+
+  <h2 id="ems">Talk it through</h2>
+  <p>If you are weighing this decision, the fastest route is to describe the environment and the service model to someone who has seen both fail. EMS Technologies supplies the <a href="/conformal/">ELPEGUARD coating range</a> in India, applies it as <a href="/services/conformal-coating-job-work/">job work</a>, and can advise where an assembly genuinely warrants encapsulation instead. Start with the <a href="/resources/conformal-coating-selection-guide/">selection guide</a>, or <a href="/contact-us/">send us the board details</a>.</p>
+</ResourceLayout>

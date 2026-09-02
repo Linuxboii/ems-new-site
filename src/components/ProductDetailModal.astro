@@ -10,13 +10,15 @@ interface Props {
   id: string;
   title: string;
   img: string;
+  /** Descriptive alt text for the photo; falls back to the title. */
+  alt?: string;
   detail: ProductDetail;
   /** Where "View full details" goes. Omitted on a page that is already there. */
   href?: string;
   /** Product name to prefill on the contact form, when it differs from title. */
   enquire?: string;
 }
-const { id, title, img, detail, href, enquire } = Astro.props;
+const { id, title, img, alt, detail, href, enquire } = Astro.props;
 
 // A card whose link is already the contact form has nowhere else to send you,
 // and neither has a section sitting on the product's own page.
@@ -24,7 +26,7 @@ const isEnquiryHref = href?.startsWith('/contact-us/') ?? false;
 const enquireHref = isEnquiryHref ? href! : `/contact-us/?product=${encodeURIComponent(enquire ?? title)}`;
 ---
 <CardModal id={id}>
-  <MagnifyImage slot="figure" name={img} alt={title} width={900} height={675} />
+  <MagnifyImage slot="figure" name={img} alt={alt ?? title} width={900} height={675} />
   <p class="eyebrow">Product</p>
   <h3 id={`${id}-title`} class="heading mt-4 text-2xl">{title}</h3>
   <p class="mt-4 text-sm text-muted">{detail.detail}</p>

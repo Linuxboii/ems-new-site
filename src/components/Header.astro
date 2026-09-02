@@ -21,14 +21,14 @@ const groupActive = (item: (typeof nav)[number]) =>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+    <nav class="hidden xl:flex items-center gap-0.5" aria-label="Primary">
       {nav.map((item) => (
         item.children ? (
           <div class="menu relative" data-menu>
             <div class="flex items-center">
               <a
                 href={item.href}
-                class:list={['px-3 py-2 rounded-lg font-medium transition', groupActive(item) ? 'text-accent2' : 'text-ink hover:text-accent2 hover:bg-line']}
+                class:list={['px-2.5 py-2 rounded-lg font-medium transition', groupActive(item) ? 'text-accent2' : 'text-ink hover:text-accent2 hover:bg-line']}
                 aria-current={groupActive(item) ? 'page' : undefined}
               >{item.label}</a>
               <button
@@ -57,7 +57,7 @@ const groupActive = (item: (typeof nav)[number]) =>
         ) : (
           <a
             href={item.href}
-            class:list={['px-3 py-2 rounded-lg font-medium transition', isActive(item.href) ? 'text-accent2' : 'text-ink hover:text-accent2 hover:bg-line']}
+            class:list={['px-2.5 py-2 rounded-lg font-medium transition', isActive(item.href) ? 'text-accent2' : 'text-ink hover:text-accent2 hover:bg-line']}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >{item.label}</a>
         )
@@ -70,14 +70,14 @@ const groupActive = (item: (typeof nav)[number]) =>
     </nav>
 
     <!-- Mobile toggle -->
-    <button id="navToggle" class="lg:hidden inline-flex items-center justify-center p-2 rounded-lg min-h-[44px] min-w-[44px] text-ink hover:bg-line" aria-label="Open menu" aria-controls="navDrawer" aria-expanded="false">
+    <button id="navToggle" class="xl:hidden inline-flex items-center justify-center p-2 rounded-lg min-h-[44px] min-w-[44px] text-ink hover:bg-line" aria-label="Open menu" aria-controls="navDrawer" aria-expanded="false">
       <svg class="ico-open h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       <svg class="ico-close hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
   </div>
 
   <!-- Mobile drawer -->
-  <div id="navDrawer" class="lg:hidden overflow-hidden max-h-0 border-t border-transparent bg-surface transition-[max-height] duration-300 ease-in-out">
+  <div id="navDrawer" class="xl:hidden overflow-hidden max-h-0 border-t border-transparent bg-surface transition-[max-height] duration-300 ease-in-out">
     <nav class="container-x py-2 flex flex-col" aria-label="Mobile">
       {nav.map((item) => (
         item.children ? (

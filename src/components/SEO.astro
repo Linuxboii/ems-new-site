@@ -1,7 +1,7 @@
 ---
 import { company } from '@/data/company';
-interface Props { title: string; description: string; path: string; image?: string; jsonLd?: object[]; }
-const { title, description, path, image = '/social-card.jpg', jsonLd = [] } = Astro.props;
+interface Props { title: string; description: string; path: string; image?: string; jsonLd?: object[]; noindex?: boolean; }
+const { title, description, path, image = '/social-card.jpg', jsonLd = [], noindex = false } = Astro.props;
 const site = 'https://emstechnologies.in';
 const canonical = new URL(path, site).href;
 const ogImage = new URL(image, site).href;
@@ -9,6 +9,7 @@ const ogImage = new URL(image, site).href;
 const orgId = `${site}/#organization`;
 const geoId = `${site}/#geo`;
 const placeId = `${site}/#place`;
+const principalId = `${site}/#principal`;
 
 const postalAddress = {
   '@type': 'PostalAddress',
@@ -44,6 +45,24 @@ const place = {
   },
 };
 
+// The German principal whose range EMS distributes in India. Published as its own
+// node so answer engines can resolve the distributor→manufacturer relationship
+// instead of inferring it from prose.
+const principal = {
+  '@type': 'Organization',
+  '@id': principalId,
+  name: company.principal.name,
+  url: company.principal.url,
+  sameAs: [company.principal.url],
+  foundingDate: String(company.principal.founded),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: company.principal.city,
+    addressCountry: 'DE',
+  },
+  brand: { '@type': 'Brand', name: 'ELPEGUARD' },
+};
+
 // Organization: primary entity for search + generative engines. Explicit facts
 // (founding, what we know about, who we distribute) help AI answer engines.
 const organization = {
@@ -66,13 +85,31 @@ const organization = {
     'Selective conformal coating machines',
     'Conformal coating job work',
   ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: company.phones[0],
+      email: company.email,
+      areaServed: 'IN',
+      availableLanguage: ['en', 'hi', 'te'],
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'technical support',
+      telephone: company.phones[0],
+      email: company.principalEmail,
+      areaServed: 'IN',
+      availableLanguage: ['en'],
+    },
+  ],
   makesOffer: {
     '@type': 'Offer',
     itemOffered: {
       '@type': 'Product',
       name: 'ELPEGUARD conformal coatings',
       brand: { '@type': 'Brand', name: 'ELPEGUARD' },
-      manufacturer: { '@type': 'Organization', name: 'Lackwerke Peters GmbH & Co. KG' },
+      manufacturer: { '@id': principalId },
     },
   },
 };
@@ -97,12 +134,12 @@ const website = {
   publisher: { '@id': orgId },
 };
 
-const graph = [organization, place, localBusiness, website, ...jsonLd];
+const graph = [organization, principal, place, localBusiness, website, ...jsonLd];
 ---
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'} />
 <meta name="theme-color" content="#1e63c4" />
 
 <!-- Geographic / local SEO: office & factory in Maheswaram, Hyderabad -->

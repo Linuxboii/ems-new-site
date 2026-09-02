@@ -5,6 +5,7 @@ import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+import { product } from '@/lib/schema';
 
 const title = 'EVA Bins - ESD Component Storage | EMS Technologies';
 const description = 'Durable EVA ESD bins from EMS Technologies, Hyderabad, offering electrostatic-sensitive-device labelled storage and transport for PCBs and components.';
@@ -17,6 +18,17 @@ const jsonLd = [
     { name: 'EVA Bins', path },
   ]),
   await galleryJsonLd('EVA Bins', description, path, [gallery.bins]),
+  product({
+    name: 'EVA Bins',
+    description: 'Rugged, reusable EVA ESD bins and conductive foam trays for storing and transporting circuit boards and components, labelled for electrostatic-sensitive devices.',
+    path,
+    category: 'ESD packaging',
+    material: 'EVA',
+    additionalProperty: [
+      { name: 'Manufactured by', value: 'EMS Technologies — Hyderabad and Cochin plants' },
+      { name: 'Customisation', value: 'Formed or cut to customer component geometry' },
+    ],
+  }),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>

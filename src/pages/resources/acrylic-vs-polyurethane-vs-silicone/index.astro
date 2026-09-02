@@ -1,0 +1,101 @@
+---
+import ResourceLayout from '@/layouts/ResourceLayout.astro';
+
+const title = 'Acrylic vs Polyurethane vs Silicone Conformal Coating | EMS';
+const description = 'Side-by-side comparison of acrylic, polyurethane and silicone conformal coatings: temperature range, moisture and chemical resistance, abrasion, flexibility, cure behaviour, reworkability and where each one is the right choice for a PCB assembly.';
+const path = '/resources/acrylic-vs-polyurethane-vs-silicone/';
+
+const faqs = [
+  {
+    q: 'What is the difference between acrylic, polyurethane and silicone conformal coating?',
+    a: 'Acrylic gives good moisture protection with the easiest rework and the most forgiving process, but limited chemical and abrasion resistance. Polyurethane trades reworkability for markedly better chemical, solvent and abrasion resistance, which is why it dominates automotive and fluid-exposed applications. Silicone covers the widest temperature range and stays flexible under thermal cycling and vibration, at the cost of poor abrasion resistance and awkward partial rework, since almost nothing bonds over cured silicone.',
+  },
+  {
+    q: 'Which conformal coating is easiest to rework?',
+    a: 'Acrylic, by a wide margin. It can be dissolved with appropriate solvents and in many cases soldered through directly, which makes it the default choice for assemblies expected to be repaired in the field. Polyurethane needs deliberate thermal, mechanical or chemical removal. Silicone can be removed, but any area to be re-coated must be cleared completely, because a new coating will not bond over cured silicone residue.',
+  },
+  {
+    q: 'Which conformal coating is best for high temperature?',
+    a: 'Silicone. Its usable range extends well beyond what acrylic or polyurethane tolerate, and it stays flexible rather than embrittling, so it survives repeated thermal cycling and the differential expansion that cracks harder films at solder fillets. It is the usual choice for LED assemblies, power electronics and anything running hot continuously.',
+  },
+  {
+    q: 'Which conformal coating is best for automotive electronics?',
+    a: 'Polyurethane is the common answer for under-bonnet and fluid-exposed automotive assemblies, because fuel, oil and cleaning chemicals are exactly what it resists best. Silicone is preferred where the dominant stress is high temperature or vibration rather than chemical attack. The Peters ELPEGUARD and ELPECAST ranges are approved by the automotive industry across both families.',
+  },
+  {
+    q: 'Is a water-based conformal coating as protective as a solvent-based one?',
+    a: 'For most industrial requirements, yes — the protection class is set by the cured polymer, not by what carried it onto the board. Water-based (aqua) systems cut VOC emissions and the ventilation and operator-exposure burden that comes with solvents. The trade is a longer dry-off stage and more sensitivity to board cleanliness, since water wets a contaminated surface less forgivingly than solvent does.',
+  },
+];
+---
+<ResourceLayout
+  title={title}
+  description={description}
+  path={path}
+  heading="Acrylic vs polyurethane vs silicone conformal coating"
+  lead="Three chemistries cover most PCB protection requirements, and they fail in different directions. This is the honest comparison — including what each one costs you in production, not only what it protects against."
+  eyebrow="Resources · Comparison"
+  datePublished="2026-08-31"
+  keywords={['acrylic vs polyurethane conformal coating', 'silicone conformal coating', 'conformal coating comparison', 'best conformal coating for automotive PCB', 'ELPEGUARD']}
+  faqs={faqs}
+>
+  <p>Acrylic, polyurethane and silicone account for the large majority of conformal coating applied to electronics. They are not tiers of the same product — one is not simply better than another. Each is strongest exactly where the others are weakest, which is why the environment has to be defined before the chemistry is chosen. If you have not done that yet, start with the <a href="/resources/conformal-coating-selection-guide/">selection guide</a>.</p>
+
+  <h2 id="at-a-glance">At a glance</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Property</th>
+          <th scope="col">Acrylic (AR)</th>
+          <th scope="col">Polyurethane (UR)</th>
+          <th scope="col">Silicone (SR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Moisture protection</td><td>Good</td><td>Very good</td><td>Very good</td></tr>
+        <tr><td>Chemical / solvent resistance</td><td>Limited</td><td>Excellent</td><td>Moderate</td></tr>
+        <tr><td>Abrasion resistance</td><td>Moderate</td><td>Excellent</td><td>Poor</td></tr>
+        <tr><td>High-temperature capability</td><td>Moderate</td><td>Moderate to good</td><td>Excellent</td></tr>
+        <tr><td>Low-temperature flexibility</td><td>Moderate</td><td>Good</td><td>Excellent</td></tr>
+        <tr><td>Thermal-cycling / vibration tolerance</td><td>Moderate</td><td>Good</td><td>Excellent</td></tr>
+        <tr><td>Reworkability</td><td>Excellent</td><td>Difficult</td><td>Difficult, and re-coating needs full removal</td></tr>
+        <tr><td>Cure speed</td><td>Fast (solvent flash-off)</td><td>Slower; often moisture- or heat-cured</td><td>Moderate; commonly moisture- or heat-cured</td></tr>
+        <tr><td>Process forgiveness</td><td>High</td><td>Moderate</td><td>Moderate</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-6 text-sm">Directional comparison of the families, not of any one product. Exact values are properties of a specific ELPEGUARD grade and its datasheet, and our engineers will give you the figures for the grade proposed for your assembly.</p>
+
+  <h2 id="acrylic">Acrylic — the forgiving default</h2>
+  <p>Acrylic coatings dry by solvent evaporation rather than chemical reaction. That single fact drives most of their character: they are fast, they are stable in the pot, they do not punish a slightly imperfect process, and they can be taken back off. Moisture protection is genuinely good, and the dielectric performance is more than adequate for the majority of industrial boards.</p>
+  <p>Where they run out of road is chemical exposure. Solvents that dissolve the coating during rework will dissolve it in service too, so an assembly exposed to fuel, cleaning agents or aggressive vapours is not an acrylic application. Abrasion resistance is moderate, which matters more than people expect on boards that are handled repeatedly.</p>
+  <p><strong>Choose it when:</strong> the board is going into a general industrial, consumer or indoor environment; the line is high-mix and needs a process that tolerates variation; or field repair is a real requirement rather than a theoretical one.</p>
+
+  <h2 id="polyurethane">Polyurethane — the chemical-resistance answer</h2>
+  <p>Polyurethane cures into a tough, densely cross-linked film with excellent resistance to solvents, fuels, oils and abrasion, and a strong moisture barrier. For under-bonnet automotive electronics, fluid-handling equipment and harsh industrial plant, it is very often the correct answer and the other two are not.</p>
+  <p>The same cross-linking that produces that resistance is what makes it hard to remove. Rework is deliberate work — thermal, mechanical or chemical — and it needs to be planned into the product's service strategy rather than discovered later. Cure is slower than acrylic, which has a real throughput cost on a line that has not planned for it.</p>
+  <p><strong>Choose it when:</strong> the board will meet chemicals, fuels or solvents in service; abrasion or handling wear is significant; or the product's service model does not depend on board-level field repair.</p>
+
+  <h2 id="silicone">Silicone — temperature and movement</h2>
+  <p>Silicone's usable temperature range is far wider than either alternative, and it stays elastic throughout. That elasticity is the point: on assemblies that cycle between temperature extremes, a hard film transfers differential expansion stress into solder joints and eventually cracks at the fillets, while a flexible one absorbs it. The same property makes silicone the sensible choice under continuous vibration.</p>
+  <p>Its weaknesses are specific. Abrasion resistance is poor. And cured silicone is a low-surface-energy surface that essentially nothing bonds to — including a fresh coat of itself — so any area that will be re-coated after repair has to be cleared completely. Silicone contamination also migrates readily in a facility, which is why lines running silicone alongside other processes keep them physically separated.</p>
+  <p><strong>Choose it when:</strong> operating temperature is high or the swing is wide; the assembly cycles thermally or vibrates continuously; or the application is LED or power electronics.</p>
+
+  <h2 id="others">Two more worth knowing</h2>
+  <h3>UV-curing thick-film lacquers</h3>
+  <p>Cure in seconds under UV and build a much heavier film in a single pass, which makes them a throughput play on repeating production runs using selective coating equipment. The catch is line of sight: areas shadowed by tall components need a secondary cure mechanism — commonly moisture cure — designed into the system rather than hoped for.</p>
+  <h3>Aqua / water-based systems</h3>
+  <p>Deliver a comparable protection class with far lower VOC emissions and a lighter ventilation and operator-exposure burden. They ask for a longer dry-off stage and a cleaner board, because water is less forgiving of surface contamination than solvent. For plants tightening emissions without wanting to change protection class, they are frequently the least disruptive route.</p>
+
+  <h2 id="cost">The cost that is not on the price list</h2>
+  <p>Material price differences between these families are usually small next to three process costs that vary far more:</p>
+  <ul>
+    <li><strong>Masking labour.</strong> Set by the board's keep-out areas and the application method, not by the chemistry. It is often the single largest line item, and it is what justifies moving to selective coating equipment.</li>
+    <li><strong>Cure time and floor space.</strong> A slower-curing system needs somewhere for boards to sit. On a constrained floor that is a real capacity cost.</li>
+    <li><strong>Rework exposure.</strong> If a percentage of assemblies come back, the cost of removing polyurethane or silicone repeatedly can exceed everything acrylic would have saved — or the reverse, if the wrong chemistry lets boards fail in the field at all.</li>
+  </ul>
+
+  <h2 id="ems">Where EMS fits</h2>
+  <p>EMS Technologies is the India distributor for Lackwerke Peters and supplies the complete <a href="/conformal/">ELPEGUARD range</a> across all five families, so the recommendation you get is not constrained by what we happen to stock. We also apply them: <a href="/services/conformal-coating-job-work/">conformal coating job work</a> at your line or ours, with UV inspection and measured thickness on every lot.</p>
+</ResourceLayout>

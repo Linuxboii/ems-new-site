@@ -2,15 +2,19 @@
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import ProductCard from '@/components/ProductCard.astro';
+import { engagement, qc } from '@/data/serviceProcess';
+import { breadcrumb, service, faq } from '@/lib/schema';
 
 const title = 'Services - Conformal Coating & ESD Paint Job Work | EMS';
-const description = 'EMS Technologies job work services: end-to-end conformal coating of PCB assemblies and on-site application of ProtectA Pro ESD conductive and anti-static paints.';
+const description = 'EMS Technologies job work services: end-to-end conformal coating of PCB assemblies and on-site application of ProtectA Pro ESD conductive and anti-static paints, with UV inspection, thickness testing and IPC-A-610 workmanship criteria.';
+const path = '/services/';
 
 const jobWork = [
   {
     title: 'Conformal Coating Job Work',
     href: '/services/conformal-coating-job-work/',
     img: '2019-services-hires-coating.jpg',
+    alt: 'EMS Technologies engineer applying ELPEGUARD conformal coating to a PCB assembly during on-site job work',
     // Same service as the "Conformal Coating Services" product card, different photo.
     detailKey: 'coating-job-work',
     blurb: 'Application, UV optical inspection, curing, thickness testing, removal and final inspection, delivered on site by 30+ trained engineers.',
@@ -19,16 +23,116 @@ const jobWork = [
     title: 'ESD Paint Job Work',
     href: '/services/esd-paint-job-work/',
     img: 'bins.png',
+    alt: 'ProtectA Pro ESD conductive paint applied to polypropylene bins and work surfaces, EMS Technologies job work',
     detailKey: 'esd-paint-job-work',
     blurb: 'ProtectA Pro ESD conductive and anti-static paints applied to floors, walls, work surfaces and bins, with earthing and resistance testing.',
   },
 ];
+
+const serviceFaq = [
+  {
+    q: 'How does a conformal coating job work engagement run?',
+    a: 'An enquiry is reviewed against the board and the environment it has to survive, and a coating system and application method are recommended in writing. A sample or pilot lot is coated and inspected first so masking, coverage, thickness and cure are proven on your actual assembly, then the parameters are fixed on a process sheet and repeat lots run to it on site at your line. Timing is confirmed against your lot size, board and location at quotation.',
+  },
+  {
+    q: 'What quality standards does EMS apply to conformal coating?',
+    a: 'Coated assemblies are judged against IPC-A-610 conformal coating workmanship criteria at the acceptance class agreed for the product — usually Class 2 for industrial and automotive electronics, Class 3 for life- or safety-critical assemblies. The ELPEGUARD materials applied are qualified by Lackwerke Peters against IPC-CC-830B, the standard that superseded the withdrawn MIL-I-46058C QPL. Every board is inspected under UV light rather than sampled, and dry film thickness is measured against an agreed band.',
+  },
+  {
+    q: 'Does EMS coat at our factory or at its own site?',
+    a: 'Both. EMS deploys 30+ trained engineers to run the agreed coating process on site at customer facilities across India, and also accepts boards sent to its Hyderabad facility. Which route suits you depends on lot size, board handling constraints and how much of the line the coating step has to sit inside.',
+  },
+  {
+    q: 'Can a conformal coated board be reworked?',
+    a: 'Yes. EMS provides selective coating removal, repair support and re-coating as part of the same job work programme. Acrylic coatings are the easiest to rework, polyurethane and silicone need more deliberate removal, and the choice of chemistry at the design stage largely decides how straightforward field repair will be.',
+  },
+  {
+    q: 'What does ESD paint job work cover?',
+    a: 'On-site application of ProtectA Pro ESD conductive and anti-static paints to floors, walls, work surfaces and polypropylene bins, including surface preparation, earthing of the applied system and resistance testing after cure to confirm the finished surface reads in the intended dissipative range.',
+  },
+];
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path },
+  ]),
+  service({
+    name: 'Conformal coating and ESD paint job work',
+    description,
+    path,
+    serviceType: 'Conformal coating job work',
+    steps: engagement.map((e) => ({ name: e.stage.replace(/^\d+\s—\s/, ''), description: e.what })),
+  }),
+  faq(serviceFaq),
+];
 ---
-<Layout title={title} description={description} path="/services/">
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Job work" title="Services" lead="Two on-site job work programmes: protective conformal coating of assembled PCBs, and ESD conductive paint systems for the environment those boards are built in." />
+
   <section class="section container-x">
     <div class="grid gap-6 sm:grid-cols-2">
-      {jobWork.map((s) => <ProductCard title={s.title} href={s.href} img={s.img} blurb={s.blurb} detailKey={s.detailKey} />)}
+      {jobWork.map((s) => <ProductCard title={s.title} href={s.href} img={s.img} alt={s.alt} blurb={s.blurb} detailKey={s.detailKey} />)}
+    </div>
+  </section>
+
+  <!-- Engagement process: the detail a procurement buyer actually compares on. -->
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">How we work</p>
+      <h2 class="heading mt-5 text-3xl sm:text-4xl">From enquiry to released lot</h2>
+      <p class="mt-6 text-muted leading-relaxed">Coating is a process, not a purchase. Every EMS job work engagement runs the same six stages, so the parameters that produced an acceptable sample are the parameters that produce lot number four hundred.</p>
+    </div>
+    <ol class="mt-12 space-y-0 border-t border-line">
+      {engagement.map((e) => (
+        <li class="grid gap-4 border-b border-line py-8 lg:grid-cols-12 lg:gap-10">
+          <h3 class="heading text-lg text-ink lg:col-span-4">{e.stage}</h3>
+          <p class="text-muted leading-relaxed lg:col-span-5">{e.what}</p>
+          <p class="text-sm text-accent2 lg:col-span-3"><span class="eyebrow block">You receive</span><span class="mt-2 block">{e.output}</span></p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- QC -->
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Quality</p>
+      <h2 class="heading mt-5 text-3xl sm:text-4xl">What every lot is checked against</h2>
+      <p class="mt-6 text-muted leading-relaxed">Conformal coating fails quietly: a thin patch or a coated contact does not show up on the line, it shows up in the field. These are the checks that stand between the two.</p>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {qc.map((c) => (
+        <div class="rounded-xl border border-line bg-surface p-6">
+          <h3 class="heading text-base text-ink">{c.title}</h3>
+          <p class="mt-3 text-sm text-muted leading-relaxed">{c.body}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 max-w-3xl text-sm text-muted leading-relaxed">Not sure which acceptance class applies to your product? Our <a class="text-accent2 hover:underline" href="/resources/conformal-coating-standards/">standards explainer</a> walks through IPC-A-610 classes, IPC-CC-830B and what happened to MIL-I-46058C.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Frequently asked</p>
+      <h2 class="heading mt-5 text-3xl sm:text-4xl">Job work questions</h2>
+    </div>
+    <div class="mt-10 grid gap-x-12 gap-y-8 lg:grid-cols-2">
+      {serviceFaq.map((f) => (
+        <div>
+          <h3 class="font-semibold text-ink">{f.q}</h3>
+          <p class="mt-2 text-muted leading-relaxed">{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section border-t border-line">
+    <div class="container-x text-center max-w-2xl">
+      <h2 class="heading text-2xl sm:text-3xl">Send us the board, get the process back</h2>
+      <p class="mt-5 text-muted leading-relaxed">Tell us the assembly, the environment it has to survive and the volume. Our engineers come back with a coating system, an application method and a window.</p>
+      <a href="/contact-us/?product=Conformal%20Coating%20Job%20Work" class="btn-primary mt-8">Request a quote</a>
     </div>
   </section>
 </Layout>

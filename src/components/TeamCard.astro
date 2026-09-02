@@ -1,13 +1,19 @@
 ---
 import AssetImage from '@/components/AssetImage.astro';
-interface Props { name: string; role: string; email?: string; img: string; }
-const { name, role, email, img } = Astro.props;
+interface Props { name: string; role: string; email?: string; img: string; bio?: string; linkedin?: string; }
+const { name, role, email, img, bio, linkedin } = Astro.props;
 ---
-<div class="card p-6">
+<div class="card flex flex-col p-6">
   <div class="h-20 w-20 overflow-hidden rounded-full bg-surface">
-    <AssetImage name={img} alt={name} width={160} height={160} class="h-full w-full object-cover" />
+    <AssetImage name={img} alt={`${name}, ${role} at EMS Technologies`} width={160} height={160} class="h-full w-full object-cover" />
   </div>
   <h3 class="mt-5 heading text-base">{name}</h3>
   <p class="eyebrow mt-2">{role}</p>
-  {email && <a href={`mailto:${email}`} class="mt-3 inline-block text-xs text-muted hover:text-accent2 break-all">{email}</a>}
+  {bio && <p class="mt-4 flex-1 text-sm text-muted leading-relaxed">{bio}</p>}
+  <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+    {email && <a href={`mailto:${email}`} class="text-xs text-muted hover:text-accent2 break-all">{email}</a>}
+    {linkedin && (
+      <a href={linkedin} target="_blank" rel="noopener" class="text-xs text-accent2 hover:underline" aria-label={`${name} on LinkedIn`}>LinkedIn &rarr;</a>
+    )}
+  </div>
 </div>

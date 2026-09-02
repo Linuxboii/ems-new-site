@@ -2,12 +2,30 @@
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import { company } from '@/data/company';
+import { breadcrumb, ORG_ID, SITE } from '@/lib/schema';
 
 const title = 'Contact & Location - EMS Technologies, Maheswaram, Hyderabad';
 const description = 'Visit EMS Technologies office & factory in Maheswaram, Ranga Reddy District, Hyderabad, Telangana 501510. Get directions, map & Plus Code. Call +91-9394116660 or email info@emstechnologies.in for Peters conformal coatings, ESD packing and coating job work.';
 const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
+const path = '/contact-us/';
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact EMS Technologies',
+    description,
+    url: `${SITE}${path}`,
+    mainEntity: { '@id': ORG_ID },
+    isPartOf: { '@id': `${SITE}/#website` },
+  },
+];
 ---
-<Layout title={title} description={description} path="/contact-us/">
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="Contact" title="Contact Us" lead="Tell us about your conformal coating or ESD packing requirement and our engineers will get back to you promptly." />
 
   <section class="section container-x grid lg:grid-cols-2 gap-12">

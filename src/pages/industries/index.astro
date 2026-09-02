@@ -1,0 +1,69 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import AssetImage from '@/components/AssetImage.astro';
+import { industries } from '@/data/industries';
+import { breadcrumb, collectionPage } from '@/lib/schema';
+
+const title = 'Industries - Automotive, Aerospace, Medical & LED Coating | EMS';
+const description = 'Conformal coating and ESD packing for automotive, aerospace and defence, medical device and LED electronics in India. What each sector stresses, which ELPEGUARD systems are typically specified, and the standards that apply.';
+const path = '/industries/';
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Industries', path },
+  ]),
+  collectionPage({ name: 'Industries served', description, path }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Industries served by EMS Technologies',
+    numberOfItems: industries.length,
+    itemListElement: industries.map((ind, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: ind.name,
+      url: new URL(`/industries/${ind.slug}/`, 'https://emstechnologies.in').href,
+    })),
+  },
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero
+    eyebrow="Industries"
+    title="Industries we coat for"
+    lead="Automotive, aerospace, medical and LED assemblies each stress a coating in a different direction, and each arrives with a different specification. What actually changes, sector by sector."
+  />
+
+  <section class="section container-x">
+    <div class="grid gap-8 sm:grid-cols-2">
+      {industries.map((ind) => (
+        <article class="card flex flex-col overflow-hidden">
+          <a href={`/industries/${ind.slug}/`} class="block aspect-[16/9] overflow-hidden bg-surface">
+            <AssetImage name={ind.img} alt={ind.imgAlt} width={640} height={360} class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" />
+          </a>
+          <div class="flex flex-1 flex-col p-8">
+            <h2 class="heading text-xl">
+              <a href={`/industries/${ind.slug}/`} class="transition hover:text-accent2">{ind.name}</a>
+            </h2>
+            <p class="mt-4 flex-1 text-sm text-muted leading-relaxed">{ind.lead}</p>
+            <p class="mt-5 text-xs text-muted">Typically specified: {ind.coatings.map((c) => c.name.replace(/\s*\([A-Z]+\)$/, '')).join(' · ')}</p>
+            <a href={`/industries/${ind.slug}/`} class="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-medium text-ink transition hover:text-accent2">
+              Read
+              <span class="text-accent2">&rarr;</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section border-t border-line">
+    <div class="container-x max-w-2xl text-center">
+      <h2 class="heading text-2xl sm:text-3xl">Not on this list?</h2>
+      <p class="mt-5 text-muted leading-relaxed">EMS serves general industrial electronics manufacturing on the same terms. The environment specification matters more than the sector label — tell us what the board has to survive.</p>
+      <a href="/contact-us/" class="btn-primary mt-8">Talk to an engineer</a>
+    </div>
+  </section>
+</Layout>

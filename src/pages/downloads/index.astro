@@ -1,0 +1,125 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { available, onRequest } from '@/data/downloads';
+import { breadcrumb, collectionPage, digitalDocument, faq } from '@/lib/schema';
+
+const title = 'Datasheets & Downloads - Coating and ESD Technical Documents | EMS';
+const description = 'Technical documents from EMS Technologies: ProtectA Pro ESD paint datasheet available directly, plus ELPEGUARD conformal coating technical and safety data sheets, IPC-CC-830B qualification data, machine specifications and ESD packing material data issued on request.';
+const path = '/downloads/';
+
+const categories = ['Conformal coatings', 'ESD paints', 'ESD packing', 'Coating equipment'] as const;
+
+const faqs = [
+  {
+    q: 'Where can I download the ELPEGUARD conformal coating datasheet?',
+    a: 'ELPEGUARD technical and safety data sheets are issued per grade by EMS Technologies as the India distributor for Lackwerke Peters. Tell us the grade you are evaluating, or describe the assembly and its operating environment, and we send the TDS and SDS for the system our engineers would actually recommend.',
+  },
+  {
+    q: 'Do I have to register or log in to get a datasheet?',
+    a: 'No. There is no login and no gate. The documents published on this page download directly, and the per-grade Peters data sheets are sent by email on request because they are issued per grade and revised by the manufacturer, not because they are restricted.',
+  },
+  {
+    q: 'Can EMS provide IPC-CC-830B qualification data?',
+    a: 'Yes. The ELPEGUARD systems EMS supplies come from Lackwerke Peters with their own qualification and test documentation covering the IPC-CC-830B property set. Ask for it against the specific grade proposed for your assembly, and it is supplied alongside the technical data sheet.',
+  },
+  {
+    q: 'What data is available for EMS ESD packing materials?',
+    a: 'Surface resistance ranges, material construction and dimensional data for the static shielding, aluminium MBB, anti-static bubble, LDPE pink, conductive grid and VCI bags, EPE and conductive foam, PP corrugated bins and thermoformed PET/HIPS trays manufactured at the Hyderabad and Cochin plants. Requested by product line, or by the part you need to pack.',
+  },
+];
+
+const jsonLd = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Downloads', path },
+  ]),
+  collectionPage({ name: 'Datasheets and downloads', description, path }),
+  ...available.map((d) => digitalDocument({ name: d.name, description: d.description, file: d.file! })),
+  faq(faqs),
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <PageHero
+    eyebrow="Technical library"
+    title="Datasheets & downloads"
+    lead="Technical documents for the coatings, paints, machines and ESD packing EMS supplies. No login, no gate — what is published downloads directly, and what is issued per grade is sent by email on request."
+  />
+
+  <section class="section container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Available now</p>
+      <h2 class="heading mt-5 text-2xl sm:text-3xl">Direct downloads</h2>
+    </div>
+    <ul class="mt-10 border-t border-line">
+      {available.map((d) => (
+        <li class="grid gap-4 border-b border-line py-7 lg:grid-cols-12 lg:items-center lg:gap-8">
+          <div class="lg:col-span-8">
+            <p class="eyebrow">{d.category} · {d.kind}</p>
+            <h3 class="heading mt-3 text-lg text-ink">{d.name}</h3>
+            <p class="mt-2 text-sm text-muted leading-relaxed">{d.description}</p>
+          </div>
+          <div class="lg:col-span-4 lg:text-right">
+            <a href={d.file} class="btn-outline" target="_blank" rel="noopener" download>Download PDF</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Issued per grade</p>
+      <h2 class="heading mt-5 text-2xl sm:text-3xl">Sent on request, usually within a working day or two</h2>
+      <p class="mt-6 text-muted leading-relaxed">Peters revise ELPEGUARD data sheets per grade, so we send the current document for the system proposed for your assembly rather than hosting a copy that quietly goes stale. Ask by grade, or describe the board and let our engineers pick.</p>
+    </div>
+
+    {categories.map((cat) => {
+      const items = onRequest.filter((d) => d.category === cat);
+      return items.length > 0 && (
+        <div class="mt-14">
+          <h3 class="eyebrow">{cat}</h3>
+          <ul class="mt-6 grid gap-6 lg:grid-cols-2">
+            {items.map((d) => (
+              <li class="rounded-xl border border-line bg-surface p-6">
+                <p class="eyebrow">{d.kind}</p>
+                <h4 class="heading mt-3 text-base text-ink">{d.name}</h4>
+                <p class="mt-3 text-sm text-muted leading-relaxed">{d.description}</p>
+                <a href={`/contact-us/?product=${encodeURIComponent(`Document request — ${d.name}`)}`} class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition hover:text-accent2">
+                  Request this document
+                  <span class="text-accent2">&rarr;</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    })}
+  </section>
+
+  <section class="section border-t border-line container-x">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Frequently asked</p>
+      <h2 class="heading mt-5 text-2xl sm:text-3xl">About these documents</h2>
+    </div>
+    <div class="mt-10 grid gap-x-12 gap-y-8 lg:grid-cols-2">
+      {faqs.map((f) => (
+        <div>
+          <h3 class="font-semibold text-ink">{f.q}</h3>
+          <p class="mt-2 text-muted leading-relaxed">{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section border-t border-line">
+    <div class="container-x max-w-2xl text-center">
+      <h2 class="heading text-2xl sm:text-3xl">Need a specific data sheet?</h2>
+      <p class="mt-5 text-muted leading-relaxed">Tell us the grade, or the assembly and the environment it has to survive, and we will send the technical and safety data sheets for the right system.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/contact-us/?product=Datasheet%20request" class="btn-primary">Request a datasheet</a>
+        <a href="/resources/" class="btn-outline">Technical resources</a>
+      </div>
+    </div>
+  </section>
+</Layout>

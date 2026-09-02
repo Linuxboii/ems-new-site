@@ -1,0 +1,84 @@
+---
+/** Shell for the buyer-education pages under /resources/.
+ *  Handles the breadcrumb + TechArticle JSON-LD and the shared editorial chrome
+ *  so each guide file contains copy and nothing else. */
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { breadcrumb, article, faq } from '@/lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  /** Short H1, distinct from the SEO <title>. */
+  heading: string;
+  lead: string;
+  eyebrow?: string;
+  datePublished: string;
+  dateModified?: string;
+  keywords?: string[];
+  /** Rendered as an FAQ block at the foot of the page and as FAQPage JSON-LD. */
+  faqs?: { q: string; a: string }[];
+  /** Extra nodes (Product, DefinedTermSet, …) merged into the page @graph. */
+  jsonLd?: object[];
+}
+const {
+  title, description, path, heading, lead,
+  eyebrow = 'Resources · Guide',
+  datePublished, dateModified, keywords, faqs = [], jsonLd = [],
+} = Astro.props;
+
+const graph = [
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources/' },
+    { name: heading, path },
+  ]),
+  article({ headline: heading, description, path, datePublished, dateModified, section: 'Technical resources', keywords }),
+  ...(faqs.length ? [faq(faqs)] : []),
+  ...jsonLd,
+];
+
+const updated = new Date(dateModified ?? datePublished).toLocaleDateString('en-IN', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<Layout title={title} description={description} path={path} jsonLd={graph}>
+  <PageHero eyebrow={eyebrow} title={heading} lead={lead}>
+    <p class="mt-8 text-sm text-muted">
+      Written by the EMS Technologies engineering team · Updated <time datetime={dateModified ?? datePublished}>{updated}</time>
+    </p>
+  </PageHero>
+
+  <article class="section container-x">
+    <div class="prose-ems max-w-3xl">
+      <slot />
+    </div>
+
+    {faqs.length > 0 && (
+      <div class="mt-20 max-w-3xl border-t border-line pt-12">
+        <p class="eyebrow">Frequently asked</p>
+        <h2 class="heading mt-5 text-2xl sm:text-3xl">Quick answers</h2>
+        <div class="mt-8 space-y-8">
+          {faqs.map((f) => (
+            <div>
+              <h3 class="font-semibold text-ink">{f.q}</h3>
+              <p class="mt-2 text-muted leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+
+  <section class="section border-t border-line">
+    <div class="container-x max-w-2xl text-center">
+      <h2 class="heading text-2xl sm:text-3xl">Still deciding?</h2>
+      <p class="mt-5 text-muted leading-relaxed">Send us the assembly and the environment it has to survive. Our engineers will recommend a coating system and an application method — no obligation.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/contact-us/" class="btn-primary">Talk to an engineer</a>
+        <a href="/resources/" class="btn-outline">All resources</a>
+      </div>
+    </div>
+  </section>
+</Layout>

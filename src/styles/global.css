@@ -82,6 +82,33 @@ body { @apply font-sans text-ink bg-paper antialiased; line-height: 1.6; }
 }
 .card:hover { border-color: rgb(var(--c-accent) / 0.45); box-shadow: 0 8px 24px rgb(var(--c-accent) / 0.08); }
 
+/* Long-form editorial body (buyer guides, standards explainers, glossary) --
+   No typography plugin in the build, so the handful of tags these pages use
+   are styled directly rather than pulling in another dependency. */
+.prose-ems { @apply text-muted; }
+.prose-ems > * + * { @apply mt-6; }
+.prose-ems p { line-height: 1.75; }
+.prose-ems h2 { @apply heading mt-16 text-2xl sm:text-3xl scroll-mt-28; }
+.prose-ems h3 { @apply heading mt-10 text-lg text-ink scroll-mt-28; }
+.prose-ems h2 + p, .prose-ems h3 + p { @apply mt-4; }
+.prose-ems ul { @apply mt-5 space-y-2.5 pl-0; }
+.prose-ems ul > li { @apply relative pl-5; line-height: 1.7; }
+.prose-ems ul > li::before {
+  content: ''; position: absolute; left: 0; top: .7em;
+  width: .28rem; height: .28rem; border-radius: 999px;
+  background: rgb(var(--c-teal));
+}
+.prose-ems ol { @apply mt-5 list-decimal space-y-2.5 pl-5; }
+.prose-ems ol > li { line-height: 1.7; }
+.prose-ems a { @apply text-accent2; text-underline-offset: 3px; }
+.prose-ems a:hover { @apply underline; }
+.prose-ems strong { @apply font-semibold text-ink; }
+.prose-ems table { @apply w-full border-collapse text-left text-sm; }
+.prose-ems th { @apply eyebrow border-b border-line py-3 pr-6 align-bottom; }
+.prose-ems td { @apply border-b border-line py-4 pr-6 align-top; }
+.prose-ems td:first-child { @apply text-ink; }
+.prose-ems .table-wrap { @apply mt-8 overflow-x-auto; }
+
 /* Theme toggle icon swap ------------------------------------------------ */
 .ico-sun { display: none; }
 :root[data-theme='dark'] .ico-moon { display: none; }

@@ -1,0 +1,111 @@
+---
+import ResourceLayout from '@/layouts/ResourceLayout.astro';
+
+const title = 'Conformal Coating Standards: IPC-A-610, IPC-CC-830B, MIL-I-46058C | EMS';
+const description = 'What each conformal coating standard actually governs: IPC-A-610 acceptance classes and workmanship criteria, IPC-CC-830B material qualification, the withdrawn MIL-I-46058C QPL, and IPC-HDBK-830 process guidance — plus what to write on a drawing.';
+const path = '/resources/conformal-coating-standards/';
+
+const faqs = [
+  {
+    q: 'What is the difference between IPC-A-610 and IPC-CC-830B?',
+    a: 'They govern different things. IPC-CC-830B qualifies the coating material — it is the specification a coating chemistry is tested and approved against. IPC-A-610 judges the finished assembly: whether the coating as applied to your board is acceptable in coverage, thickness, bridging and keep-out clearance, at a stated acceptance class. A qualified material applied badly still fails IPC-A-610, and that distinction is the one most often missed on a drawing.',
+  },
+  {
+    q: 'Is MIL-I-46058C still valid for conformal coating?',
+    a: 'MIL-I-46058C was cancelled and its Qualified Products List was discontinued, with IPC-CC-830 named as the superseding specification. Many drawings, legacy specifications and supplier datasheets still reference it, and some coatings are still described as "MIL-I-46058C qualified" from their historical listing. For new work, IPC-CC-830B is the reference to cite; if a customer drawing calls out MIL-I-46058C, treat it as a request for an equivalently qualified material and agree that in writing.',
+  },
+  {
+    q: 'What are IPC-A-610 acceptance classes?',
+    a: 'Class 1 covers general electronic products where function is what matters. Class 2 covers dedicated service electronics — continued performance is expected, uninterrupted service is desirable but not critical — and is where most industrial, automotive and commercial assemblies sit. Class 3 covers high-performance and safety-critical electronics where downtime is unacceptable, such as life-support, aerospace and critical control systems. The class is chosen by the product, and it should be stated on the drawing rather than assumed.',
+  },
+  {
+    q: 'What conformal coating thickness do the standards require?',
+    a: 'For conventional solvent- and water-based acrylic, polyurethane and silicone types, 25–75 µm (roughly 1–3 mils) of dry film is the customary band, and thickness is treated as a measured property rather than a visual judgement. UV-curing thick-film systems are applied deliberately heavier and are specified against their own datasheet. What matters in practice is that a band is agreed for your assembly and that lots are measured against it.',
+  },
+  {
+    q: 'Which standard covers the conformal coating process itself?',
+    a: 'IPC-HDBK-830 is the handbook that addresses selection, application, cure, inspection and rework of conformal coatings — the process guidance that sits alongside the material qualification in IPC-CC-830B and the acceptance criteria in IPC-A-610. For electronics assembled in India for export, IEC 61086 series requirements may also be invoked by a customer specification.',
+  },
+];
+---
+<ResourceLayout
+  title={title}
+  description={description}
+  path={path}
+  heading="Conformal coating standards, explained"
+  lead="Four documents get cited on conformal coating drawings, they govern completely different things, and one of them was cancelled years ago. Here is what each actually controls — and what to put on your own drawing."
+  eyebrow="Resources · Standards explainer"
+  datePublished="2026-08-31"
+  keywords={['IPC-A-610 conformal coating', 'IPC-CC-830B', 'MIL-I-46058C', 'conformal coating standards', 'IPC-HDBK-830', 'conformal coating acceptance class']}
+  faqs={faqs}
+>
+  <p>Ask three suppliers whether their coating "meets the standard" and you will get three answers, because there is no single standard. Material qualification, workmanship acceptance and process guidance are three separate documents, and a supplier can be entirely truthful about one while silent on the others. This page separates them.</p>
+
+  <h2 id="map">The map</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Document</th>
+          <th scope="col">Governs</th>
+          <th scope="col">Answers the question</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>IPC-CC-830B</td><td>The coating material</td><td>Is this chemistry qualified for electronic insulation?</td></tr>
+        <tr><td>IPC-A-610</td><td>The coated assembly</td><td>Is the coating on <em>this board</em> acceptable?</td></tr>
+        <tr><td>IPC-HDBK-830</td><td>The process</td><td>How should it be selected, applied, cured, inspected and reworked?</td></tr>
+        <tr><td>MIL-I-46058C</td><td>Historic material qualification</td><td>Superseded — see below.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="ipc-cc-830b">IPC-CC-830B — qualifying the material</h2>
+  <p>IPC-CC-830B is the qualification and performance specification for electrical insulating compound applied over printed board assemblies. It is what a coating chemistry is tested <em>against</em>: appearance, dielectric withstand, insulation resistance, thermal shock, moisture and insulation resistance under humidity, flexibility, fungus resistance and flammability, among others.</p>
+  <p>When a manufacturer states that a coating is qualified to IPC-CC-830B, the claim is about the material in laboratory conditions. It says nothing about whether it was applied correctly to your board. That is the next document's job.</p>
+  <p>The ELPEGUARD systems EMS supplies come from Lackwerke Peters with their own qualification and test documentation, and our engineers will provide the relevant data for whichever grade is proposed for your assembly.</p>
+
+  <h2 id="ipc-a-610">IPC-A-610 — judging the coated assembly</h2>
+  <p>IPC-A-610, <em>Acceptability of Electronic Assemblies</em>, is the workmanship standard. Its conformal coating section is what an inspector uses to decide whether a coated board passes: coverage over the areas that should be coated, clearance on the areas that should not be, thickness within the agreed band, and the absence of defects such as bridging, dewetting, blistering, delamination, cracking, orange peel, entrapped foreign material and coating that has crept onto a keep-out area.</p>
+
+  <h3>The three acceptance classes</h3>
+  <ul>
+    <li><strong>Class 1 — General Electronic Products.</strong> Assemblies where the requirement is function. Cosmetic imperfection is not a rejection.</li>
+    <li><strong>Class 2 — Dedicated Service Electronic Products.</strong> Continued performance and extended life are required; uninterrupted service is desired but not critical. Most industrial, automotive, commercial and telecom assemblies belong here.</li>
+    <li><strong>Class 3 — High Performance / Harsh Environment Electronic Products.</strong> Continued performance on demand is essential, downtime cannot be tolerated, and the end-use environment may be uncommonly harsh. Life-support, aerospace, defence and critical control systems.</li>
+  </ul>
+  <p>The class belongs on the drawing. Where it is absent, a supplier will apply their default, and "we assumed Class 2" is a poor conversation to have after a lot has shipped.</p>
+
+  <h2 id="mil-i-46058c">MIL-I-46058C — cancelled, but still quoted</h2>
+  <p>For decades MIL-I-46058C was <em>the</em> conformal coating qualification, and its Qualified Products List was how buyers identified approved materials. It was cancelled and the QPL discontinued, with IPC-CC-830 named as the superseding specification. IPC-CC-830B carried the substance of it forward into the commercial standards world.</p>
+  <p>It nevertheless persists — on legacy drawings, in customer specifications copied forward across product generations, and on datasheets where a coating is still described as historically QPL-listed. Two practical rules:</p>
+  <ul>
+    <li>For new specifications, cite IPC-CC-830B.</li>
+    <li>If an incoming drawing calls out MIL-I-46058C, treat it as a request for an equivalently qualified material, confirm in writing which document the lot will actually be judged against, and record it on the process sheet.</li>
+  </ul>
+
+  <h2 id="ipc-hdbk-830">IPC-HDBK-830 — the process handbook</h2>
+  <p>IPC-HDBK-830 is guidance rather than a pass/fail specification, covering selection, surface preparation, application methods, masking, cure, inspection and rework. It is the document that connects the other two: it explains how a material qualified under IPC-CC-830B ends up producing an assembly that passes IPC-A-610. For a team standing up a coating process for the first time, it is the most immediately useful of the set.</p>
+
+  <h2 id="others">Standards you may also be asked for</h2>
+  <ul>
+    <li><strong>IEC 61086 series</strong> — international requirements for coatings used on assembled printed boards; frequently invoked on export work.</li>
+    <li><strong>UL 746E / UL recognition</strong> — where the end product's safety certification requires a recognised insulating system.</li>
+    <li><strong>IPC-J-STD-001</strong> — requirements for soldered assemblies, whose cleanliness provisions materially affect coating adhesion, and therefore sit upstream of every coating decision.</li>
+    <li><strong>Customer and OEM specifications</strong> — automotive and aerospace primes routinely impose their own document on top of the IPC set. Read it before quoting; it usually tightens something.</li>
+  </ul>
+
+  <h2 id="drawing">What to put on your drawing</h2>
+  <p>A conformal coating callout that avoids most downstream argument states all six of these:</p>
+  <ol>
+    <li>Coating type and, where fixed, the specific grade — for example an ELPEGUARD polyurethane system.</li>
+    <li>The material qualification reference: IPC-CC-830B.</li>
+    <li>The acceptance standard and class: IPC-A-610, Class 2 or Class 3.</li>
+    <li>The dry film thickness band, and where on the assembly it is measured.</li>
+    <li>Keep-out areas, marked on the drawing itself rather than described in a note.</li>
+    <li>The inspection method — UV inspection coverage, and how thickness is verified.</li>
+  </ol>
+
+  <h2 id="ems">How EMS applies this</h2>
+  <p>Every lot we coat is inspected under UV rather than sampled, measured against the thickness band agreed at process sign-off, and judged against the IPC-A-610 class stated for the product. The <a href="/services/">services page</a> sets out the full inspection and release regime, and our engineers can review an incoming customer specification with you before you commit to it.</p>
+</ResourceLayout>

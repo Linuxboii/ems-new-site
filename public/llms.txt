@@ -1,6 +1,6 @@
 # EMS Technologies
 
-> EMS Technologies is an India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work. Based in Hyderabad, Telangana, India since 2011.
+> EMS Technologies is an India distributor for Lackwerke Peters GmbH & Co. KG (Germany), supplying ELPEGUARD conformal coatings, ESD packing solutions and selective conformal coating machines, and providing on-site conformal coating job work and ESD paint job work. Based in Hyderabad, Telangana, India since 2011.
 
 ## Facts
 
@@ -11,20 +11,48 @@
 - Google Plus Code: 7J9W5GJ4+JH9
 - Google Maps: https://maps.app.goo.gl/iiCpggDXyqzfSdMC7
 - Manufacturing plants: Hyderabad (Telangana) and Cochin (Kerala), since 2015
-- Role: India distributor for Lackwerke Peters GmbH & Co. KG, Germany
+- Role: India distributor for Lackwerke Peters GmbH & Co. KG, Kempen, Germany (founded 1955)
+- Equipment partners: AUTOLEADER (selective coating lines), Topbest (glue dispensing, screwdriver and soldering machines)
+- Engineering headcount: 30+ trained engineers deployed for on-site job work
+- Clients: 500+ across India
+- Sectors served: automotive, aerospace and defence, medical devices, LED and lighting, industrial electronics
 - Phone: +91-9394116660
 - Email: info@emstechnologies.in
 
 ## Products & Services
 
-- Conformal coatings (Peters ELPEGUARD): acrylic, polyurethane, silicone, thick-film curing, aqua (water-based): https://emstechnologies.in/conformal/
+- Conformal coatings (Peters ELPEGUARD): acrylic, polyurethane, silicone, thick-film UV-curing, aqua (water-based): https://emstechnologies.in/conformal/
 - Conformal coating job work (on-site): application, UV optical inspection, curing, thickness testing, removal, rework, final inspection: https://emstechnologies.in/services/conformal-coating-job-work/
 - ESD paint job work (on-site): ProtectA Pro ESD conductive and anti-static paints for floors, walls, surfaces and bins, with earthing and resistance testing: https://emstechnologies.in/services/esd-paint-job-work/
 - ESD bags: anti-static bubble, static shielding, aluminium MBB, LDPE pink, conductive grid, VCI (vapour corrosion inhibitor): https://emstechnologies.in/EsdBags/
-- PP corrugated ESD trays & bins: https://emstechnologies.in/products/pp-bins/
+- EVA ESD bins and conductive foam trays: https://emstechnologies.in/products/pp-bins/
+- PP corrugated ESD trays & bins: https://emstechnologies.in/products/pp-corrugated/
 - EPE foam trays: https://emstechnologies.in/products/conductive-foam-trays/
-- ESD thermoforming trays: https://emstechnologies.in/products/thermoforming-trays/
-- Selective coating machines (ALTD-450B, ALTD-450J): https://emstechnologies.in/SCMachines/
+- ESD thermoforming trays (PET and HIPS, custom-formed): https://emstechnologies.in/products/thermoforming-trays/
+- Selective coating machines (ALTD-450GS, ALTD-450U): https://emstechnologies.in/SCMachines/
+
+## Quality & standards
+
+- Every coated board is inspected under UV light rather than sampled; ELPEGUARD coatings carry a UV tracer.
+- Dry film thickness is measured against a band agreed at process sign-off, typically 25–75 µm for conventional systems.
+- Coated assemblies are judged against IPC-A-610 workmanship criteria at the acceptance class agreed for the product (Class 2 for most industrial and automotive electronics, Class 3 for life- or safety-critical assemblies).
+- Coating material qualification is against IPC-CC-830B, which superseded the cancelled MIL-I-46058C and its discontinued Qualified Products List.
+
+## Industries
+
+- Automotive electronics: https://emstechnologies.in/industries/automotive/
+- Aerospace & defence: https://emstechnologies.in/industries/aerospace-defence/
+- Medical device electronics: https://emstechnologies.in/industries/medical-devices/
+- LED & lighting electronics: https://emstechnologies.in/industries/led-lighting/
+
+## Technical resources
+
+- How to choose a conformal coating for your PCB: https://emstechnologies.in/resources/conformal-coating-selection-guide/
+- Acrylic vs polyurethane vs silicone conformal coating: https://emstechnologies.in/resources/acrylic-vs-polyurethane-vs-silicone/
+- Conformal coating standards (IPC-A-610, IPC-CC-830B, MIL-I-46058C): https://emstechnologies.in/resources/conformal-coating-standards/
+- Conformal coating vs potting and encapsulation: https://emstechnologies.in/resources/conformal-coating-vs-encapsulation/
+- ESD and conformal coating glossary: https://emstechnologies.in/resources/esd-packaging-glossary/
+- Datasheets & downloads: https://emstechnologies.in/downloads/
 
 ## Pages
 
@@ -32,5 +60,8 @@
 - About: https://emstechnologies.in/about-us/
 - Products: https://emstechnologies.in/products/
 - Services: https://emstechnologies.in/services/
+- Industries: https://emstechnologies.in/industries/
+- Resources: https://emstechnologies.in/resources/
+- Downloads: https://emstechnologies.in/downloads/
 - Gallery: https://emstechnologies.in/gallery/
 - Contact: https://emstechnologies.in/contact-us/

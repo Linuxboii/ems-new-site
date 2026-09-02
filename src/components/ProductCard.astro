@@ -3,8 +3,12 @@ import AssetImage from '@/components/AssetImage.astro';
 import ProductDetailModal from '@/components/ProductDetailModal.astro';
 import { productDetails } from '@/data/productDetails';
 
-interface Props { title: string; href: string; img: string; blurb?: string; detailKey?: string; }
-const { title, href, img, blurb, detailKey } = Astro.props;
+interface Props { title: string; href: string; img: string; blurb?: string; detailKey?: string; alt?: string; }
+const { title, href, img, blurb, detailKey, alt } = Astro.props;
+
+// Cards fall back to the title, but every catalogue entry should pass a descriptive
+// `alt` — generic one-word alt text is a wasted keyword and a poor screen-reader label.
+const imgAlt = alt ?? title;
 
 // With a detailKey the photo opens an expanded panel; the "View" link below it
 // still navigates, so the card gains detail without losing its destination.
@@ -21,7 +25,7 @@ const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '
       aria-label={`More about ${title}`}
     >
       <div class="aspect-[4/3] overflow-hidden">
-        <AssetImage name={img} alt={title} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+        <AssetImage name={img} alt={imgAlt} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
       </div>
       <span class="pc-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
@@ -30,7 +34,7 @@ const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '
     </button>
   ) : (
     <a href={href} class="block aspect-[4/3] overflow-hidden bg-surface" tabindex="-1" aria-hidden="true">
-      <AssetImage name={img} alt={title} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+      <AssetImage name={img} alt={imgAlt} width={640} height={480} class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
     </a>
   )}
   <div class="flex flex-1 flex-col p-6">
@@ -43,7 +47,7 @@ const dialogId = `pc-${detailKey ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '
   </div>
 </article>
 
-{detail && <ProductDetailModal id={dialogId} title={title} img={img} detail={detail} href={href} />}
+{detail && <ProductDetailModal id={dialogId} title={title} img={img} alt={imgAlt} detail={detail} href={href} />}
 
 <style>
   .pc-open { cursor: pointer; }

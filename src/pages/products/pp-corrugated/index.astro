@@ -5,6 +5,7 @@ import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
 import { gallery } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+import { product } from '@/lib/schema';
 
 const title = 'PP Corrugated Trays and Bins - ESD Storage & Transport | EMS Technologies';
 const description = 'PP corrugated ESD trays and bins from EMS Technologies, Hyderabad: lightweight, reusable anti-static corrugated packaging for storing and transporting PCBs and components.';
@@ -17,6 +18,17 @@ const jsonLd = [
     { name: 'PP Corrugated Trays and Bins', path },
   ]),
   await galleryJsonLd('PP Corrugated Trays and Bins', description, path, [gallery.ppCorrugated]),
+  product({
+    name: 'PP Corrugated Trays and Bins',
+    description: 'Lightweight, reusable anti-static polypropylene corrugated trays, bins and dividers for storing and transporting PCBs and components.',
+    path,
+    category: 'ESD packaging',
+    material: 'Polypropylene corrugated',
+    additionalProperty: [
+      { name: 'Manufactured by', value: 'EMS Technologies — Hyderabad and Cochin plants' },
+      { name: 'Customisation', value: 'Formed or cut to customer component geometry' },
+    ],
+  }),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
