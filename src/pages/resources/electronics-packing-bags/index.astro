@@ -1,0 +1,23 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+const title = 'Electronics Packing Bags & Moisture Barrier Bags | EMS';
+const description = 'Compare anti-static, bubble, shielding, moisture barrier (MBB), conductive grid and VCI bags.';
+const bags = [
+  ['Pink LDPE', 'General anti-static packing; specify shielding for external discharge protection.'],
+  ['Pink bubble', 'Anti-static packing with cushioning against knocks during handling.'],
+  ['Static shielding', 'Metallised bags for ESD-sensitive boards and components in transit.'],
+  ['Moisture barrier bags (MBB)', 'Aluminium-laminated bags for moisture-sensitive electronics, long-term storage and export packing. Specify dry-packing and sealing requirements.'],
+  ['Conductive grid', 'Grid-pattern bags for charge dissipation. Confirm the required grade for your assembly.'],
+  ['VCI', 'Corrosion protection for metal parts; specify ESD protection separately when needed.'],
+];
+---
+<Layout title={title} description={description} path="/resources/electronics-packing-bags/">
+  <PageHero eyebrow="Resources · Bags" title="Choosing electronics packing bags" lead="Match protection to your parts: static control, cushioning, moisture protection or corrosion prevention." />
+  <section class="section container-x">
+    <div class="grid gap-6 lg:grid-cols-2">
+      {bags.map(([name, copy]) => <article class="card p-8"><h2 class="heading text-xl">{name}</h2><p class="mt-4 text-muted">{copy}</p><a class="btn-outline mt-6" href="/EsdBags/">View bags</a></article>)}
+    </div>
+    <div class="mt-12 max-w-3xl"><h2 class="heading text-2xl">What to include in your enquiry</h2><p class="mt-4 text-muted">Share part type, bag dimensions, quantity, closure and required protection. For MBB dry packing, include desiccant and humidity indicator requirements.</p><a class="btn-primary mt-7" href="/contact-us/?product=Electronics%20Packing%20Bags">Ask for a recommendation</a></div>
+  </section>
+</Layout>

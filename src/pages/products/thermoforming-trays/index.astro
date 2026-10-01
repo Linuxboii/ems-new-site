@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import ProductIntro from '@/components/ProductIntro.astro';
 import GallerySection from '@/components/GallerySection.astro';
-import { gallery } from '@/data/gallery';
+import { gallery, galleryShowcase } from '@/data/gallery';
 import { galleryJsonLd, breadcrumbJsonLd } from '@/lib/galleryJsonLd';
 import { product } from '@/lib/schema';
 
@@ -26,6 +26,8 @@ const jsonLd = [
     { label: 'PET thermoformed tray', images: petImages },
     gallery.traysHips,
     gallery.hipsPetLid,
+    galleryShowcase.thermoformedWhite,
+    galleryShowcase.whiteBoardTrays,
   ]),
   product({
     name: 'ESD Thermoforming Trays',
@@ -43,6 +45,7 @@ const jsonLd = [
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
   <PageHero eyebrow="ESD Packing" title="ESD Thermoforming Trays" lead="Anti-static, conductive and clear thermoformed blister trays, custom-formed to the exact geometry of your components for safe storage, handling and automated line feeding." />
   <ProductIntro path={path} />
+  <GallerySection id="white-trays" detailKey="white-trays" title="White Thermoformed Trays" enquire="White Thermoformed Trays" images={[...galleryShowcase.thermoformedWhite.images, ...galleryShowcase.whiteBoardTrays.images]} blurb="White trays with moulded pockets matched to your components for secure handling and easy visual inspection." />
   <GallerySection id="pet" detailKey="pet-trays" title="PET Thermoformed Trays" enquire="ESD Thermoforming Trays (PET)" images={petImages} blurb="Clear, transparent PET trays and blister packs for full part visibility, including anti-static pocket matrices and matched base-and-lid sets formed to hold PCBs and components securely." />
   <GallerySection id="hips" detailKey="hips-trays" title="HIPS Thermoformed Trays" enquire="ESD Thermoforming Trays (HIPS)" images={gallery.traysHips.images} blurb="Black, conductive and anti-static HIPS trays for robust, reusable protection of ESD-sensitive components." />
   <GallerySection id="hips-pet-lid" detailKey="hips-pet-lid" title="Thermoforming HIPS Tray with PET Lid" enquire="Thermoforming HIPS Tray with PET Lid" images={gallery.hipsPetLid.images} blurb="Black HIPS slotted base trays holding boards on edge, closed with a clear PET lid so the contents stay visible and protected in stacked storage and transport." />

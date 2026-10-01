@@ -2,6 +2,12 @@
  *  /resources/; this array drives the hub page, the nav and the sitemap ordering. */
 export const resources = [
   {
+    title: 'Choosing electronics packing bags',
+    href: '/resources/electronics-packing-bags/',
+    kind: 'Bag selection guide',
+    blurb: 'Compare pink anti-static, bubble, static shielding, moisture barrier (MBB), conductive grid and VCI bags. Choose protection to suit your parts.',
+  },
+  {
     title: 'How to choose a conformal coating for your PCB',
     href: '/resources/conformal-coating-selection-guide/',
     kind: 'Buyer’s guide',

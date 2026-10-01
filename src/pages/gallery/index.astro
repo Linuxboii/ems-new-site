@@ -16,9 +16,16 @@ const sections = [
   { key: 'thermoformedWhite', id: 'white-trays', detail: 'white-trays', blurb: 'White thermoformed trays, where a light background makes the part and its orientation easier to check.' },
   { key: 'ppCorrugated', id: 'pp-corrugated', detail: 'pp-corrugated', blurb: 'PP corrugated bins, boxes and trays with twin-wall dividers, riveted corners and carry slots.' },
   { key: 'conductiveFoam', id: 'conductive-foam', detail: 'conductive-foam-packing', blurb: 'Conductive foam boxes and inserts routed to hold each part in its own pocket.' },
-  { key: 'epeFoam', id: 'epe-foam', detail: 'epe-foam-trays', blurb: 'EPE foam trays cut to component geometry for cushioned, static-safe handling.' },
   { key: 'custom', id: 'custom', detail: 'custom-packing', blurb: 'Shaped presentation packs, PP honeycomb pallet tops and conductive reels, all made to a drawing.' },
-].map((s) => ({ ...s, group: galleryShowcase[s.key] }));
+].map((s) => ({
+  ...s,
+  group: s.key === 'thermoformedWhite'
+    ? {
+        ...galleryShowcase.thermoformedWhite,
+        images: [...galleryShowcase.thermoformedWhite.images, ...galleryShowcase.whiteBoardTrays.images],
+      }
+    : galleryShowcase[s.key],
+}));
 
 const jsonLd = [
   breadcrumbJsonLd([

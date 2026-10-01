@@ -513,12 +513,12 @@ export const galleryShowcase: Record<string, GalleryGroup> = {
       }
     ]
   },
-  "epeFoam": {
-    "label": "EPE foam trays",
+  "whiteBoardTrays": {
+    "label": "White thermoformed trays",
     "images": [
       {
         "src": "epe-foam-tray-boards-01.png",
-        "alt": "White EPE foam tray with three populated circuit boards seated in routed channels, EMS Technologies"
+        "alt": "White thermoformed tray with three populated circuit boards seated in moulded pockets, EMS Technologies"
       }
     ]
   },
