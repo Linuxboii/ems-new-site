@@ -1,0 +1,28 @@
+# For LiteSpeed / Apache hosting (the current emstechnologies.in server).
+# Uploaded with the rest of dist/. Ignored by Cloudflare.
+
+Options -Indexes
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # One canonical origin: https://emstechnologies.in (no www, HTTPS only).
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://emstechnologies.in%{REQUEST_URI} [L,R=301]
+
+  # Tools that guess /sitemap.xml; Astro publishes a sitemap index.
+  RewriteRule ^sitemap\.xml$ /sitemap-index.xml [L,R=301]
+
+  # Retired URL still linked from outside.
+  RewriteRule ^our-equipment/?$ /SCMachines/ [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+# Long-lived caching for the content-hashed /_astro/ files lives in
+# public/_astro/.htaccess, which Astro copies into dist/_astro/.

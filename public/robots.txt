@@ -1,29 +1,24 @@
-# EMS Technologies - allow all standard and AI answer-engine crawlers
+# EMS Technologies: allow search engines and AI answer-engine crawlers.
+# Note: Cloudflare's "Managed robots.txt" and "Block AI bots" settings override
+# this file at the edge. Keep both turned off so this file is the only policy.
+
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
-Allow: /
-
+# AI search and answer engines (citations in ChatGPT, Perplexity, Claude, Gemini, Apple)
 User-agent: OAI-SearchBot
-Allow: /
-
 User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
+User-agent: GPTBot
 User-agent: PerplexityBot
-Allow: /
-
+User-agent: Perplexity-User
 User-agent: ClaudeBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
 User-agent: CCBot
+User-agent: DuckAssistBot
 Allow: /
 
 Sitemap: https://emstechnologies.in/sitemap-index.xml

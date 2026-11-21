@@ -29,7 +29,7 @@ export const industries: Industry[] = [
     name: 'Automotive electronics',
     seoTitle: 'Conformal Coating for Automotive PCB Assemblies | EMS Technologies',
     seoDescription:
-      'Conformal coating for automotive electronics in India: ELPEGUARD polyurethane and silicone systems for under-bonnet ECUs, EV power electronics and sensor modules, applied as on-site job work with UV inspection and measured thickness.',
+      'Automotive PCB conformal coating in India: ELPEGUARD polyurethane and silicone for ECUs, EV power electronics and sensors, applied on site with UV inspection.',
     heading: 'Automotive electronics',
     lead: 'Under-bonnet heat, fuel and fluid exposure, salt spray, condensation cycling and constant vibration — automotive is the environment that finds every weakness in a coating specification.',
     img: 'automated-conformal-coating-2.jpg',
@@ -89,7 +89,7 @@ export const industries: Industry[] = [
     name: 'Aerospace & defence',
     seoTitle: 'Conformal Coating for Aerospace & Defence Electronics | EMS',
     seoDescription:
-      'Conformal coating for aerospace and defence PCB assemblies in India: ELPEGUARD systems for altitude, thermal cycling, vibration and condensation, applied to IPC-A-610 Class 3 workmanship criteria with 100% UV inspection.',
+      'Aerospace and defence PCB conformal coating in India: ELPEGUARD systems for altitude, thermal cycling and condensation, to IPC-A-610 Class 3, 100% UV inspected.',
     heading: 'Aerospace & defence',
     lead: 'Wide thermal excursions, low-pressure operation, sustained vibration and a documentation trail that matters as much as the coating itself.',
     img: 'selective-conformal-coating-640_sch-uk-2.jpeg',
@@ -149,7 +149,7 @@ export const industries: Industry[] = [
     name: 'Medical device electronics',
     seoTitle: 'Conformal Coating for Medical Device PCBs | EMS Technologies',
     seoDescription:
-      'Conformal coating for medical device electronics in India: ELPEGUARD systems for cleaning-agent exposure, sterilisation, humidity and leakage-current control, applied with 100% UV inspection and full lot traceability.',
+      'Medical device PCB conformal coating in India: ELPEGUARD for disinfectants, sterilisation, humidity and leakage current, 100% UV inspected and traceable.',
     heading: 'Medical device electronics',
     lead: 'Repeated disinfection, sterilisation cycles, body fluids and humidity — against a regulatory expectation that the process is documented as tightly as the product.',
     img: '2019-services-hires-coating.jpg',
@@ -209,7 +209,7 @@ export const industries: Industry[] = [
     name: 'LED & lighting electronics',
     seoTitle: 'Conformal Coating for LED & Lighting PCBs | EMS Technologies',
     seoDescription:
-      'Conformal coating for LED and lighting electronics in India: non-yellowing, low-outgassing ELPEGUARD systems for LED modules and drivers exposed to heat, humidity, UV and outdoor conditions.',
+      'LED and lighting conformal coating in India: non-yellowing, low-outgassing ELPEGUARD for LED modules and drivers facing heat, humidity, UV and outdoor use.',
     heading: 'LED & lighting electronics',
     lead: 'Continuous heat at the junction, outdoor humidity and UV exposure, and one requirement the other sectors do not have: the coating must not discolour or dim the light it sits near.',
     img: 'uv-oven.png',

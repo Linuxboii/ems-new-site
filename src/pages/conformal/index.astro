@@ -7,7 +7,7 @@ import { coatings, coatingIntro } from '@/data/coatings';
 import { breadcrumb, productList } from '@/lib/schema';
 
 const title = 'ELPEGUARD® Conformal Coatings - Acrylic, PU, Silicone | EMS';
-const description = 'Peters ELPEGUARD conformal coatings distributed in India by EMS Technologies: acrylic, polyurethane, silicone, thick-film curing and aqua coatings for PCB protection.';
+const description = 'Peters ELPEGUARD conformal coatings in India from EMS Technologies: acrylic, polyurethane, silicone, thick-film UV and water-based PCB coatings.';
 const path = '/conformal/';
 const jsonLd = [
   breadcrumb([
@@ -35,7 +35,10 @@ const jsonLd = [
   <PageHero eyebrow="Products · ELPEGUARD®" title="Conformal Coatings" lead={coatingIntro} />
   <ProductIntro path="/conformal/" />
   <section class="section container-x">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <p class="eyebrow">The range</p>
+    <h2 class="heading mt-4 text-2xl sm:text-3xl">ELPEGUARD conformal coating chemistries</h2>
+    <p class="mt-3 max-w-2xl text-muted">Acrylic, polyurethane, silicone, thick-film UV-curing and water-based systems. Not sure which fits your assembly? Read the <a class="text-accent2 underline" href="/resources/conformal-coating-selection-guide/">conformal coating selection guide</a> or the <a class="text-accent2 underline" href="/resources/acrylic-vs-polyurethane-vs-silicone/">acrylic vs polyurethane vs silicone comparison</a>.</p>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {coatings.map((c) => <ProductCard title={c.title} href={`/contact-us/?product=${encodeURIComponent(c.title)}`} img={c.img} alt={c.alt} blurb={c.blurb} detailKey={c.detailKey} />)}
     </div>
   </section>

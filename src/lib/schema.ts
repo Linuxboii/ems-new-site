@@ -40,9 +40,10 @@ export interface ProductNode {
   additionalProperty?: { name: string; value: string }[];
 }
 
-/** A Product node with an Offer whose seller is EMS. No price is published, so
- *  the offer states availability and the currency/area only — inventing a price
- *  would be worse than omitting one. */
+/** A Product node. Pricing is quote-only, and Google's Rich Results Test flags
+ *  every Offer that has no `price` as invalid, so no Offer is emitted.
+ *  Inventing a price would be worse than leaving the Offer out. The seller
+ *  relationship is carried by `manufacturer` / the sitewide Organization instead. */
 export function product(p: ProductNode) {
   return {
     '@context': 'https://schema.org',
@@ -64,14 +65,6 @@ export function product(p: ProductNode) {
           })),
         }
       : {}),
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      priceCurrency: 'INR',
-      areaServed: { '@type': 'Country', name: 'India' },
-      seller: { '@id': ORG_ID },
-      url: abs('/contact-us/'),
-    },
   };
 }
 

@@ -1,0 +1,6 @@
+# Cloudflare Pages / Workers path redirects (true 301s).
+# Host-level redirects (emstechnologies.co.in and www → emstechnologies.in)
+# can't be expressed here; set them as a Cloudflare Redirect Rule.
+/sitemap.xml      /sitemap-index.xml  301
+/our-equipment    /SCMachines/        301
+/our-equipment/   /SCMachines/        301

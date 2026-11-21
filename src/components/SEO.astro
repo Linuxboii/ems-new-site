@@ -103,15 +103,10 @@ const organization = {
       availableLanguage: ['en'],
     },
   ],
-  makesOffer: {
-    '@type': 'Offer',
-    itemOffered: {
-      '@type': 'Product',
-      name: 'ELPEGUARD conformal coatings',
-      brand: { '@type': 'Brand', name: 'ELPEGUARD' },
-      manufacturer: { '@id': principalId },
-    },
-  },
+  // The distributor → principal link is carried by `description` and the
+  // #principal node. The old makesOffer → Offer → Product had no price, which
+  // the Rich Results Test flags as invalid on every page.
+  ...(company.sameAs.length ? { sameAs: [...company.sameAs] } : {}),
 };
 
 const localBusiness = {

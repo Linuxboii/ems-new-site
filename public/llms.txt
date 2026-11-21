@@ -52,6 +52,8 @@
 - Conformal coating standards (IPC-A-610, IPC-CC-830B, MIL-I-46058C): https://emstechnologies.in/resources/conformal-coating-standards/
 - Conformal coating vs potting and encapsulation: https://emstechnologies.in/resources/conformal-coating-vs-encapsulation/
 - ESD and conformal coating glossary: https://emstechnologies.in/resources/esd-packaging-glossary/
+- Choosing electronics packing bags (anti-static, shielding, MBB, VCI): https://emstechnologies.in/resources/electronics-packing-bags/
+- Full text of all guides in one file: https://emstechnologies.in/llms-full.txt
 - Datasheets & downloads: https://emstechnologies.in/downloads/
 
 ## Pages

@@ -1,23 +1,104 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import PageHero from '@/components/PageHero.astro';
+import ResourceLayout from '@/layouts/ResourceLayout.astro';
+
 const title = 'Electronics Packing Bags & Moisture Barrier Bags | EMS';
-const description = 'Compare anti-static, bubble, shielding, moisture barrier (MBB), conductive grid and VCI bags.';
+const description = 'Compare anti-static pink, bubble, static shielding, moisture barrier (MBB), conductive grid and VCI bags, and choose the right bag for PCBs and components.';
+const path = '/resources/electronics-packing-bags/';
+
 const bags = [
-  ['Pink LDPE', 'General anti-static packing; specify shielding for external discharge protection.'],
-  ['Pink bubble', 'Anti-static packing with cushioning against knocks during handling.'],
-  ['Static shielding', 'Metallised bags for ESD-sensitive boards and components in transit.'],
-  ['Moisture barrier bags (MBB)', 'Aluminium-laminated bags for moisture-sensitive electronics, long-term storage and export packing. Specify dry-packing and sealing requirements.'],
-  ['Conductive grid', 'Grid-pattern bags for charge dissipation. Confirm the required grade for your assembly.'],
-  ['VCI', 'Corrosion protection for metal parts; specify ESD protection separately when needed.'],
+  ['Pink LDPE (anti-static)', 'Low charge generation when the bag rubs against parts', 'No', 'No', 'Non-sensitive parts and packing inside an EPA'],
+  ['Pink bubble (anti-static)', 'Low charge generation plus cushioning', 'No', 'No', 'Bulky or fragile items that need impact protection'],
+  ['Static shielding (metallised)', 'Blocks external electrostatic discharge when closed', 'Yes', 'Limited', 'ESD-sensitive PCBs and components leaving the EPA'],
+  ['Moisture barrier bag (MBB)', 'Very low moisture transmission; usually also shields', 'Typically', 'Yes', 'Dry packing moisture-sensitive (MSL-rated) devices and export'],
+  ['Conductive grid', 'Conductive grid pattern spreads and drains charge', 'Grade-dependent', 'No', 'Sensitive parts where the bag must also stay see-through'],
+  ['VCI', 'Releases a corrosion inhibitor that protects metal surfaces', 'Only if specified', 'No', 'Metal parts, connectors and assemblies stored for long periods'],
+];
+
+const faqs = [
+  {
+    q: 'Is a pink anti-static bag enough for a PCB?',
+    a: 'Only inside an ESD protected area (EPA). A pink bag limits the charge the bag itself generates, but it does not stop an external discharge from reaching the board. Once an ESD-sensitive PCB or component leaves the EPA, it should travel in a static shielding bag, which ANSI/ESD S541 treats as the requirement for sensitive items outside an EPA.',
+  },
+  {
+    q: 'What is the difference between a static shielding bag and a moisture barrier bag?',
+    a: 'A static shielding bag uses a thin metallised layer to block electrostatic discharge and slows moisture only slightly. A moisture barrier bag uses an aluminium foil laminate with very low moisture vapour transmission, so it can keep moisture-sensitive devices dry for long storage. Most MBBs also provide static shielding, but shielding bags are not a substitute for an MBB.',
+  },
+  {
+    q: 'What goes into a dry pack for moisture-sensitive components?',
+    a: 'The parts are sealed in a moisture barrier bag with desiccant and a humidity indicator card, usually heat-sealed after removing excess air. IPC/JEDEC J-STD-033 sets the dry-packing, storage and floor-life rules for moisture-sensitivity levels (MSL). Tell us the MSL and storage time when you enquire, so the bag and desiccant are sized correctly.',
+  },
+  {
+    q: 'Do VCI bags protect against static?',
+    a: 'Not by default. VCI (volatile corrosion inhibitor) bags protect metal surfaces from corrosion. If the contents are also ESD-sensitive, specify an anti-static or static-shielding VCI grade, or use a shielding bag for the electronics and VCI for the metal parts.',
+  },
+  {
+    q: 'Does a static shielding bag work if it is left open?',
+    a: 'No. A shielding bag protects its contents by surrounding them on all sides, so it has to be closed, by folding and taping, zip lock or heat seal, for the shielding to work. Putting labels and paperwork on the outside instead of inside also keeps the bag from being reopened outside the EPA.',
+  },
 ];
 ---
-<Layout title={title} description={description} path="/resources/electronics-packing-bags/">
-  <PageHero eyebrow="Resources · Bags" title="Choosing electronics packing bags" lead="Match protection to your parts: static control, cushioning, moisture protection or corrosion prevention." />
-  <section class="section container-x">
-    <div class="grid gap-6 lg:grid-cols-2">
-      {bags.map(([name, copy]) => <article class="card p-8"><h2 class="heading text-xl">{name}</h2><p class="mt-4 text-muted">{copy}</p><a class="btn-outline mt-6" href="/EsdBags/">View bags</a></article>)}
-    </div>
-    <div class="mt-12 max-w-3xl"><h2 class="heading text-2xl">What to include in your enquiry</h2><p class="mt-4 text-muted">Share part type, bag dimensions, quantity, closure and required protection. For MBB dry packing, include desiccant and humidity indicator requirements.</p><a class="btn-primary mt-7" href="/contact-us/?product=Electronics%20Packing%20Bags">Ask for a recommendation</a></div>
-  </section>
-</Layout>
+<ResourceLayout
+  title={title}
+  description={description}
+  path={path}
+  heading="Choosing electronics packing bags"
+  lead="Each bag type protects against a different hazard: static generated by the bag, discharge from outside, impact, moisture or corrosion. Choose the bag for the hazard your parts actually face."
+  eyebrow="Resources · Packing guide"
+  datePublished="2026-11-21"
+  keywords={['ESD bags', 'static shielding bag', 'moisture barrier bag', 'MBB', 'anti-static pink bag', 'VCI bag', 'electronics packing bags India']}
+  faqs={faqs}
+>
+  <p><strong>Short answer:</strong> use pink anti-static bags only inside an ESD protected area, static shielding bags for any ESD-sensitive board or component that leaves it, moisture barrier bags with desiccant for moisture-sensitive (MSL-rated) devices, and VCI bags where metal corrosion is the risk. Bubble variants add cushioning to any of these.</p>
+
+  <h2 id="at-a-glance">At a glance</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Bag type</th>
+          <th scope="col">What it does</th>
+          <th scope="col">Shields external ESD</th>
+          <th scope="col">Moisture barrier</th>
+          <th scope="col">Typical use</th>
+        </tr>
+      </thead>
+      <tbody>
+        {bags.map(([name, what, esd, moisture, use]) => (
+          <tr><td>{name}</td><td>{what}</td><td>{esd}</td><td>{moisture}</td><td>{use}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-6 text-sm">Directional comparison of the bag families. The exact shielding, resistance and moisture-transmission values belong to a specific material grade, so ask us for the grade data before you specify.</p>
+
+  <h2 id="anti-static">Anti-static (pink) bags</h2>
+  <p>Pink LDPE and pink bubble bags contain an anti-static additive that keeps the bag from building up charge when it rubs against its contents or other packaging. That matters because the bag itself is often the biggest source of charge in a packing operation. They do not stop a discharge from outside, so they belong inside an EPA, for non-sensitive parts, or as an inner layer inside a shielding outer pack.</p>
+  <p>The additive works by drawing a thin film of moisture to the surface, so pink bags work less well in very dry air and lose effectiveness as they age. Use stock in rotation rather than storing it for years.</p>
+
+  <h2 id="static-shielding">Static shielding bags</h2>
+  <p>Static shielding bags carry a thin metallised layer between dissipative plastic films. When the bag is closed, the metal layer acts as a Faraday cage: charge from a person or a surface flows around the bag rather than into the board. This is the standard choice for ESD-sensitive PCBs and components that are shipped, stored outside an EPA, or handled by people without grounding.</p>
+  <p>Shielding bags are translucent so parts and labels can be read without opening them. They slow moisture only a little, so they don't replace a moisture barrier bag for MSL-rated devices.</p>
+
+  <h2 id="moisture-barrier">Moisture barrier bags (MBB)</h2>
+  <p>Moisture barrier bags use an aluminium foil laminate that lets almost no water vapour through. Plastic IC packages absorb moisture from the air, and that moisture can crack the package or delaminate it during reflow soldering. Sealing parts in an MBB with desiccant and a humidity indicator card keeps them dry until they are used.</p>
+  <p>Dry packing follows IPC/JEDEC J-STD-033, which links each moisture-sensitivity level (MSL) to how long a part can be exposed after the bag is opened. Specify the MSL, the storage period, the bag size and whether you need vacuum sealing.</p>
+
+  <h2 id="conductive-grid">Conductive grid bags</h2>
+  <p>Conductive grid bags have a grid of conductive lines in or on the film, which spreads charge across the bag and drains it to ground on contact. They stay see-through, which helps when parts are inspected or counted without opening the pack. Shielding performance depends on the grade, so confirm it against your parts' sensitivity.</p>
+
+  <h2 id="bubble">Bubble bags</h2>
+  <p>Bubble bags add an air-cushion layer for parts that need protection from knocks and drops: populated boards with tall components, displays, modules and finished units. They come in anti-static pink and in shielding versions. Choose the shielding version when the contents are ESD-sensitive and will leave the EPA.</p>
+
+  <h2 id="vci">VCI bags</h2>
+  <p>VCI (volatile corrosion inhibitor) bags release a vapour that forms a protective layer on metal surfaces inside the closed bag. They suit connectors, terminals, machined metal parts and assemblies with exposed metal that will be stored for a long time or shipped through humid conditions. Corrosion protection and ESD protection are separate properties, so specify both if you need both.</p>
+
+  <h2 id="enquiry">What to include in your enquiry</h2>
+  <ul>
+    <li>Part type and whether it is ESD-sensitive or moisture-sensitive (with the MSL if known).</li>
+    <li>Bag dimensions, film thickness if specified, and quantity.</li>
+    <li>Closure: open top, zip lock, or heat seal.</li>
+    <li>For dry packing: desiccant and humidity indicator card requirements, and whether vacuum sealing is needed.</li>
+    <li>Any printing, ESD symbols or labelling required.</li>
+  </ul>
+  <p>EMS Technologies makes ESD packing bags at its own plants in Hyderabad and Cochin. See the full range on the <a href="/EsdBags/">ESD bags page</a>, or <a href="/contact-us/?product=Electronics%20Packing%20Bags">ask for a recommendation</a>. For the terms used here, see the <a href="/resources/esd-packaging-glossary/">ESD and conformal coating glossary</a>.</p>
+</ResourceLayout>

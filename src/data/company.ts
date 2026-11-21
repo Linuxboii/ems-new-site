@@ -31,6 +31,10 @@ export const company = {
     founded: 1955,
     url: 'https://www.peters.de/',
   },
+  /** Official profiles for Organization.sameAs (Google Business Profile, LinkedIn
+   *  company page, IndiaMART, Justdial, YouTube…). Emitted only when non-empty, so
+   *  add real URLs here as each profile goes live. Never add a profile that EMS doesn't control. */
+  sameAs: [] as readonly string[],
   plants: ['Hyderabad, Telangana', 'Cochin, Kerala'],
   engineers: '30+',
   stats: { clients: '500+', materials: '50+', products: '200+' },

@@ -3,18 +3,45 @@ import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import ApplicationCard from '@/components/ApplicationCard.astro';
 import { esdPaintApplications, esdPaintIntro } from '@/data/services';
-import { breadcrumbJsonLd } from '@/lib/galleryJsonLd';
+import { breadcrumb, service, faq } from '@/lib/schema';
 
 const title = 'ESD Paint Job Work - Conductive Floor & Surface Coating | EMS';
-const description = 'EMS Technologies applies ProtectA Pro ESD conductive and anti-static paints on site: surface preparation, conductive primer and earthing, topcoat application, resistance testing and handover.';
+const description = 'On-site ProtectA Pro ESD conductive and anti-static paint: surface prep, conductive primer and earthing, topcoat, resistance testing and handover.';
 const path = '/services/esd-paint-job-work/';
 
+// Rendered on the page below and as FAQPage JSON-LD.
+const faqs = [
+  {
+    q: 'What does ESD paint job work cover?',
+    a: 'On-site application of ProtectA Pro ESD conductive and anti-static paints, covering surface preparation, conductive primer and earthing, topcoat application, and resistance testing after cure to confirm the finished surface reads in the intended dissipative range, followed by handover.',
+  },
+  {
+    q: 'Which surfaces can be ESD painted?',
+    a: 'Floors, walls and work surfaces in cleanrooms and production areas; conveyor belts and conveyor structures; polypropylene bins, crates and racking; EVA foam inserts and packaging; and storage or transport systems for flammable materials where an electrostatic discharge is a safety hazard.',
+  },
+  {
+    q: 'How is an ESD painted floor verified?',
+    a: 'The applied system is earthed and its surface resistance is tested after cure, so the handover confirms the floor or surface actually dissipates charge in the intended range rather than relying on the paint specification alone.',
+  },
+  {
+    q: 'Which industries use ESD paint job work?',
+    a: 'Electronics assembly, automotive, aerospace, warehousing and logistics facilities, plus petroleum storage and fuel handling areas where static control is a safety requirement.',
+  },
+];
+
 const jsonLd = [
-  breadcrumbJsonLd([
+  breadcrumb([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services/' },
     { name: 'ESD Paint Job Work', path },
   ]),
+  service({
+    name: 'ESD paint job work',
+    description,
+    path,
+    serviceType: 'ESD conductive and anti-static paint application',
+  }),
+  faq(faqs),
 ];
 ---
 <Layout title={title} description={description} path={path} jsonLd={jsonLd}>
@@ -37,6 +64,20 @@ const jsonLd = [
         <p class="mt-3 max-w-2xl text-muted">An advanced range of ESD conductive and anti-static paints for floors, walls, surfaces and polypropylene bins, built on a conductive polymer matrix for stable, durable electrostatic protection in industrial environments.</p>
       </div>
       <a href="/datasheets/protecta-pro-esd-conductive-paint.pdf" class="btn-outline shrink-0" target="_blank" rel="noopener">Datasheet (PDF)</a>
+    </div>
+  </section>
+  <section class="section border-t border-line">
+    <div class="container-x max-w-3xl">
+      <p class="eyebrow">Frequently asked</p>
+      <h2 class="heading mt-5 text-2xl sm:text-3xl">ESD paint job work: quick answers</h2>
+      <div class="mt-8 space-y-8">
+        {faqs.map((f) => (
+          <div>
+            <h3 class="font-semibold text-ink">{f.q}</h3>
+            <p class="mt-2 text-muted leading-relaxed">{f.a}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
   <section class="section border-t border-line">
